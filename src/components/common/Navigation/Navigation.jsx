@@ -1,123 +1,48 @@
-import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import styled from 'styled-components';
-import { HiMenu, HiX } from 'react-icons/hi';
+import { cn } from '../../../utils/cn';
+import { navigationItems } from './navigationItems';
 
-const Nav = styled.nav`
-  display: flex;
-  align-items: center;
-`;
-
-const NavList = styled.ul`
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-    position: fixed;
-    top: ${({ theme }) => theme.layout.headerHeight};
-    left: 0;
-    right: 0;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0;
-    padding: 16px;
-    background-color: ${({ theme }) => theme.colors.background};
-    border-bottom: 1px solid ${({ theme }) => theme.colors.border};
-    box-shadow: ${({ theme }) => theme.shadows.default};
-    transform: translateY(${({ $isOpen }) => ($isOpen ? '0' : '-110%')});
-    opacity: ${({ $isOpen }) => ($isOpen ? 1 : 0)};
-    visibility: ${({ $isOpen }) => ($isOpen ? 'visible' : 'hidden')};
-    transition: transform 0.25s ease, opacity 0.25s ease, visibility 0.25s;
-    z-index: 100;
-  }
-`;
-
-const NavItem = styled.li`
-  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-    width: 100%;
-  }
-`;
-
-const StyledNavLink = styled(NavLink)`
-  display: block;
-  padding: 8px 16px;
-  border-radius: 8px;
-  font-size: 15px;
-  font-weight: 500;
-  color: ${({ theme }) => theme.colors.text};
-  transition: background-color 0.2s, color 0.2s;
-
-  &:hover {
-    color: ${({ theme }) => theme.colors.accent};
-    background-color: ${({ theme }) => theme.colors.accentBg};
-  }
-
-  &.active {
-    color: ${({ theme }) => theme.colors.accent};
-    background-color: ${({ theme }) => theme.colors.accentBg};
-  }
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-    padding: 12px 16px;
-  }
-`;
-
-const MenuToggle = styled.button`
-  display: none;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  padding: 0;
-  border: 1px solid ${({ theme }) => theme.colors.border};
-  border-radius: 8px;
-  background-color: transparent;
-  color: ${({ theme }) => theme.colors.textHeading};
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-    display: inline-flex;
-  }
-`;
-
-const defaultNavItems = [
-  { label: '홈', path: '/' },
-  { label: '소개', path: '/about' },
-  { label: '프로젝트', path: '/projects' },
-  { label: '멤버', path: '/members' },
-];
-
-function Navigation({ items = defaultNavItems }) {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const handleLinkClick = () => {
-    setIsOpen(false);
-  };
-
+// 하단 고정 네비게이션 바 — 위 두 꼭짓점만 둥글게, 아래는 직각
+function Navigation() {
   return (
-    <Nav aria-label="메인 네비게이션">
-      <MenuToggle
-        type="button"
-        aria-label={isOpen ? '메뉴 닫기' : '메뉴 열기'}
-        aria-expanded={isOpen}
-        onClick={() => setIsOpen((prev) => !prev)}
-      >
-        {isOpen ? <HiX size={22} /> : <HiMenu size={22} />}
-      </MenuToggle>
-
-      <NavList $isOpen={isOpen}>
-        {items.map(({ label, path }) => (
-          <NavItem key={path}>
-            <StyledNavLink to={path} end={path === '/'} onClick={handleLinkClick}>
-              {label}
-            </StyledNavLink>
-          </NavItem>
-        ))}
-      </NavList>
-    </Nav>
+    <nav className="absolute inset-x-0 bottom-0 z-50 w-app">
+      <div className="flex h-[80px] w-full items-center justify-center rounded-t-[9999px] bg-white px-1">
+        <ul className="flex h-full items-stretch gap-5">
+          {navigationItems.map(({ label, path, icon, inactiveIcon }) => (
+            <li key={path}>
+              <NavLink
+                to={path}
+                end={path === '/'}
+                className={({ isActive }) =>
+                  cn(
+                    'flex h-full w-12 flex-col items-center justify-center text-[11px] transition-colors',
+                    isActive ? 'text-[#795921]' : 'text-[#4D4540]',
+                  )
+                }
+              >
+                {({ isActive }) => (
+                  <span className="flex h-[39px] flex-col items-center justify-between">
+                    <img
+                      src={isActive ? icon : inactiveIcon}
+                      alt=""
+                      aria-hidden
+                      className="h-[18px] w-[18px]"
+                    />
+                    <span className="leading-none">{label}</span>
+                    <span
+                      className={cn(
+                        'h-1 w-1 rounded-full',
+                        isActive ? 'bg-[#795921]' : 'bg-transparent',
+                      )}
+                    />
+                  </span>
+                )}
+              </NavLink>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </nav>
   );
 }
 
