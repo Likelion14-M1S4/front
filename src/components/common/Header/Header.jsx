@@ -1,36 +1,41 @@
 import { Link } from 'react-router-dom';
-import hamburgerIcon from '../../../assets/icons/nav/header/hamburger.svg';
+import styled from 'styled-components';
 import mcmLogo from '../../../assets/icons/nav/header/mcm.svg';
-import cartIcon from '../../../assets/icons/nav/header/cart.svg';
+import { APP_WIDTH } from '../../../styles/theme';
 
-// 모든 페이지 상단에 고정되는 헤더
-// 좌측 메뉴 버튼, 중앙 로고, 우측 장바구니 버튼으로 구성됩니다.
-function Header({ onMenuClick }) {
+const HeaderBar = styled.header`
+  position: absolute;
+  inset: 0 0 auto 0;
+  z-index: 50;
+  display: flex;
+  height: 80px;
+  width: ${APP_WIDTH}px;
+  max-width: 100%;
+  align-items: center;
+  justify-content: center;
+  padding-top: 12px;
+  background: #ffffff;
+  box-sizing: border-box;
+`;
+
+const LogoLink = styled(Link)`
+  display: flex;
+  align-items: center;
+`;
+
+const LogoImage = styled.img`
+  height: 57px;
+  width: 57px;
+`;
+
+// 모든 페이지 상단에 고정되는 헤더 — 중앙 MCM 로고만 표시
+function Header() {
   return (
-    <header className="absolute inset-x-0 top-0 z-50 flex h-[64px] w-app items-center border-b border-mcm-border bg-mcm-ivory/95 backdrop-blur-sm">
-      <div className="flex h-full w-full items-center justify-between px-5">
-        <button
-          type="button"
-          aria-label="메뉴 열기"
-          onClick={onMenuClick}
-          className="flex h-9 w-9 items-center justify-center"
-        >
-          <img src={hamburgerIcon} alt="" aria-hidden className="h-3 w-[18px]" />
-        </button>
-
-        <Link to="/" className="flex items-center" aria-label="홈으로 이동">
-          <img src={mcmLogo} alt="MCM" className="h-4 w-[62px]" />
-        </Link>
-
-        <Link
-          to="/cart"
-          aria-label="장바구니"
-          className="flex h-9 w-9 items-center justify-center"
-        >
-          <img src={cartIcon} alt="" aria-hidden className="h-[26px] w-4" />
-        </Link>
-      </div>
-    </header>
+    <HeaderBar>
+      <LogoLink to="/" aria-label="홈으로 이동">
+        <LogoImage src={mcmLogo} alt="MCM" />
+      </LogoLink>
+    </HeaderBar>
   );
 }
 

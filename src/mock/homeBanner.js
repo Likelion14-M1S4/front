@@ -6,6 +6,6 @@ export const homeBanner = {
   imageUrl: bannerImage,
   title: '시즌 제품 만나보기',
   description:
-    '이번 시즌 새롭게 선보이는 MCM 라이언 컬렉션의 특별한 이야기를 확인해보세요.',
+    '이번 시즌 새롭게 선보이는 새로운 컬렉션의\n특별한 이야기를 확인해보세요',
   linkTo: '/collection',
 };

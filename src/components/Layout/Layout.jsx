@@ -1,25 +1,62 @@
+import { useLocation } from 'react-router-dom';
+import styled from 'styled-components';
 import Header from '../common/Header/Header';
 import Navigation from '../common/Navigation/Navigation';
+import { APP_WIDTH } from '../../styles/theme';
+
+const PageShell = styled.div`
+  display: flex;
+  min-height: 100vh;
+  justify-content: center;
+  background: #ffffff;
+`;
+
+const AppFrame = styled.div`
+  position: relative;
+  display: flex;
+  height: 100dvh;
+  width: ${APP_WIDTH}px;
+  max-width: 100%;
+  flex-shrink: 0;
+  flex-direction: column;
+  overflow: hidden;
+  background: #ffffff;
+`;
+
+const Main = styled.main`
+  flex: 1;
+  width: 100%;
+  overflow-y: ${({ $fullBleed }) => ($fullBleed ? 'hidden' : 'auto')};
+  overscroll-behavior: contain;
+  padding-top: ${({ $hideHeader }) => ($hideHeader ? '0' : '80px')};
+  padding-bottom: ${({ $hideNav }) => ($hideNav ? '0' : '96px')};
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+`;
 
 // 390px 고정 프레임 — 모든 페이지는 이 컨테이너 안에서만 렌더링됩니다.
 // 라우트가 바뀌어도 프레임(헤더·네비)은 유지되고 main 영역만 교체됩니다.
 function Layout({ children }) {
+  const { pathname } = useLocation();
+  const isCollectionDetail = /^\/collection\/[^/]+$/.test(pathname);
+  const isCharacterChat = /^\/collection\/[^/]+\/chat$/.test(pathname);
+  const hideHeader = isCollectionDetail || isCharacterChat;
+  const hideNav = isCharacterChat;
+
   return (
-    <div className="flex min-h-screen justify-center bg-mcm-ivory">
-      <div
-        id="app-frame"
-        className="relative flex h-dvh w-app shrink-0 flex-col overflow-hidden bg-mcm-ivory"
-      >
-        <Header />
-
-        {/* 하단 네비(80px) 위에 콘텐츠가 스크롤되도록 여백 확보 */}
-        <main className="scrollbar-hide flex-1 overflow-y-auto overscroll-contain pt-[64px] pb-[80px]">
+    <PageShell>
+      <AppFrame id="app-frame">
+        {!hideHeader && <Header />}
+        <Main $hideHeader={hideHeader} $hideNav={hideNav} $fullBleed={isCharacterChat}>
           {children}
-        </main>
-
-        <Navigation />
-      </div>
-    </div>
+        </Main>
+        {!hideNav && <Navigation />}
+      </AppFrame>
+    </PageShell>
   );
 }
 

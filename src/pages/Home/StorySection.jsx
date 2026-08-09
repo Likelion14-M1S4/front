@@ -1,30 +1,69 @@
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 import { featuredStory } from '../../mock/story';
+import { SECTION_GAP } from '../../styles/theme';
 
-// 홈 화면 스토리 섹션 (텍스트 + 이미지)
+const Section = styled.section`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: ${SECTION_GAP}px;
+  padding-bottom: 0;
+`;
+
+const StoryLink = styled(Link)`
+  display: block;
+  width: 308px;
+  height: 205px;
+  overflow: hidden;
+  border-radius: 10px;
+  background: #f2f2f2;
+`;
+
+const StoryImage = styled.img`
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+`;
+
+const TextBlock = styled.div`
+  margin: 16px 0 0;
+  width: 308px;
+  text-align: left;
+  box-sizing: border-box;
+`;
+
+const Title = styled.h2`
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+  text-align: left;
+  color: #000000;
+`;
+
+const Description = styled.p`
+  margin: 8px 0 0;
+  font-size: 14px;
+  line-height: 1.625;
+  text-align: left;
+  color: #000000;
+`;
+
+// 홈 화면 스토리 섹션 (이미지 + 텍스트)
 function StorySection() {
   return (
-    <section className="pt-12">
-      <div className="px-5">
-        <h2 className="text-[18px] font-bold text-mcm-title">{featuredStory.title}</h2>
-        <p className="mt-2 text-[14px] leading-relaxed text-mcm-body">
-          {featuredStory.description}
-        </p>
-      </div>
+    <Section>
+      <StoryLink to={featuredStory.linkTo}>
+        {featuredStory.imageUrl ? (
+          <StoryImage src={featuredStory.imageUrl} alt={featuredStory.title} />
+        ) : null}
+      </StoryLink>
 
-      <div className="mt-4 flex justify-center">
-        <Link
-          to={featuredStory.linkTo}
-          className="block h-[153.43px] w-[358px] overflow-hidden rounded-[4px] border border-mcm-border"
-        >
-          <img
-            src={featuredStory.imageUrl}
-            alt={featuredStory.title}
-            className="h-full w-full object-cover"
-          />
-        </Link>
-      </div>
-    </section>
+      <TextBlock>
+        <Title>{featuredStory.title}</Title>
+        <Description>{featuredStory.description}</Description>
+      </TextBlock>
+    </Section>
   );
 }
 

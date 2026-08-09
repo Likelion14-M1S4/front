@@ -1,9 +1,22 @@
+import styled from 'styled-components';
+
+const Page = styled.div`
+  padding: 24px 20px 40px;
+`;
+
+const Title = styled.h1`
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  color: #1a1a1a;
+`;
+
 // 내계정 페이지 (추후 UI 구현 예정)
 function Account() {
   return (
-    <div className="px-5 pt-6 pb-10">
-      <h1 className="text-xl font-bold text-mcm-black">내계정</h1>
-    </div>
+    <Page>
+      <Title>내계정</Title>
+    </Page>
   );
 }
 

@@ -1,9 +1,35 @@
-import { cn } from '../../../utils/cn';
+import styled, { css } from 'styled-components';
 
-const variantClassNames = {
-  primary: 'bg-mcm-black text-mcm-white',
-  outline: 'border border-mcm-black text-mcm-black bg-transparent',
+const variantStyles = {
+  primary: css`
+    background: #1a1a1a;
+    color: #ffffff;
+  `,
+  outline: css`
+    border: 1px solid #1a1a1a;
+    color: #1a1a1a;
+    background: transparent;
+  `,
 };
+
+const StyledButton = styled.button`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0;
+  padding: 12px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.025em;
+  transition: opacity 0.15s;
+  width: ${({ $fullWidth }) => ($fullWidth ? '100%' : 'auto')};
+
+  ${({ $variant }) => variantStyles[$variant] || variantStyles.primary}
+
+  &:active {
+    opacity: 0.7;
+  }
+`;
 
 // 서비스 전반에서 사용하는 공통 버튼
 function Button({
@@ -12,21 +38,11 @@ function Button({
   fullWidth = false,
   type = 'button',
   onClick,
-  className,
 }) {
   return (
-    <button
-      type={type}
-      onClick={onClick}
-      className={cn(
-        'inline-flex items-center justify-center rounded-none px-5 py-3 text-sm font-medium tracking-wide transition-opacity active:opacity-70',
-        variantClassNames[variant],
-        fullWidth && 'w-full',
-        className,
-      )}
-    >
+    <StyledButton type={type} onClick={onClick} $variant={variant} $fullWidth={fullWidth}>
       {children}
-    </button>
+    </StyledButton>
   );
 }
 
