@@ -1,48 +1,81 @@
 import { NavLink } from 'react-router-dom';
-import { cn } from '../../../utils/cn';
+import styled from 'styled-components';
 import { navigationItems } from './navigationItems';
+import { APP_WIDTH } from '../../../styles/theme';
 
-// 하단 고정 네비게이션 바 — 위 두 꼭짓점만 둥글게, 아래는 직각
+const Nav = styled.nav`
+  pointer-events: none;
+  position: absolute;
+  inset: auto 0 0 0;
+  z-index: 50;
+  display: flex;
+  width: ${APP_WIDTH}px;
+  max-width: 100%;
+  justify-content: center;
+  padding: 0 16px 16px;
+  box-sizing: border-box;
+`;
+
+const NavBar = styled.div`
+  pointer-events: auto;
+  display: flex;
+  height: 64px;
+  width: 100%;
+  max-width: 358px;
+  align-items: center;
+  justify-content: space-around;
+  border-radius: 9999px;
+  background: #ffffff;
+  padding: 0 8px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+`;
+
+const Item = styled(NavLink)`
+  display: flex;
+  height: 48px;
+  width: 48px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
+const Icon = styled.img`
+  height: 22px;
+  width: 22px;
+  transition: transform 0.2s;
+  transform: ${({ $active }) => ($active ? 'translateY(-3px)' : 'none')};
+`;
+
+const Dot = styled.span`
+  margin-top: 2px;
+  height: 4px;
+  width: 4px;
+  border-radius: 9999px;
+  background: ${({ $active }) => ($active ? '#6f5b4d' : 'transparent')};
+`;
+
+// 하단 플로팅 캡슐형 네비게이션 — 아이콘만 표시
 function Navigation() {
   return (
-    <nav className="absolute inset-x-0 bottom-0 z-50 w-app">
-      <div className="flex h-[80px] w-full items-center justify-center rounded-t-[9999px] bg-white px-1">
-        <ul className="flex h-full items-stretch gap-5">
-          {navigationItems.map(({ label, path, icon, inactiveIcon }) => (
-            <li key={path}>
-              <NavLink
-                to={path}
-                end={path === '/'}
-                className={({ isActive }) =>
-                  cn(
-                    'flex h-full w-12 flex-col items-center justify-center text-[11px] transition-colors',
-                    isActive ? 'text-[#795921]' : 'text-[#4D4540]',
-                  )
-                }
-              >
-                {({ isActive }) => (
-                  <span className="flex h-[39px] flex-col items-center justify-between">
-                    <img
-                      src={isActive ? icon : inactiveIcon}
-                      alt=""
-                      aria-hidden
-                      className="h-[18px] w-[18px]"
-                    />
-                    <span className="leading-none">{label}</span>
-                    <span
-                      className={cn(
-                        'h-1 w-1 rounded-full',
-                        isActive ? 'bg-[#795921]' : 'bg-transparent',
-                      )}
-                    />
-                  </span>
-                )}
-              </NavLink>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </nav>
+    <Nav>
+      <NavBar>
+        {navigationItems.map(({ label, path, icon, inactiveIcon }) => (
+          <Item key={path} to={path} end={path === '/'} aria-label={label}>
+            {({ isActive }) => (
+              <>
+                <Icon
+                  src={isActive ? icon : inactiveIcon}
+                  alt=""
+                  aria-hidden
+                  $active={isActive}
+                />
+                <Dot $active={isActive} />
+              </>
+            )}
+          </Item>
+        ))}
+      </NavBar>
+    </Nav>
   );
 }
 

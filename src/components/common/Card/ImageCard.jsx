@@ -1,30 +1,73 @@
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 import { HiOutlineArrowRight } from 'react-icons/hi';
+import { getContrastTextColor } from '../../../utils/getContrastTextColor';
 
-// 이미지 위에 제목/설명이 얹히는 카드 (홈 화면의 시즌 배너에서 사용)
-function ImageCard({ imageUrl, title, description, linkTo, showArrow = false }) {
+const CardLink = styled(Link)`
+  position: relative;
+  display: block;
+  width: 308px;
+  height: 234px;
+  min-height: 234px;
+  max-height: 234px;
+  overflow: hidden;
+  border-radius: 10px;
+  background: #f2f2f2;
+  flex-shrink: 0;
+`;
+
+const CoverImage = styled.img`
+  width: 100%;
+  height: 234px;
+  object-fit: cover;
+`;
+
+const Overlay = styled.div`
+  position: absolute;
+  inset: auto 0 0 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 16px 16px;
+`;
+
+const Title = styled.h3`
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+  color: ${({ $color }) => $color};
+`;
+
+const Arrow = styled(HiOutlineArrowRight)`
+  flex-shrink: 0;
+  color: ${({ $color }) => $color};
+`;
+
+// 이미지 위에 제목이 얹히는 카드 (홈 화면의 시즌 배너에서 사용)
+function ImageCard({ imageUrl, title, linkTo, showArrow = false }) {
+  const [textColor, setTextColor] = useState('#000000');
+
+  useEffect(() => {
+    let cancelled = false;
+
+    getContrastTextColor(imageUrl).then((color) => {
+      if (!cancelled) setTextColor(color);
+    });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [imageUrl]);
+
   return (
-    <Link
-      to={linkTo}
-      className="block h-[358px] w-[358px] overflow-hidden rounded-none border border-mcm-border bg-mcm-gray/10"
-    >
-      <div className="relative h-full w-full">
-        <img src={imageUrl} alt={title} className="h-full w-full object-cover" />
-        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent px-5 pb-5 pt-20">
-          <div className="flex items-end justify-between gap-3">
-            <div>
-              <h3 className="text-[20px] font-bold text-mcm-white">{title}</h3>
-              <p className="mt-1.5 text-[10px] leading-relaxed text-mcm-white/90">
-                {description}
-              </p>
-            </div>
-            {showArrow && (
-              <HiOutlineArrowRight size={22} className="mb-1 shrink-0 text-mcm-white" />
-            )}
-          </div>
-        </div>
-      </div>
-    </Link>
+    <CardLink to={linkTo}>
+      {imageUrl ? <CoverImage src={imageUrl} alt={title} /> : null}
+      <Overlay>
+        <Title $color={textColor}>{title}</Title>
+        {showArrow && <Arrow size={24} $color={textColor} />}
+      </Overlay>
+    </CardLink>
   );
 }
 

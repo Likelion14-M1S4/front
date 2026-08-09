@@ -1,6 +1,8 @@
 import { Routes, Route } from 'react-router-dom';
 import Home from '../pages/Home/Home';
 import Collection from '../pages/Collection/Collection';
+import CollectionDetail from '../pages/Collection/CollectionDetail';
+import CharacterChat from '../pages/Chat/CharacterChat';
 import Story from '../pages/Story/Story';
 import Concierge from '../pages/Concierge/Concierge';
 import Product from '../pages/Product/Product';
@@ -12,6 +14,8 @@ function AppRoutes() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/collection" element={<Collection />} />
+      <Route path="/collection/:characterId" element={<CollectionDetail />} />
+      <Route path="/collection/:characterId/chat" element={<CharacterChat />} />
       <Route path="/story" element={<Story />} />
       <Route path="/concierge" element={<Concierge />} />
       <Route path="/product/:productId" element={<Product />} />
