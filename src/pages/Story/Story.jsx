@@ -1,21 +1,21 @@
 import styled from 'styled-components';
+import SeasonIntroSection from './SeasonIntroSection';
+import PastSeasonStorySection from './PastSeasonStorySection';
 
+// 페이지 좌우 기본 여백(20px) — 각 섹션은 필요 시 여기서 상쇄해 풀블리드 처리
 const Page = styled.div`
-  padding: 24px 20px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px 40px;
 `;
 
-const Title = styled.h1`
-  margin: 0;
-  font-size: 20px;
-  font-weight: 700;
-  color: #1a1a1a;
-`;
-
-// 스토리 페이지 (추후 UI 구현 예정)
+// 스토리 페이지 — 섹션들을 순서대로 배치하는 역할만 담당
 function Story() {
   return (
     <Page>
-      <Title>스토리</Title>
+      <SeasonIntroSection />
+      <PastSeasonStorySection />
     </Page>
   );
 }
