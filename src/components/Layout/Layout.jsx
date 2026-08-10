@@ -2,7 +2,7 @@ import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import Header from '../common/Header/Header';
 import Navigation from '../common/Navigation/Navigation';
-import { APP_WIDTH } from '../../styles/theme';
+import { APP_WIDTH, HEADER_HEIGHT } from '../../styles/theme';
 
 const PageShell = styled.div`
   display: flex;
@@ -28,7 +28,7 @@ const Main = styled.main`
   width: 100%;
   overflow-y: ${({ $fullBleed }) => ($fullBleed ? 'hidden' : 'auto')};
   overscroll-behavior: contain;
-  padding-top: ${({ $hideHeader }) => ($hideHeader ? '0' : '80px')};
+  padding-top: ${({ $hideHeader }) => ($hideHeader ? '0' : `${HEADER_HEIGHT}px`)};
   padding-bottom: ${({ $hideNav }) => ($hideNav ? '0' : '96px')};
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -44,10 +44,17 @@ function Layout({ children }) {
   const { pathname } = useLocation();
   const isCollectionDetail = /^\/collection\/[^/]+$/.test(pathname);
   const isCharacterChat = /^\/collection\/[^/]+\/chat$/.test(pathname);
+  const isProductDetail = pathname.startsWith('/product/');
+  const isCharmRecommend = pathname === '/recommend/charms';
   const isStoryChapter = pathname === '/story/chapter';
-  const isStoryView = /^\/story\/view\/[^/]+$/.test(pathname);
-  const hideHeader = isCollectionDetail || isCharacterChat || isStoryChapter || isStoryView;
-  const hideNav = isCharacterChat || isStoryChapter || isStoryView;
+  // 제품 상세·참 추천·컬렉션 상세·채팅·스토리 챕터에서는 MCM 로고 헤더 숨김
+  const hideHeader =
+    isCollectionDetail ||
+    isCharacterChat ||
+    isProductDetail ||
+    isCharmRecommend ||
+    isStoryChapter;
+  const hideNav = isCharacterChat || isProductDetail || isCharmRecommend;
 
   return (
     <PageShell>

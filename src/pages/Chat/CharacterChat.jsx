@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
+import BackHeader from '../../components/common/Header/BackHeader';
 import cameraIcon from '../../assets/icons/nav/camera.svg';
 import sendIcon from '../../assets/icons/nav/vector.svg';
 import { useCharacterChat } from '../../hooks/useCharacterChat';
@@ -11,26 +12,6 @@ const Page = styled.div`
   min-height: 100%;
   flex-direction: column;
   background: #ffffff;
-`;
-
-const TopBar = styled.div`
-  display: flex;
-  align-items: center;
-  height: 48px;
-  padding: 0 12px;
-  border-bottom: 1px solid #e8e2dc;
-  flex-shrink: 0;
-`;
-
-const BackButton = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  font-size: 28px;
-  line-height: 1;
-  color: #6f5b4d;
 `;
 
 const MessageList = styled.div`
@@ -217,7 +198,6 @@ const Status = styled.p`
 // 캐릭터 챗봇 페이지 (추후 AI API 연동)
 function CharacterChat() {
   const { characterId } = useParams();
-  const navigate = useNavigate();
   const { session, messages, isLoading, isSending, error, sendText, sendImage } =
     useCharacterChat(characterId);
 
@@ -270,11 +250,7 @@ function CharacterChat() {
   if (isLoading) {
     return (
       <Page>
-        <TopBar>
-          <BackButton type="button" aria-label="뒤로가기" onClick={() => navigate(-1)}>
-            ‹
-          </BackButton>
-        </TopBar>
+        <BackHeader />
         <Status>대화를 준비하는 중...</Status>
       </Page>
     );
@@ -283,11 +259,7 @@ function CharacterChat() {
   if (error || !session) {
     return (
       <Page>
-        <TopBar>
-          <BackButton type="button" aria-label="뒤로가기" onClick={() => navigate(-1)}>
-            ‹
-          </BackButton>
-        </TopBar>
+        <BackHeader />
         <Status>채팅을 시작할 수 없습니다.</Status>
       </Page>
     );
@@ -295,11 +267,7 @@ function CharacterChat() {
 
   return (
     <Page>
-      <TopBar>
-        <BackButton type="button" aria-label="뒤로가기" onClick={() => navigate(-1)}>
-          ‹
-        </BackButton>
-      </TopBar>
+      <BackHeader />
 
       <MessageList ref={listRef}>
         {messages.map((message) => {
