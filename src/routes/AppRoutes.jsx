@@ -4,6 +4,7 @@ import Collection from '../pages/Collection/Collection';
 import CollectionDetail from '../pages/Collection/CollectionDetail';
 import CharacterChat from '../pages/Chat/CharacterChat';
 import Story from '../pages/Story/Story';
+import StoryChapter from '../pages/StoryChapter/StoryChapter';
 import Concierge from '../pages/Concierge/Concierge';
 import Product from '../pages/Product/Product';
 import Account from '../pages/Account/Account';
@@ -17,6 +18,7 @@ function AppRoutes() {
       <Route path="/collection/:characterId" element={<CollectionDetail />} />
       <Route path="/collection/:characterId/chat" element={<CharacterChat />} />
       <Route path="/story" element={<Story />} />
+      <Route path="/story/chapter" element={<StoryChapter />} />
       <Route path="/concierge" element={<Concierge />} />
       <Route path="/product/:productId" element={<Product />} />
       <Route path="/account" element={<Account />} />

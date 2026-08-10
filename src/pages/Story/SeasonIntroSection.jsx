@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 import { seasonStory } from '../../mock/story';
 
 // 시즌 소개 박스 — 풀블리드 배경 박스. 하단 썸네일이 경계에 걸치도록 relative 기준
@@ -76,11 +77,15 @@ const ThumbnailImage = styled.img`
 
 // 스토리 페이지 상단 — 시즌 소개 박스 + 스토리 진행 CTA + 경계 썸네일
 function SeasonIntroSection() {
+  const navigate = useNavigate();
+
   return (
     <Box>
       <Season>{seasonStory.season}</Season>
       <Title>{seasonStory.title}</Title>
-      <CtaButton type="button">{seasonStory.ctaLabel}</CtaButton>
+      <CtaButton type="button" onClick={() => navigate('/story/chapter')}>
+        {seasonStory.ctaLabel}
+      </CtaButton>
       <Divider aria-hidden />
 
       <Thumbnail>
