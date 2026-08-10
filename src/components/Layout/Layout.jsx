@@ -44,8 +44,10 @@ function Layout({ children }) {
   const { pathname } = useLocation();
   const isCollectionDetail = /^\/collection\/[^/]+$/.test(pathname);
   const isCharacterChat = /^\/collection\/[^/]+\/chat$/.test(pathname);
-  const hideHeader = isCollectionDetail || isCharacterChat;
-  const hideNav = isCharacterChat;
+  const isStoryChapter = pathname === '/story/chapter';
+  const isStoryView = /^\/story\/view\/[^/]+$/.test(pathname);
+  const hideHeader = isCollectionDetail || isCharacterChat || isStoryChapter || isStoryView;
+  const hideNav = isCharacterChat || isStoryChapter || isStoryView;
 
   return (
     <PageShell>
