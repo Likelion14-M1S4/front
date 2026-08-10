@@ -6,35 +6,12 @@ import {
   finalUnlockLabel,
   finalUnlockedLabel,
 } from '../../mock/storyChapter';
-import backArrowIcon from '../../assets/icons/nav/back_arrow.svg';
+import BackHeader from '../../components/common/Header/BackHeader';
 import padlockIcon from '../../assets/icons/nav/padlock.svg';
 
 const Page = styled.div`
   display: flex;
   flex-direction: column;
-`;
-
-// 상단 헤더 — 뒤로가기 버튼
-const Header = styled.header`
-  display: flex;
-  align-items: center;
-  height: 96px;
-  padding: 0 30px;
-  border-bottom: 1px solid #eeeeee;
-`;
-
-const BackButton = styled.button`
-  display: flex;
-  align-items: center;
-  padding: 0;
-  border: none;
-  background: none;
-  cursor: pointer;
-`;
-
-const BackArrowIcon = styled.img`
-  width: 13px;
-  height: 23px;
 `;
 
 // 시즌 소개 영역
@@ -210,11 +187,7 @@ function StoryChapter() {
 
   return (
     <Page>
-      <Header>
-        <BackButton type="button" onClick={() => navigate(-1)} aria-label="뒤로가기">
-          <BackArrowIcon src={backArrowIcon} alt="" aria-hidden />
-        </BackButton>
-      </Header>
+      <BackHeader />
 
       <IntroBox>
         <Season>{storyChapterIntro.season}</Season>

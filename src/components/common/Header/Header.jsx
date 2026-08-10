@@ -1,14 +1,14 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import mcmLogo from '../../../assets/icons/nav/header/mcm.svg';
-import { APP_WIDTH } from '../../../styles/theme';
+import { APP_WIDTH, HEADER_HEIGHT } from '../../../styles/theme';
 
 const HeaderBar = styled.header`
   position: absolute;
   inset: 0 0 auto 0;
   z-index: 50;
   display: flex;
-  height: 80px;
+  height: ${HEADER_HEIGHT}px;
   width: ${APP_WIDTH}px;
   max-width: 100%;
   align-items: center;

@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { HiOutlineChevronDown } from 'react-icons/hi';
+import BackHeader from '../../components/common/Header/BackHeader';
 import chatIcon from '../../assets/icons/nav/chat.svg';
 import { useCollectedCharacterDetail } from '../../hooks/useCollectedCharacterDetail';
 
@@ -30,27 +31,9 @@ const Page = styled.div`
   padding: 0 0 40px;
 `;
 
-const TopBar = styled.div`
-  display: flex;
-  align-items: center;
-  height: 48px;
-  padding: 0 12px;
-  border-bottom: 1px solid #e8e2dc;
-`;
-
-const BackButton = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  font-size: 28px;
-  line-height: 1;
-  color: #6f5b4d;
-`;
-
 const Hero = styled.div`
   width: 100%;
+  margin-top: 24px;
   aspect-ratio: 1 / 1;
   background: #f2f2f2;
   overflow: hidden;
@@ -200,18 +183,13 @@ const Empty = styled.div`
 // 수집한 캐릭터 상세 페이지
 function CollectionDetail() {
   const { characterId } = useParams();
-  const navigate = useNavigate();
   const { character, isLoading } = useCollectedCharacterDetail(characterId);
   const [openSection, setOpenSection] = useState(null);
 
   if (isLoading) {
     return (
       <Page>
-        <TopBar>
-          <BackButton type="button" aria-label="뒤로가기" onClick={() => navigate(-1)}>
-            ‹
-          </BackButton>
-        </TopBar>
+        <BackHeader />
         <Empty>불러오는 중...</Empty>
       </Page>
     );
@@ -220,11 +198,7 @@ function CollectionDetail() {
   if (!character) {
     return (
       <Page>
-        <TopBar>
-          <BackButton type="button" aria-label="뒤로가기" onClick={() => navigate(-1)}>
-            ‹
-          </BackButton>
-        </TopBar>
+        <BackHeader />
         <Empty>수집한 캐릭터를 찾을 수 없습니다.</Empty>
       </Page>
     );
@@ -238,11 +212,7 @@ function CollectionDetail() {
 
   return (
     <Page>
-      <TopBar>
-        <BackButton type="button" aria-label="뒤로가기" onClick={() => navigate(-1)}>
-          ‹
-        </BackButton>
-      </TopBar>
+      <BackHeader />
 
       <Hero>
         {character.imageUrl ? (

@@ -15,6 +15,6 @@ export const navigationItems = [
   { label: '홈', path: '/', icon: homeIcon, inactiveIcon: homeIconInactive },
   { label: '컬렉션', path: '/collection', icon: collectionIcon, inactiveIcon: collectionIconInactive },
   { label: '스토리', path: '/story', icon: storyIcon, inactiveIcon: storyIconInactive },
-  { label: '컨시어지', path: '/concierge', icon: recommendIcon, inactiveIcon: recommendIconInactive },
+  { label: '추천', path: '/recommend', icon: recommendIcon, inactiveIcon: recommendIconInactive },
   { label: '내계정', path: '/account', icon: accountIcon, inactiveIcon: accountIconInactive },
 ];

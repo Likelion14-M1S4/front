@@ -51,9 +51,11 @@ function ImageCard({ imageUrl, title, linkTo, showArrow = false }) {
   useEffect(() => {
     let cancelled = false;
 
-    getContrastTextColor(imageUrl).then((color) => {
-      if (!cancelled) setTextColor(color);
-    });
+    getContrastTextColor(imageUrl, { displayWidth: 308, displayHeight: 234 }).then(
+      (color) => {
+        if (!cancelled) setTextColor(color);
+      },
+    );
 
     return () => {
       cancelled = true;
