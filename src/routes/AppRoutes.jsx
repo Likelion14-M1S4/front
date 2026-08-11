@@ -11,6 +11,7 @@ import CharmRecommend from '../pages/CharmRecommend/CharmRecommend';
 import Product from '../pages/Product/Product';
 import Account from '../pages/Account/Account';
 import Login from '../pages/Account/Login';
+import Wishlist from '../pages/Account/whislist';
 import LoginInfo from '../pages/Account/LoginInfo';
 import RegisteredProducts from '../pages/Account/RegisteredProducts';
 import StoreTagHistory from '../pages/Account/StoreTagHistory';
@@ -33,6 +34,7 @@ function AppRoutes() {
       <Route path="/product/:productId" element={<Product />} />
       <Route path="/account" element={<Account />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/wishlist" element={<Wishlist />} />
       <Route path="/account/login-info" element={<LoginInfo />} />
       <Route path="/account/products" element={<RegisteredProducts />} />
       <Route path="/account/tag-history" element={<StoreTagHistory />} />

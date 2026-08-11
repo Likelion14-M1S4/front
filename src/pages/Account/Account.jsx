@@ -114,7 +114,7 @@ function Account() {
     // id별 페이지 이동 (하나씩 연결)
     switch (item.id) {
       case 'wishlist':
-        // TODO: navigate('/wishlist');
+        navigate('/wishlist');
         break;
       case 'login-info':
         navigate('/account/login-info');
