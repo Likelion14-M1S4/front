@@ -14,6 +14,7 @@ import Login from '../pages/Account/Login';
 import LoginInfo from '../pages/Account/LoginInfo';
 import RegisteredProducts from '../pages/Account/RegisteredProducts';
 import StoreTagHistory from '../pages/Account/StoreTagHistory';
+import AvailableCharms from '../pages/Account/AvailableCharms';
 
 // 페이지 경로와 컴포넌트 매핑
 function AppRoutes() {
@@ -34,6 +35,7 @@ function AppRoutes() {
       <Route path="/account/login-info" element={<LoginInfo />} />
       <Route path="/account/products" element={<RegisteredProducts />} />
       <Route path="/account/tag-history" element={<StoreTagHistory />} />
+      <Route path="/account/available-charms" element={<AvailableCharms />} />
     </Routes>
   );
 }

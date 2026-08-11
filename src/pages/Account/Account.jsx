@@ -125,6 +125,9 @@ function Account() {
       case 'store-tag-history':
         navigate('/account/tag-history');
         break;
+      case 'available-charm':
+        navigate('/account/available-charms');
+        break;
       case 'logout':
         // TODO: logout();
         break;
