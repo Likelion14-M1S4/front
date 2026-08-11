@@ -123,7 +123,7 @@ function Account() {
         navigate('/account/products');
         break;
       case 'store-tag-history':
-        // TODO: navigate('/account/tag-history');
+        navigate('/account/tag-history');
         break;
       case 'logout':
         // TODO: logout();
