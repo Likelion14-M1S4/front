@@ -47,6 +47,7 @@ function Layout({ children }) {
   const isCollectionDetail = /^\/collection\/[^/]+$/.test(pathname);
   const isCharacterChat = /^\/collection\/[^/]+\/chat$/.test(pathname);
   const isStoryView = /^\/story\/view\/[^/]+$/.test(pathname);
+  const isAccountDetail = /^\/account\/[^/]+$/.test(pathname);
   const isProductDetail = pathname.startsWith('/product/');
   const isCharmRecommend = pathname === '/recommend/charms';
   const isStoryChapter = pathname === '/story/chapter';
@@ -61,8 +62,8 @@ function Layout({ children }) {
     isStoryChapter ||
     isStoryView ||
     isLogin || 
-    isLoginScreen
-    ;
+    isLoginScreen ||
+    isAccountDetail;
 
   const hideNav =
     isCharacterChat ||
@@ -71,8 +72,8 @@ function Layout({ children }) {
     isStoryChapter ||
     isStoryView ||
     isLogin || 
-    isLoginScreen
-    ;
+    isLoginScreen ||
+    isAccountDetail;
 
   return (
     <PageShell>

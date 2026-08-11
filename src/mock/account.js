@@ -1,40 +1,41 @@
 // 마이페이지 메뉴 데이터 (추후 백엔드 연동)
 export const accountSections = [
-  {
+{
     id: 'my-info',
     title: '내 정보',
     items: [
-      { id: 'login-info', label: '로그인 정보' },
-      { id: 'registered-product', label: '등록한 제품' },
-      { id: 'store-tag-history', label: '매장 태그 이력' },
+    { id: 'login-info', label: '로그인 정보' },
+    { id: 'registered-product', label: '등록한 제품' },
+    { id: 'store-tag-history', label: '매장 태그 이력' },
     ],
-  },
-  
-  {
+},
+
+{
     id: 'season-charm',
     title: '시즌 한정 참',
     items: [
-      { id: 'available-charm', label: '구매 가능한 참' },
-      { id: 'owned-charm', label: '보유한 참' },
+    { id: 'available-charm', label: '구매 가능한 참' },
+    { id: 'owned-charm', label: '보유한 참' },
     ],
-  },
+},
 
-  {
+    //URL 작성해야됨
+    {
     id: 'settings',
     title: '설정',
     items: [
-      { id: 'terms', label: '온라인 서비스 이용 약관' },
-      { id: 'privacy', label: '개인정보 처리방침' },
-      { id: 'cookie', label: 'COOKIE POLICY' },
+        { id: 'terms', label: '온라인 서비스 이용 약관', url: 'https://약관URL' },
+        { id: 'privacy', label: '개인정보 처리방침', url: 'https://개인정보URL' },
+        { id: 'cookie', label: 'COOKIE POLICY', url: 'https://쿠키정책URL' },
     ],
-  },
+    },
 
-  {
+{
     id: 'account-manage',
     title: '계정 관리',
     items: [
-      { id: 'logout', label: '로그아웃' },
-      { id: 'withdraw', label: '계정 탈퇴' },
+    { id: 'logout', label: '로그아웃' },
+    { id: 'withdraw', label: '계정 탈퇴' },
     ],
-  },
+},
 ];
