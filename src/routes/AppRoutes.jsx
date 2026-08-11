@@ -11,6 +11,7 @@ import CharmRecommend from '../pages/CharmRecommend/CharmRecommend';
 import Product from '../pages/Product/Product';
 import Account from '../pages/Account/Account';
 import Login from '../pages/Account/Login';
+import LoginInfo from '../pages/Account/LoginInfo';
 
 // 페이지 경로와 컴포넌트 매핑
 function AppRoutes() {
@@ -28,6 +29,7 @@ function AppRoutes() {
       <Route path="/product/:productId" element={<Product />} />
       <Route path="/account" element={<Account />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/account/login-info" element={<LoginInfo />} />
     </Routes>
   );
 }
