@@ -2,7 +2,13 @@ import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import AccountDetailLayout from '../../components/Layout/AccountDetailLayout';
 import { getAvailableCharms } from '../../api/availableCharms';
+import { charmCollectionOptions } from '../../mock/charmCollectionOptions';
 import belowArrow from '../../assets/icons/nav/below_arrow.svg';
+
+// 옵션 목록이 뜰 때 기준이 되는 위치 앵커
+const SelectorWrapper = styled.div`
+  position: relative;
+`;
 
 // 컬렉션 선택 버튼 — 구분선과는 Title의 기본 margin-bottom(16px)으로 간격 확보
 const CollectionSelect = styled.button`
@@ -12,7 +18,7 @@ const CollectionSelect = styled.button`
   width: 100%;
   height: 35px;
   padding: 0;
-  border: 1px solid #ffffff;
+  border: 1px solid #F6F4F2;
   background: none;
   color: black;
   font-size: 16px;
@@ -24,6 +30,33 @@ const CollectionSelect = styled.button`
 const ChevronIcon = styled.img`
   width: 16px;
   height: 15px;
+  transition: transform 0.2s ease;
+  transform: ${({ $open }) => ($open ? 'rotate(180deg)' : 'rotate(0deg)')};
+`;
+
+// 컬렉션 선택 버튼을 누르면 나오는 옵션 목록 — 아래 그리드를 밀어내지 않도록 그 위에 띄움
+const OptionList = styled.div`
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  background: #f2f2f2;
+`;
+
+const OptionItem = styled.button`
+  width: 100%;
+  padding: 5px 0 7px;
+  border: none;
+  background: none;
+  color: black;
+  font-size: 14px;
+  font-family: 'SD Minburi';
+  font-weight: 400;
+  text-align: left;
+  cursor: pointer;
 `;
 
 // 참 그리드 — 컬렉션 선택 버튼과 24px 간격
@@ -74,18 +107,43 @@ const CharmCollection = styled.p`
 // 구매 가능한 참 페이지 — 시즌 한정 참 중 구매 가능한 목록을 보여줌
 function AvailableCharms() {
   const [page, setPage] = useState({ collectionName: '', charms: [] });
+  const [isOptionListOpen, setIsOptionListOpen] = useState(false);
 
   useEffect(() => {
     getAvailableCharms().then(setPage);
   }, []);
 
+  // 옵션 선택 — TODO: 선택한 컬렉션으로 참 목록 다시 조회
+  const handleSelectOption = (option) => {
+    setPage((prev) => ({ ...prev, collectionName: option }));
+    setIsOptionListOpen(false);
+  };
+
   return (
     <AccountDetailLayout title="구매 가능한 참">
-      {/* TODO: 컬렉션 목록 드롭다운 연결 */}
-      <CollectionSelect type="button">
-        {page.collectionName}
-        <ChevronIcon src={belowArrow} alt="" aria-hidden />
-      </CollectionSelect>
+      <SelectorWrapper>
+        <CollectionSelect
+          type="button"
+          onClick={() => setIsOptionListOpen((prev) => !prev)}
+        >
+          {page.collectionName}
+          <ChevronIcon src={belowArrow} alt="" aria-hidden $open={isOptionListOpen} />
+        </CollectionSelect>
+
+        {isOptionListOpen ? (
+          <OptionList>
+            {charmCollectionOptions.map((option) => (
+              <OptionItem
+                key={option}
+                type="button"
+                onClick={() => handleSelectOption(option)}
+              >
+                {option}
+              </OptionItem>
+            ))}
+          </OptionList>
+        ) : null}
+      </SelectorWrapper>
 
       <Grid>
         {page.charms.map((charm) => (
