@@ -128,6 +128,9 @@ function Account() {
       case 'available-charm':
         navigate('/account/available-charms');
         break;
+      case 'owned-charm':
+        navigate('/account/owned-charms');
+        break;
       case 'logout':
         // TODO: logout();
         break;
