@@ -44,6 +44,7 @@ function Layout({ children }) {
   const { pathname } = useLocation();
   const isCollectionDetail = /^\/collection\/[^/]+$/.test(pathname);
   const isCharacterChat = /^\/collection\/[^/]+\/chat$/.test(pathname);
+  const isStoryView = /^\/story\/view\/[^/]+$/.test(pathname);
   const isProductDetail = pathname.startsWith('/product/');
   const isCharmRecommend = pathname === '/recommend/charms';
   const isStoryChapter = pathname === '/story/chapter';
@@ -53,9 +54,15 @@ function Layout({ children }) {
     isCharacterChat ||
     isProductDetail ||
     isCharmRecommend ||
-    isStoryChapter;
-  const hideNav = isCharacterChat || isProductDetail || isCharmRecommend;
+    isStoryChapter ||
+    isStoryView;
 
+  const hideNav =
+    isCharacterChat ||
+    isProductDetail ||
+    isCharmRecommend ||
+    isStoryChapter ||
+    isStoryView;
   return (
     <PageShell>
       <AppFrame id="app-frame">
