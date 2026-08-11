@@ -120,7 +120,7 @@ function Account() {
         navigate('/account/login-info');
         break;
       case 'registered-product':
-        // TODO: navigate('/account/products');
+        navigate('/account/products');
         break;
       case 'store-tag-history':
         // TODO: navigate('/account/tag-history');

@@ -12,6 +12,7 @@ import Product from '../pages/Product/Product';
 import Account from '../pages/Account/Account';
 import Login from '../pages/Account/Login';
 import LoginInfo from '../pages/Account/LoginInfo';
+import RegisteredProducts from '../pages/Account/RegisteredProducts';
 
 // 페이지 경로와 컴포넌트 매핑
 function AppRoutes() {
@@ -30,6 +31,7 @@ function AppRoutes() {
       <Route path="/account" element={<Account />} />
       <Route path="/login" element={<Login />} />
       <Route path="/account/login-info" element={<LoginInfo />} />
+      <Route path="/account/products" element={<RegisteredProducts />} />
     </Routes>
   );
 }
