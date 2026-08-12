@@ -15,7 +15,7 @@ import Wishlist from '../pages/Account/whislist';
 import LoginInfo from '../pages/Account/LoginInfo';
 import RegisteredProducts from '../pages/Account/RegisteredProducts';
 import StoreTagHistory from '../pages/Account/StoreTagHistory';
-
+import RegisteredProductDetail from '../pages/Account/RegisteredProductDetail';
 import StoreTagDetail from '../pages/Account/StoreTagDetail';
 import AvailableCharms from '../pages/Account/AvailableCharms';
 import OwnedCharms from '../pages/Account/OwnedCharms';
@@ -39,7 +39,7 @@ function AppRoutes() {
       <Route path="/wishlist" element={<Wishlist />} />
       <Route path="/account/login-info" element={<LoginInfo />} />
       <Route path="/account/products" element={<RegisteredProducts />} />
-
+      <Route path="/account/products/:productId" element={<RegisteredProductDetail />} />
       <Route path="/account/tag-history" element={<StoreTagHistory />} />
       <Route path="/account/tag-history/:storeId" element={<StoreTagDetail />} />
       <Route path="/account/available-charms" element={<AvailableCharms />} />
