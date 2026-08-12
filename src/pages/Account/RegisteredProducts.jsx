@@ -12,11 +12,11 @@ const Grid = styled.div`
     column-gap: 22px;
     row-gap: 32px;
     margin: 16px -20px 0;
-    padding: 0 23px;
+    padding: 0 21px;
 `;
 
-// 상품 1개 카드 (썸네일 + 이름 + 등록일)
-const Card = styled.div`
+// 상품 1개 카드 (썸네일 + 이름 + 등록일) — 누르면 상세 페이지로 이동
+const Card = styled(Link)`
     display: flex;
     flex-direction: column;
 `;
@@ -114,7 +114,7 @@ return (
     <AccountDetailLayout title="등록한 제품">
     <Grid>
         {products.map((product) => (
-        <Card key={product.id}>
+        <Card key={product.id} to={`/account/products/${product.id}`}>
             <Thumbnail src={product.imageUrl} alt={product.name} />
             <Name>{product.name}</Name>
             <RegisteredDate>{product.registeredAt}</RegisteredDate>

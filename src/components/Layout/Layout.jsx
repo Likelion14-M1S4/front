@@ -48,7 +48,7 @@ function Layout({ children }) {
   const isCharacterChat = /^\/collection\/[^/]+\/chat$/.test(pathname);
   const isStoryView = /^\/story\/view\/[^/]+$/.test(pathname);
   const isAccountDetail = /^\/account\/[^/]+$/.test(pathname);
-
+  const isRegisteredProductDetail = /^\/account\/products\/[^/]+$/.test(pathname);
   const isStoreTagDetail = /^\/account\/tag-history\/[^/]+$/.test(pathname);
   const isWishlist = pathname === '/wishlist';
   const isProductDetail = pathname.startsWith('/product/');
@@ -67,7 +67,7 @@ function Layout({ children }) {
     isLogin ||
     isLoginScreen ||
     isAccountDetail ||
-    
+    isRegisteredProductDetail ||
     isStoreTagDetail ||
     isWishlist;
 
@@ -80,7 +80,7 @@ function Layout({ children }) {
     isLogin ||
     isLoginScreen ||
     isAccountDetail ||
-    
+    isRegisteredProductDetail ||
     isStoreTagDetail ||
     isWishlist;
 
