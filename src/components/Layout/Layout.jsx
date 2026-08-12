@@ -51,6 +51,7 @@ function Layout({ children }) {
   const isAccountDetail = /^\/account\/[^/]+$/.test(pathname);
   const isRegisteredProductDetail = /^\/account\/products\/[^/]+$/.test(pathname);
   const isStoreTagDetail = /^\/account\/tag-history\/[^/]+$/.test(pathname);
+  const isPurchasableStores = pathname === '/story/stores';
   const isWishlist = pathname === '/wishlist';
   const isProductDetail = pathname.startsWith('/product/');
   const isCharmRecommend = pathname === '/recommend/charms';
@@ -71,6 +72,7 @@ function Layout({ children }) {
     isAccountDetail ||
     isRegisteredProductDetail ||
     isStoreTagDetail ||
+    isPurchasableStores ||
     isWishlist;
 
   const hideNav =
@@ -85,6 +87,7 @@ function Layout({ children }) {
     isAccountDetail ||
     isRegisteredProductDetail ||
     isStoreTagDetail ||
+    isPurchasableStores ||
     isWishlist;
 
   return (

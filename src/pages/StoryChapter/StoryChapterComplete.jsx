@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import AccountDetailLayout from '../../components/Layout/AccountDetailLayout';
 import { chapters } from '../../mock/storyChapter';
@@ -108,6 +108,7 @@ const Divider = styled.div`
 // 실제 완료 처리(api/storyProgress.completeChapter)는 StoryView에서 이 화면으로 넘어오기 직전에 호출됩니다.
 function StoryChapterComplete() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const { products } = useRecommendedProducts();
   const scrollRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -169,8 +170,7 @@ function StoryChapterComplete() {
           </CompleteDescription>
         </MessageBlock>
 
-        {/* TODO: 구매 가능 매장 페이지 연결 */}
-        <StoreButton type="button">
+        <StoreButton type="button" onClick={() => navigate('/story/stores')}>
           구매 가능 매장 확인하기
           <StoreArrow src={halfArrow} alt="" aria-hidden />
         </StoreButton>
