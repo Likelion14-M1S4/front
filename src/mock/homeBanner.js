@@ -7,5 +7,5 @@ export const homeBanner = {
   title: '시즌 제품 만나보기',
   description:
     '이번 시즌 새롭게 선보이는 새로운 컬렉션의\n특별한 이야기를 확인해보세요',
-  linkTo: '/collection',
+  linkTo: '/season',
 };
