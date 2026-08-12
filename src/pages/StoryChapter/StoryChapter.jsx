@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -6,8 +7,10 @@ import {
     finalUnlockLabel,
     finalUnlockedLabel,
 } from '../../mock/storyChapter';
+import { getCompletedChapterIds } from '../../api/storyProgress';
 import BackHeader from '../../components/common/Header/BackHeader';
 import padlockIcon from '../../assets/icons/nav/padlock.svg';
+import unlockIcon from '../../assets/icons/nav/unlock.svg';
 
 const Page = styled.div`
     display: flex;
@@ -163,15 +166,23 @@ const PadlockIcon = styled.img`
 // 스토리 챕터 페이지
 function StoryChapter() {
 const navigate = useNavigate();
+// 완료된 챕터 id 목록 — localStorage 기반 진행 기록 (api/storyProgress)
+const [completedChapterIds, setCompletedChapterIds] = useState([]);
+
+useEffect(() => {
+    getCompletedChapterIds().then(setCompletedChapterIds);
+}, []);
+
+const isCompleted = (chapter) => completedChapterIds.includes(chapter.id);
 
 // 해금 규칙: 첫 챕터는 항상 열림, 그 외엔 이전 챕터가 완료되어야 열림
 const isUnlocked = (index) => {
     if (index === 0) return true;
-    return chapters[index - 1].completed;
+    return isCompleted(chapters[index - 1]);
 };
 
 // 모든 챕터 완료 여부
-const allCompleted = chapters.every((chapter) => chapter.completed);
+const allCompleted = chapters.every((chapter) => isCompleted(chapter));
 
 // 챕터 카드 클릭 시 스토리 진행 페이지로 이동
 const handleChapterClick = (chapter, index) => {
@@ -223,7 +234,7 @@ const handleFinalClick = () => {
                     <ChapterName>{chapter.title}</ChapterName>
                 </ChapterLabelRow>
                 {/* 완료된 챕터만 다시보기 표시 */}
-                {chapter.completed ? (
+                {isCompleted(chapter) ? (
                 <ReplayButton
                     type="button"
                     onClick={(e) => {
@@ -248,10 +259,12 @@ const handleFinalClick = () => {
         >
         {!allCompleted ? (
             <>
-            <PadlockIcon src={padlockIcon} alt="" aria-hidden /> {finalUnlockLabel}     
+            <PadlockIcon src={padlockIcon} alt="" aria-hidden /> {finalUnlockLabel}
             </>
         ) : (
-            finalUnlockedLabel
+            <>
+            <PadlockIcon src={unlockIcon} alt="" aria-hidden /> {finalUnlockedLabel}
+            </>
         )}
         </FinalButton>
     </Page>

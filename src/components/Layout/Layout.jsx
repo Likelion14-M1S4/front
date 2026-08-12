@@ -47,6 +47,7 @@ function Layout({ children }) {
   const isCollectionDetail = /^\/collection\/[^/]+$/.test(pathname);
   const isCharacterChat = /^\/collection\/[^/]+\/chat$/.test(pathname);
   const isStoryView = /^\/story\/view\/[^/]+$/.test(pathname);
+  const isStoryComplete = /^\/story\/view\/[^/]+\/complete$/.test(pathname);
   const isAccountDetail = /^\/account\/[^/]+$/.test(pathname);
   const isRegisteredProductDetail = /^\/account\/products\/[^/]+$/.test(pathname);
   const isStoreTagDetail = /^\/account\/tag-history\/[^/]+$/.test(pathname);
@@ -64,6 +65,7 @@ function Layout({ children }) {
     isCharmRecommend ||
     isStoryChapter ||
     isStoryView ||
+    isStoryComplete ||
     isLogin ||
     isLoginScreen ||
     isAccountDetail ||
@@ -77,6 +79,7 @@ function Layout({ children }) {
     isCharmRecommend ||
     isStoryChapter ||
     isStoryView ||
+    isStoryComplete ||
     isLogin ||
     isLoginScreen ||
     isAccountDetail ||
