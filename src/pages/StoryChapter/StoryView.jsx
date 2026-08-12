@@ -85,12 +85,12 @@ const CloseIcon = styled.img`
   height: 24px;
 `;
 
-// 하단 설명 박스 위에 살짝 걸치는 작은 썸네일 (추후 이미지)
+// 하단 설명 박스 위에 살짝 걸치는 썸네일 — 추후 캐릭터 사진이 들어갈 자리
 const Thumbnail = styled.div`
   width: 64px;
   height: 80px;
-  margin: auto 0 -16px 23px;
-  background: #f2f2f2;
+  margin: auto 0 -18px 34px;
+  background: #ffffff;
 `;
 
 // 하단 설명 박스 — 선택지 슬라이드일 때만 탭이 여기서 멈추도록(pointer-events: auto) 처리
