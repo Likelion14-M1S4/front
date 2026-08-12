@@ -48,6 +48,8 @@ function Layout({ children }) {
   const isCharacterChat = /^\/collection\/[^/]+\/chat$/.test(pathname);
   const isStoryView = /^\/story\/view\/[^/]+$/.test(pathname);
   const isAccountDetail = /^\/account\/[^/]+$/.test(pathname);
+
+  const isStoreTagDetail = /^\/account\/tag-history\/[^/]+$/.test(pathname);
   const isWishlist = pathname === '/wishlist';
   const isProductDetail = pathname.startsWith('/product/');
   const isCharmRecommend = pathname === '/recommend/charms';
@@ -65,6 +67,8 @@ function Layout({ children }) {
     isLogin ||
     isLoginScreen ||
     isAccountDetail ||
+    
+    isStoreTagDetail ||
     isWishlist;
 
   const hideNav =
@@ -76,6 +80,8 @@ function Layout({ children }) {
     isLogin ||
     isLoginScreen ||
     isAccountDetail ||
+    
+    isStoreTagDetail ||
     isWishlist;
 
   return (

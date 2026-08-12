@@ -72,7 +72,8 @@ return (
         </BackButton>
     </Header>
 
-    <Title>{title}</Title>
+    {/* 제목이 없으면 없는대로, 있으면 있는대로 */}
+    {title ? <Title>{title}</Title> : null}
 
     <Content>{children}</Content>
     </Page>
