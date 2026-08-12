@@ -15,7 +15,8 @@ const WelcomeBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 105px;
+  width: 389px;
+  height: 187px;
   background: #f6f4f2;
 `;
 
