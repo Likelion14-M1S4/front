@@ -11,8 +11,9 @@ const List = styled.div`
     margin-top: 46px;
 `;
 
-// 매장 1곳의 방문 이력
-const Row = styled.div`
+// 매장 1곳의 방문 이력 — 테두리 없는 버튼, 누르면 해당 매장 상세로 이동
+const Row = styled(Link)`
+    display: block;
     padding-bottom: 16px;
     border-bottom: 0.25px solid #EBE8E5;
     margin-bottom: 32px;
@@ -103,7 +104,7 @@ function StoreTagHistory() {
     <AccountDetailLayout title="매장 태그 이력">
       <List>
         {history.map((store) => (
-          <Row key={store.id}>
+          <Row key={store.id} to={`/account/tag-history/${store.id}`}>
             <StoreName>{store.storeName}</StoreName>
             <LastVisited>마지막 방문 일자: {store.lastVisitedAt}</LastVisited>
           </Row>
