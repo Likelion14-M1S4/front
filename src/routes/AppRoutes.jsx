@@ -1,4 +1,5 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 import Home from '../pages/Home/Home';
 import Collection from '../pages/Collection/Collection';
 import CollectionDetail from '../pages/Collection/CollectionDetail';
@@ -24,9 +25,12 @@ import OwnedCharms from '../pages/Account/OwnedCharms';
 
 // 페이지 경로와 컴포넌트 매핑
 function AppRoutes() {
+  const { isLoggedIn } = useAuth();
+
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
+      {/* 로그인 안 되어 있으면 사이트 진입 시 바로 로그인 페이지로 */}
+      <Route path="/" element={isLoggedIn ? <Home /> : <Navigate to="/login" replace />} />
       <Route path="/collection" element={<Collection />} />
       <Route path="/collection/:characterId" element={<CollectionDetail />} />
       <Route path="/collection/:characterId/chat" element={<CharacterChat />} />

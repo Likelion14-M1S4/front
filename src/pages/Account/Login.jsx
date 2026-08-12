@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 import mcmLogo from '../../assets/icons/nav/header/mcm.svg';
 import kakaoIcon from '../../assets/icons/nav/kakaotalk_icon.svg';
 import { useAuth } from '../../context/AuthContext';    //api 연동 전 로그인 확인 위함
@@ -57,9 +58,11 @@ const KakaoText = styled.span`
 // 로그인 페이지
 function Login() {
   const { login } = useAuth()
+  const navigate = useNavigate();
   // 카카오 로그인 처리 (추후 API 연동)
   const handleKakaoLogin = () => {
     login(); // 시연용: 로그인 상태로 전환 (추후 실제 카카오 API로 교체)
+    navigate('/');
   };
 
   return (
