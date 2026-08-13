@@ -113,7 +113,7 @@ function StoreTagLoading() {
   const { result, isLoading, error } = useStoreTagNfc({ requestKey, skip: alreadyRead });
 
   useEffect(() => {
-    if (alreadyRead) navigate(isLoggedIn ? '/home' : '/login', { replace: true });
+    if (alreadyRead) navigate(isLoggedIn ? '/home' : '/certificate', { replace: true });
   }, [alreadyRead, isLoggedIn, navigate]);
 
   // 점 애니메이션: 로딩 중 무한 루프 (2번 후 종료하지 않음)
@@ -127,12 +127,12 @@ function StoreTagLoading() {
     return () => clearInterval(timer);
   }, [isLoading]);
 
-  // 연결 성공 시 세션에 기록 후 로그인 화면으로 이동 (다음 방문부터는 로딩 화면 생략)
-  // TODO: 추후 태그 화면과 로그인 화면 사이에 정품인증 화면 · 태그 캐릭터 화면 추가 예정
+  // 연결 성공 시 세션에 기록 후 정품인증 화면으로 이동 (다음 방문부터는 로딩 화면 생략)
+  // TODO: 추후 정품인증 화면과 로그인 화면 사이에 태그 캐릭터 화면 추가 예정
   useEffect(() => {
     if (!result || isLoading) return;
     sessionStorage.setItem(NFC_READ_KEY, 'true');
-    navigate(isLoggedIn ? result.nextPath || '/home' : '/login', { replace: true });
+    navigate(isLoggedIn ? result.nextPath || '/home' : '/certificate', { replace: true });
   }, [result, isLoading, isLoggedIn, navigate]);
 
   const dots = DOT_FRAMES[frameIndex];

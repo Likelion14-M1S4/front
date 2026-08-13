@@ -1,5 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import StoreTagLoading from '../pages/StoreTag/StoreTagLoading';
+import Certificate from '../pages/Certificate/Certificate';
 import Home from '../pages/Home/Home';
 import Collection from '../pages/Collection/Collection';
 import CollectionDetail from '../pages/Collection/CollectionDetail';
@@ -30,6 +31,7 @@ function AppRoutes() {
   return (
     <Routes>
       <Route path="/" element={<StoreTagLoading />} />
+      <Route path="/certificate" element={<Certificate />} />
       <Route path="/home" element={<Home />} />
       <Route path="/collection" element={<Collection />} />
       <Route path="/collection/:characterId" element={<CollectionDetail />} />
