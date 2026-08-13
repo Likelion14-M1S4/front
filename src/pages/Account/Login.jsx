@@ -62,7 +62,7 @@ function Login() {
   // 카카오 로그인 처리 (추후 API 연동)
   const handleKakaoLogin = () => {
     login(); // 시연용: 로그인 상태로 전환 (추후 실제 카카오 API로 교체)
-    navigate('/');
+    navigate('/home', { replace: true });
   };
 
   return (
