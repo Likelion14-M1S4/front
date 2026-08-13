@@ -18,7 +18,7 @@ import Product from '../pages/Product/Product';
 import SeasonProducts from '../pages/Season/SeasonProducts';
 import SeasonProductDetail from '../pages/Season/SeasonProductDetail';
 import Account from '../pages/Account/Account';
-import Wishlist from '../pages/Account/whislist';
+import Wishlist from '../pages/Account/Wishlist';
 import LoginInfo from '../pages/Account/LoginInfo';
 import RegisteredProducts from '../pages/Account/RegisteredProducts';
 import StoreTagHistory from '../pages/Account/StoreTagHistory';
