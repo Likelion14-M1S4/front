@@ -54,15 +54,17 @@ function Layout({ children }) {
   const isPurchasableStores = pathname === '/story/stores';
   const isWishlist = pathname === '/wishlist';
   const isProductDetail = pathname.startsWith('/product/');
+  const isSeasonPage = pathname === '/season' || pathname.startsWith('/season/');
   const isCharmRecommend = pathname === '/recommend/charms';
   const isStoryChapter = pathname === '/story/chapter';
   const isLogin = pathname === '/login';
   const isLoginScreen = pathname === '/account' && !isLoggedIn;
-  // 제품 상세·참 추천·컬렉션 상세·채팅·스토리 챕터에서는 MCM 로고 헤더 숨김
+  // 제품 상세·시즌·참 추천·컬렉션 상세·채팅·스토리 챕터에서는 MCM 로고 헤더 숨김
   const hideHeader =
     isCollectionDetail ||
     isCharacterChat ||
     isProductDetail ||
+    isSeasonPage ||
     isCharmRecommend ||
     isStoryChapter ||
     isStoryView ||
@@ -78,6 +80,7 @@ function Layout({ children }) {
   const hideNav =
     isCharacterChat ||
     isProductDetail ||
+    isSeasonPage ||
     isCharmRecommend ||
     isStoryChapter ||
     isStoryView ||

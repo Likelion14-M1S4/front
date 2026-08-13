@@ -1,5 +1,4 @@
-import { Routes, Route, Navigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
+import { Routes, Route } from 'react-router-dom';
 import Home from '../pages/Home/Home';
 import Collection from '../pages/Collection/Collection';
 import CollectionDetail from '../pages/Collection/CollectionDetail';
@@ -12,6 +11,8 @@ import PurchasableStores from '../pages/StoryChapter/PurchasableStores';
 import Recommend from '../pages/Recommend/Recommend';
 import CharmRecommend from '../pages/CharmRecommend/CharmRecommend';
 import Product from '../pages/Product/Product';
+import SeasonProducts from '../pages/Season/SeasonProducts';
+import SeasonProductDetail from '../pages/Season/SeasonProductDetail';
 import Account from '../pages/Account/Account';
 import Login from '../pages/Account/Login';
 import Wishlist from '../pages/Account/whislist';
@@ -25,12 +26,9 @@ import OwnedCharms from '../pages/Account/OwnedCharms';
 
 // 페이지 경로와 컴포넌트 매핑
 function AppRoutes() {
-  const { isLoggedIn } = useAuth();
-
   return (
     <Routes>
-      {/* 로그인 안 되어 있으면 사이트 진입 시 바로 로그인 페이지로 */}
-      <Route path="/" element={isLoggedIn ? <Home /> : <Navigate to="/login" replace />} />
+      <Route path="/" element={<Home />} />
       <Route path="/collection" element={<Collection />} />
       <Route path="/collection/:characterId" element={<CollectionDetail />} />
       <Route path="/collection/:characterId/chat" element={<CharacterChat />} />
@@ -42,6 +40,8 @@ function AppRoutes() {
       <Route path="/recommend" element={<Recommend />} />
       <Route path="/recommend/charms" element={<CharmRecommend />} />
       <Route path="/product/:productId" element={<Product />} />
+      <Route path="/season" element={<SeasonProducts />} />
+      <Route path="/season/:productId" element={<SeasonProductDetail />} />
       <Route path="/account" element={<Account />} />
       <Route path="/login" element={<Login />} />
       <Route path="/wishlist" element={<Wishlist />} />
