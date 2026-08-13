@@ -13,7 +13,7 @@ export async function getCompletedChapterIds() {
 
   const raw = localStorage.getItem(STORAGE_KEY);
   //return Promise.resolve([]); // 전부 잠긴 상태로 강제
-  // return Promise.resolve([1]); // 챕터 1만 완료된 상태로 강제
+  //return Promise.resolve([1,2]); // 챕터 1,2만 완료된 상태로 강제
   return Promise.resolve(raw ? JSON.parse(raw) : []);
 }
 
