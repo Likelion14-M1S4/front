@@ -218,9 +218,11 @@ function StoryView() {
       setSlideIndex((prev) => prev + 1);
       return;
     }
-    // 마지막 슬라이드 — 챕터 완료 처리 후 완료 화면으로 이동
+    // 마지막 슬라이드 — 챕터 완료 처리 후 이동
+    // 마지막 챕터만 완료 화면(제품 추천 등)으로, 그 전 챕터들은 챕터 목록으로 복귀
+    const isLastChapter = chapters[chapters.length - 1]?.id === chapter.id;
     completeChapter(chapter.id).then(() => {
-      navigate(`/story/view/${id}/complete`);
+      navigate(isLastChapter ? `/story/view/${id}/complete` : '/story/chapter');
     });
   };
 
