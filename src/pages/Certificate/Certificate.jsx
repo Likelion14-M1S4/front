@@ -5,10 +5,11 @@ import { getCertificate } from '../../api/certificate';
 
 // 헤더/네비게이션 없이 흰 배경으로 꽉 채우는 페이지
 const Page = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   min-height: 100dvh;
-  padding-bottom: 40px;
+  padding-bottom: 196px;
   background: #ffffff;
 `;
 
@@ -85,11 +86,13 @@ const InfoRow = styled.p`
   font-weight: 400;
 `;
 
-// 다음 버튼 — 구매처와 44px 간격, 342x27, 좌우 24px씩
+// 다음 버튼 — 컬렉션에 추가 버튼과 화면상 같은 위치에 겹치도록 페이지 하단에 고정
 const NextButton = styled.button`
-  width: 342px;
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  bottom: 140px;
   height: 56px;
-  margin: 44px 24px 0;
   border: none;
   border-radius: 5px;
   background: #1E1E1E;
@@ -112,8 +115,7 @@ function Certificate() {
   if (!certificate) return null;
 
   const handleNext = () => {
-    // TODO: 정품인증 다음 단계(태그 캐릭터 화면)가 생기면 그쪽으로 교체
-    navigate('/login');
+    navigate('/character/add');
   };
 
   return (
