@@ -32,7 +32,7 @@ const LogoImage = styled.img`
 function Header() {
   return (
     <HeaderBar>
-      <LogoLink to="/" aria-label="홈으로 이동">
+      <LogoLink to="/home" aria-label="홈으로 이동">
         <LogoImage src={mcmLogo} alt="MCM" />
       </LogoLink>
     </HeaderBar>

@@ -1,4 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
+import StoreTagLoading from '../pages/StoreTag/StoreTagLoading';
 import Home from '../pages/Home/Home';
 import Collection from '../pages/Collection/Collection';
 import CollectionDetail from '../pages/Collection/CollectionDetail';
@@ -28,7 +29,8 @@ import OwnedCharms from '../pages/Account/OwnedCharms';
 function AppRoutes() {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
+      <Route path="/" element={<StoreTagLoading />} />
+      <Route path="/home" element={<Home />} />
       <Route path="/collection" element={<Collection />} />
       <Route path="/collection/:characterId" element={<CollectionDetail />} />
       <Route path="/collection/:characterId/chat" element={<CharacterChat />} />
