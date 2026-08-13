@@ -9,7 +9,7 @@ const PageShell = styled.div`
   display: flex;
   min-height: 100vh;
   justify-content: center;
-  background: #ffffff;
+  background: ${({ $cream }) => ($cream ? '#f9f6f2' : '#ffffff')};
 `;
 
 const AppFrame = styled.div`
@@ -21,7 +21,7 @@ const AppFrame = styled.div`
   flex-shrink: 0;
   flex-direction: column;
   overflow: hidden;
-  background: #ffffff;
+  background: ${({ $cream }) => ($cream ? '#f9f6f2' : '#ffffff')};
 `;
 
 const Main = styled.main`
@@ -55,16 +55,18 @@ function Layout({ children }) {
   const isWishlist = pathname === '/wishlist';
   const isProductDetail = pathname.startsWith('/product/');
   const isSeasonPage = pathname === '/season' || pathname.startsWith('/season/');
+  const isStoreTagLoading = pathname === '/';
   const isCharmRecommend = pathname === '/recommend/charms';
   const isStoryChapter = pathname === '/story/chapter';
   const isLogin = pathname === '/login';
   const isLoginScreen = pathname === '/account' && !isLoggedIn;
-  // 제품 상세·시즌·참 추천·컬렉션 상세·채팅·스토리 챕터에서는 MCM 로고 헤더 숨김
+  // 제품 상세·시즌·매장태그 로딩·참 추천·컬렉션 상세·채팅·스토리 챕터에서는 MCM 로고 헤더 숨김
   const hideHeader =
     isCollectionDetail ||
     isCharacterChat ||
     isProductDetail ||
     isSeasonPage ||
+    isStoreTagLoading ||
     isCharmRecommend ||
     isStoryChapter ||
     isStoryView ||
@@ -81,6 +83,7 @@ function Layout({ children }) {
     isCharacterChat ||
     isProductDetail ||
     isSeasonPage ||
+    isStoreTagLoading ||
     isCharmRecommend ||
     isStoryChapter ||
     isStoryView ||
@@ -94,10 +97,10 @@ function Layout({ children }) {
     isWishlist;
 
   return (
-    <PageShell>
-      <AppFrame id="app-frame">
+    <PageShell $cream={isStoreTagLoading}>
+      <AppFrame id="app-frame" $cream={isStoreTagLoading}>
         {!hideHeader && <Header />}
-        <Main $hideHeader={hideHeader} $hideNav={hideNav} $fullBleed={isCharacterChat}>
+        <Main $hideHeader={hideHeader} $hideNav={hideNav} $fullBleed={isCharacterChat || isStoreTagLoading}>
           {children}
         </Main>
         {!hideNav && <Navigation />}
