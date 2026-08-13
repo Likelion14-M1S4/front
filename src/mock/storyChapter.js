@@ -89,8 +89,16 @@ export const chapters = [
       { id: 4, type: 'normal', imageUrl: '', text: '완성된 제품이 매장에 도착하기까지의 여정입니다.' },
     ],
   },
+  {
+    id: 4,
+    label: 'Chapter 4.',
+    title: 'Legacy', // 임시 제목 — 원하는 대로 수정
+    description: '50주년을 맞은 하우스가 걸어온 길과 앞으로의 이야기를 들여다봅니다.', // 임시 설명 — 원하는 대로 수정
+    large: true,
+    slides: [
+      { id: 1, type: 'normal', imageUrl: '', text: '50주년을 맞은 하우스가 걸어온 길과 앞으로의 이야기를 들여다봅니다.' },
+      { id: 2, type: 'normal', imageUrl: '', text: '지난 시간 동안 쌓아온 유산을 소개합니다.' },
+      { id: 3, type: 'normal', imageUrl: '', text: '앞으로 하우스가 그려갈 다음 이야기를 예고합니다.' },
+    ],
+  },
 ];
-
-// 모든 챕터 완료 후 해금되는 최종 버튼 라벨
-export const finalUnlockLabel = 'Chapter 3 완료 시 해금';
-export const finalUnlockedLabel = '스토리 완료 보상 받기'; // 다 완료됐을 때 문구 (원하는 대로 수정)

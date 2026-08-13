@@ -1,17 +1,12 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import {
-    storyChapterIntro,
-    chapters,
-    finalUnlockLabel,
-    finalUnlockedLabel,
-} from '../../mock/storyChapter';
+import { storyChapterIntro, chapters } from '../../mock/storyChapter';
 import { getCompletedChapterIds } from '../../api/storyProgress';
 import BackHeader from '../../components/common/Header/BackHeader';
 import padlockIcon from '../../assets/icons/nav/padlock.svg';
-import unlockIcon from '../../assets/icons/nav/unlock.svg';
 
+// 페이지 전체 레이아웃
 const Page = styled.div`
     display: flex;
     flex-direction: column;
@@ -22,6 +17,7 @@ const IntroBox = styled.div`
     padding: 48px 30px 0;
 `;
 
+// 시즌 텍스트 (예: Autumn Winter 2026)
 const Season = styled.p`
     margin: 0;
     color: black;
@@ -31,6 +27,7 @@ const Season = styled.p`
     line-height: 22.75px;
 `;
 
+// 페이지 제목 (예: 스토리 챕터)
 const Title = styled.h1`
     margin: 24px 0 0;
     color: black;
@@ -46,10 +43,10 @@ const ChapterList = styled.div`
     flex-direction: column;
     gap: 8px;
     margin-top: 56px;
-    padding: 0 30px;
+    padding: 0 30px 40px;
 `;
 
-// 일반 챕터 카드 — 해금 여부에 따라 커서 변경
+// 일반 챕터 카드 (해금된 챕터만 이 형태로 렌더링됨)
 const ChapterCard = styled.div`
     display: flex;
     align-items: flex-end;
@@ -57,16 +54,17 @@ const ChapterCard = styled.div`
     height: 120px;
     padding: 0 16px 8px;
     background: #F6F4F2;
-    cursor: ${({ $unlocked }) => ($unlocked ? 'pointer' : 'not-allowed')};
-    opacity: ${({ $unlocked }) => ($unlocked ? 1 : 0.5)};
+    cursor: pointer;
 `;
 
+// 챕터 번호 + 제목을 나란히 배치하는 행
 const ChapterLabelRow = styled.div`
     display: flex;
     align-items: baseline;
     gap: 8px;
 `;
 
+// "Chapter 1." 같은 챕터 번호 라벨
 const ChapterLabel = styled.span`
     color: black;
     font-size: 14px;
@@ -75,6 +73,7 @@ const ChapterLabel = styled.span`
     line-height: 22.75px;
 `;
 
+// 챕터 제목 (예: Introduction)
 const ChapterName = styled.span`
     color: black;
     font-size: 14px;
@@ -83,6 +82,7 @@ const ChapterName = styled.span`
     line-height: 22.75px;
 `;
 
+// 완료된 챕터에 노출되는 "다시보기" 버튼
 const ReplayButton = styled.button`
     padding: 0;
     border: none;
@@ -95,7 +95,7 @@ const ReplayButton = styled.button`
     line-height: 22.75px;
 `;
 
-// 큰 카드 (Chapter 3 — 설명 포함)
+// 큰 카드 (설명 포함, 해금된 챕터만 이 형태로 렌더링됨)
 const LargeCard = styled.div`
     display: flex;
     flex-direction: column;
@@ -103,16 +103,24 @@ const LargeCard = styled.div`
     min-height: 300px;
     padding: 31px 16px;
     background: #F6F4F2;
-    cursor: ${({ $unlocked }) => ($unlocked ? 'pointer' : 'not-allowed')};
-    opacity: ${({ $unlocked }) => ($unlocked ? 1 : 0.5)};
+    cursor: pointer;
 `;
 
+// 큰 카드의 챕터 번호 + 제목을 나란히 배치하는 행
 const LargeLabelRow = styled.div`
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+`;
+
+// 큰 카드의 챕터 번호 + 제목을 묶는 그룹
+const LargeLabelGroup = styled.div`
     display: flex;
     align-items: baseline;
     gap: 4px;
 `;
 
+// 큰 카드의 챕터 번호 라벨
 const LargeLabel = styled.span`
     color: black;
     font-size: 16px;
@@ -121,6 +129,7 @@ const LargeLabel = styled.span`
     line-height: 22.75px;
 `;
 
+// 큰 카드의 챕터 제목
 const LargeName = styled.span`
     color: black;
     font-size: 16px;
@@ -129,6 +138,7 @@ const LargeName = styled.span`
     line-height: 22.75px;
 `;
 
+// 큰 카드에만 노출되는 챕터 설명 문구
 const Description = styled.p`
     margin: 7px 0 0;
     color: black;
@@ -138,26 +148,26 @@ const Description = styled.p`
     line-height: 22.75px;
 `;
 
-// 최종 버튼 — 전체 완료 여부에 따라 활성/비활성
-const FinalButton = styled.button`
+// 잠긴 챕터 카드 — 크기와 상관없이 최종 버튼과 같은 74px 막대로 표시
+const LockedBar = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
     height: 74px;
-    margin: 25px 30px 20px;
-    border: none;
+    background: linear-gradient(180deg, #f6f4f2 0%, #000000 200%);
+    cursor: not-allowed;
+`;
+
+// 잠긴 챕터 막대 안내 문구 (예: "Chapter 1 완료 시 해금")
+const LockedText = styled.span`
     color: #ffffff;
     font-size: 16px;
     font-family: 'SD Minburi';
     font-weight: 500;
-    cursor: ${({ $enabled }) => ($enabled ? 'pointer' : 'not-allowed')};
-    background: ${({ $enabled }) =>
-    $enabled
-        ? 'linear-gradient(180deg, #8b5e3c 0%, #5c3d26 100%)'
-        : 'linear-gradient(180deg, #f6f4f2 0%, #000000 200%)'};
 `;
 
+// 잠긴 챕터 막대에 표시되는 자물쇠 아이콘
 const PadlockIcon = styled.img`
     width: 24px;
     height: 24px;
@@ -173,6 +183,7 @@ useEffect(() => {
     getCompletedChapterIds().then(setCompletedChapterIds);
 }, []);
 
+// 해당 챕터를 끝까지 봤는지 여부
 const isCompleted = (chapter) => completedChapterIds.includes(chapter.id);
 
 // 해금 규칙: 첫 챕터는 항상 열림, 그 외엔 이전 챕터가 완료되어야 열림
@@ -181,25 +192,17 @@ const isUnlocked = (index) => {
     return isCompleted(chapters[index - 1]);
 };
 
-// 모든 챕터 완료 여부
-const allCompleted = chapters.every((chapter) => isCompleted(chapter));
-
 // 챕터 카드 클릭 시 스토리 진행 페이지로 이동
 const handleChapterClick = (chapter, index) => {
     if (!isUnlocked(index)) return;
     navigate(`/story/view/${chapter.id}`);
 };
 
-    // 최종 버튼 클릭 (전체 완료 시에만 동작)
-const handleFinalClick = () => {
-    if (!allCompleted) return;
-    navigate('/story/reward'); // 보상 페이지 경로 (원하는 대로 수정)
-};
-
     return (
     <Page>
         <BackHeader />
 
+        {/* 시즌/타이틀 소개 영역 */}
         <IntroBox>
             <Season>{storyChapterIntro.season}</Season>
             <Title>{storyChapterIntro.title}</Title>
@@ -209,26 +212,45 @@ const handleFinalClick = () => {
         {chapters.map((chapter, index) => {
             const unlocked = isUnlocked(index);
 
+            // 잠긴 챕터 — 이전 챕터 완료 시 해금된다는 안내 막대만 표시
+            if (!unlocked) {
+            // 라벨 끝의 마침표(.)를 떼어 "Chapter N 완료 시 해금" 문구를 만듦
+            const prevLabel = chapters[index - 1].label.replace(/\.$/, '');
+            return (
+                <LockedBar key={chapter.id}>
+                <PadlockIcon src={padlockIcon} alt="" aria-hidden />
+                <LockedText>{prevLabel} 완료 시 해금</LockedText>
+                </LockedBar>
+            );
+            }
+
+            // 해금된 챕터 — chapter.large 여부에 따라 큰 카드/일반 카드로 렌더링
             return chapter.large ? (
-            <LargeCard
-                key={chapter.id}
-                $unlocked={unlocked}
-                onClick={() => handleChapterClick(chapter, index)}
-            >
+            <LargeCard key={chapter.id} onClick={() => handleChapterClick(chapter, index)}>
                 <LargeLabelRow>
-                    <LargeLabel>{chapter.label}</LargeLabel>
-                    <LargeName>{chapter.title}</LargeName>
+                    <LargeLabelGroup>
+                        <LargeLabel>{chapter.label}</LargeLabel>
+                        <LargeName>{chapter.title}</LargeName>
+                    </LargeLabelGroup>
+                    {/* 완료된 챕터만 다시보기 표시 */}
+                    {isCompleted(chapter) ? (
+                    <ReplayButton
+                        type="button"
+                        onClick={(e) => {
+                        e.stopPropagation();
+                        navigate(`/story/view/${chapter.id}`);
+                        }}
+                    >
+                        다시보기
+                    </ReplayButton>
+                    ) : null}
                 </LargeLabelRow>
                 {chapter.description ? (
                 <Description>{chapter.description}</Description>
                 ) : null}
             </LargeCard>
             ) : (
-            <ChapterCard
-                key={chapter.id}
-                $unlocked={unlocked}
-                onClick={() => handleChapterClick(chapter, index)}
-            >
+            <ChapterCard key={chapter.id} onClick={() => handleChapterClick(chapter, index)}>
                 <ChapterLabelRow>
                     <ChapterLabel>{chapter.label}</ChapterLabel>
                     <ChapterName>{chapter.title}</ChapterName>
@@ -249,24 +271,6 @@ const handleFinalClick = () => {
             );
         })}
         </ChapterList>
-
-        {/* 최종 버튼 — 전체 완료 전엔 잠금, 완료 시 활성화 */}
-        <FinalButton
-        type="button"
-        $enabled={allCompleted}
-        disabled={!allCompleted}
-        onClick={handleFinalClick}
-        >
-        {!allCompleted ? (
-            <>
-            <PadlockIcon src={padlockIcon} alt="" aria-hidden /> {finalUnlockLabel}
-            </>
-        ) : (
-            <>
-            <PadlockIcon src={unlockIcon} alt="" aria-hidden /> {finalUnlockedLabel}
-            </>
-        )}
-        </FinalButton>
     </Page>
     );
 }
