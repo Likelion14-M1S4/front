@@ -1,7 +1,8 @@
 import { Routes, Route } from 'react-router-dom';
 import StoreTagLoading from '../pages/StoreTag/StoreTagLoading';
-import Certificate from '../pages/Certificate/Certificate';
-import TagCharacterAdd from '../pages/TagCharacterAdd/TagCharacterAdd';
+import Certificate from '../pages/StoreTag/Certificate';
+import TagCharacterAdd from '../pages/StoreTag/TagCharacterAdd';
+import Login from '../pages/StoreTag/Login';
 import Home from '../pages/Home/Home';
 import Collection from '../pages/Collection/Collection';
 import CollectionDetail from '../pages/Collection/CollectionDetail';
@@ -17,7 +18,6 @@ import Product from '../pages/Product/Product';
 import SeasonProducts from '../pages/Season/SeasonProducts';
 import SeasonProductDetail from '../pages/Season/SeasonProductDetail';
 import Account from '../pages/Account/Account';
-import Login from '../pages/Account/Login';
 import Wishlist from '../pages/Account/whislist';
 import LoginInfo from '../pages/Account/LoginInfo';
 import RegisteredProducts from '../pages/Account/RegisteredProducts';
@@ -34,6 +34,7 @@ function AppRoutes() {
       <Route path="/" element={<StoreTagLoading />} />
       <Route path="/certificate" element={<Certificate />} />
       <Route path="/character/add" element={<TagCharacterAdd />} />
+      <Route path="/login" element={<Login />} />
       <Route path="/home" element={<Home />} />
       <Route path="/collection" element={<Collection />} />
       <Route path="/collection/:characterId" element={<CollectionDetail />} />
@@ -49,7 +50,6 @@ function AppRoutes() {
       <Route path="/season" element={<SeasonProducts />} />
       <Route path="/season/:productId" element={<SeasonProductDetail />} />
       <Route path="/account" element={<Account />} />
-      <Route path="/login" element={<Login />} />
       <Route path="/wishlist" element={<Wishlist />} />
       <Route path="/account/login-info" element={<LoginInfo />} />
       <Route path="/account/products" element={<RegisteredProducts />} />
