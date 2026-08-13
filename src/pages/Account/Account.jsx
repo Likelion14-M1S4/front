@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';  //api 연동 전 로그인 확인 위함
-import Login from './Login';
 import { accountSections } from '../../mock/account';
 import forwardArrow from '../../assets/icons/nav/forward_arrow.svg';
 
@@ -96,13 +94,7 @@ const Arrow = styled.img`
 
 // 내계정 페이지 — 로그인 상태에 따라 분기
 function Account() {
-  const { isLoggedIn } = useAuth();
   const navigate = useNavigate();
-
-  // 로그인 안 되어 있으면 로그인 페이지 표시
-  if (!isLoggedIn) {
-    return <Login />;
-  }
 
   // 항목 클릭 — url 있으면 외부 링크, id에 따라 페이지 이동
   const handleItemClick = (item) => {

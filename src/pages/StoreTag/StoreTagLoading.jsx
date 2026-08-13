@@ -6,6 +6,7 @@ import pointLarge from '../../assets/icons/tag/point 1.svg';
 import pointMedium from '../../assets/icons/tag/point 2.svg';
 import pointSmall from '../../assets/icons/tag/point 3.svg';
 import { useStoreTagNfc } from '../../hooks/useStoreTagNfc';
+import { useAuth } from '../../context/AuthContext';
 import { APP_WIDTH } from '../../styles/theme';
 
 const L = pointLarge;
@@ -21,6 +22,9 @@ const DOT_FRAMES = [
 ];
 
 const FRAME_MS = 380;
+
+// 이 값이 세션에 있으면 이미 한 번 NFC를 읽은 것으로 보고 로딩 화면을 건너뜀
+const NFC_READ_KEY = 'mcm_store_tag_nfc_read';
 
 const Page = styled.div`
   display: flex;
@@ -101,9 +105,16 @@ function getDotSize(src) {
 // 매장 태그 로딩 — NFC API 연결될 때까지 유지
 function StoreTagLoading() {
   const navigate = useNavigate();
+  const { isLoggedIn } = useAuth();
   const [frameIndex, setFrameIndex] = useState(0);
   const [requestKey, setRequestKey] = useState(0);
-  const { result, isLoading, error } = useStoreTagNfc({ requestKey });
+  // 이번 세션에 이미 한 번 읽었으면 다시 읽지 않고, 로그인 여부에 따라 바로 이동
+  const alreadyRead = sessionStorage.getItem(NFC_READ_KEY) === 'true';
+  const { result, isLoading, error } = useStoreTagNfc({ requestKey, skip: alreadyRead });
+
+  useEffect(() => {
+    if (alreadyRead) navigate(isLoggedIn ? '/home' : '/login', { replace: true });
+  }, [alreadyRead, isLoggedIn, navigate]);
 
   // 점 애니메이션: 로딩 중 무한 루프 (2번 후 종료하지 않음)
   useEffect(() => {
@@ -116,11 +127,13 @@ function StoreTagLoading() {
     return () => clearInterval(timer);
   }, [isLoading]);
 
-  // 연결 성공 시 이동
+  // 연결 성공 시 세션에 기록 후 로그인 화면으로 이동 (다음 방문부터는 로딩 화면 생략)
+  // TODO: 추후 태그 화면과 로그인 화면 사이에 정품인증 화면 · 태그 캐릭터 화면 추가 예정
   useEffect(() => {
     if (!result || isLoading) return;
-    navigate(result.nextPath || '/home', { replace: true });
-  }, [result, isLoading, navigate]);
+    sessionStorage.setItem(NFC_READ_KEY, 'true');
+    navigate(isLoggedIn ? result.nextPath || '/home' : '/login', { replace: true });
+  }, [result, isLoading, isLoggedIn, navigate]);
 
   const dots = DOT_FRAMES[frameIndex];
 

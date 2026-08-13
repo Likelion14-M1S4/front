@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import Header from '../common/Header/Header';
 import Navigation from '../common/Navigation/Navigation';
 import { APP_WIDTH, HEADER_HEIGHT } from '../../styles/theme';
-import { useAuth } from '../../context/AuthContext';
 
 const PageShell = styled.div`
   display: flex;
@@ -43,7 +42,6 @@ const Main = styled.main`
 // 라우트가 바뀌어도 프레임(헤더·네비)은 유지되고 main 영역만 교체됩니다.
 function Layout({ children }) {
   const { pathname } = useLocation();
-  const { isLoggedIn } = useAuth();
   const isCollectionDetail = /^\/collection\/[^/]+$/.test(pathname);
   const isCharacterChat = /^\/collection\/[^/]+\/chat$/.test(pathname);
   const isStoryView = /^\/story\/view\/[^/]+$/.test(pathname);
@@ -59,7 +57,6 @@ function Layout({ children }) {
   const isCharmRecommend = pathname === '/recommend/charms';
   const isStoryChapter = pathname === '/story/chapter';
   const isLogin = pathname === '/login';
-  const isLoginScreen = pathname === '/account' && !isLoggedIn;
   // 제품 상세·시즌·매장태그 로딩·참 추천·컬렉션 상세·채팅·스토리 챕터에서는 MCM 로고 헤더 숨김
   const hideHeader =
     isCollectionDetail ||
@@ -72,7 +69,6 @@ function Layout({ children }) {
     isStoryView ||
     isStoryComplete ||
     isLogin ||
-    isLoginScreen ||
     isAccountDetail ||
     isRegisteredProductDetail ||
     isStoreTagDetail ||
@@ -89,7 +85,6 @@ function Layout({ children }) {
     isStoryView ||
     isStoryComplete ||
     isLogin ||
-    isLoginScreen ||
     isAccountDetail ||
     isRegisteredProductDetail ||
     isStoreTagDetail ||
