@@ -58,6 +58,7 @@ function Layout({ children }) {
   const isStoryChapter = pathname === '/story/chapter';
   const isLogin = pathname === '/login';
   const isCertificate = pathname === '/certificate';
+  const isTagCharacterAdd = pathname === '/character/add';
   // 제품 상세·시즌·매장태그 로딩·참 추천·컬렉션 상세·채팅·스토리 챕터에서는 MCM 로고 헤더 숨김
   const hideHeader =
     isCollectionDetail ||
@@ -71,6 +72,7 @@ function Layout({ children }) {
     isStoryComplete ||
     isLogin ||
     isCertificate ||
+    isTagCharacterAdd ||
     isAccountDetail ||
     isRegisteredProductDetail ||
     isStoreTagDetail ||
@@ -88,6 +90,7 @@ function Layout({ children }) {
     isStoryComplete ||
     isLogin ||
     isCertificate ||
+    isTagCharacterAdd ||
     isAccountDetail ||
     isRegisteredProductDetail ||
     isStoreTagDetail ||

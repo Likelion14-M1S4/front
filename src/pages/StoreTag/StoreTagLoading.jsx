@@ -128,7 +128,6 @@ function StoreTagLoading() {
   }, [isLoading]);
 
   // 연결 성공 시 세션에 기록 후 정품인증 화면으로 이동 (다음 방문부터는 로딩 화면 생략)
-  // TODO: 추후 정품인증 화면과 로그인 화면 사이에 태그 캐릭터 화면 추가 예정
   useEffect(() => {
     if (!result || isLoading) return;
     sessionStorage.setItem(NFC_READ_KEY, 'true');
