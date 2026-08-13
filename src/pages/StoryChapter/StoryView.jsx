@@ -222,7 +222,12 @@ function StoryView() {
     // 마지막 챕터만 완료 화면(제품 추천 등)으로, 그 전 챕터들은 챕터 목록으로 복귀
     const isLastChapter = chapters[chapters.length - 1]?.id === chapter.id;
     completeChapter(chapter.id).then(() => {
-      navigate(isLastChapter ? `/story/view/${id}/complete` : '/story/chapter');
+      if (isLastChapter) {
+        navigate(`/story/view/${id}/complete`, { replace: true });
+        return;
+      }
+      // 챕터 목록은 이미 히스토리에 있으므로 새로 쌓지 않고 그 자리로 돌아감 (뒤로가기 두 번 방지)
+      navigate(-1);
     });
   };
 
