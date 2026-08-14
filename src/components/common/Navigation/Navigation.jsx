@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import { navigationItems } from './navigationItems';
-import { APP_WIDTH } from '../../../styles/theme';
+import { APP_MAX_WIDTH_REM } from '../../../styles/theme';
 
 const Nav = styled.nav`
   pointer-events: none;
@@ -9,47 +9,46 @@ const Nav = styled.nav`
   inset: auto 0 0 0;
   z-index: 50;
   display: flex;
-  width: ${APP_WIDTH}px;
-  max-width: 100%;
+  width: min(100vw, ${APP_MAX_WIDTH_REM}rem);
   justify-content: center;
-  padding: 0 16px 16px;
+  padding: 0 1rem 1rem;
   box-sizing: border-box;
 `;
 
 const NavBar = styled.div`
   pointer-events: auto;
   display: flex;
-  height: 64px;
+  height: 4rem;
   width: 100%;
-  max-width: 358px;
+  max-width: 22.375rem;
   align-items: center;
   justify-content: space-around;
   border-radius: 9999px;
   background: #ffffff;
-  padding: 0 8px;
+  padding: 0 0.5rem;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
 `;
 
 const Item = styled(NavLink)`
   display: flex;
-  height: 48px;
-  width: 48px;
+  height: 3rem;
+  width: 3rem;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 `;
 
 const Icon = styled.img`
-  height: 22px;
-  width: 22px;
+  height: 1.375rem;
+  width: 1.375rem;
   transition: transform 0.2s;
-  transform: ${({ $active }) => ($active ? 'translateY(-3px)' : 'none')};
+  transform: ${({ $active }) => ($active ? 'translateY(-0.1875rem)' : 'none')};
 `;
 
 const Dot = styled.span`
-  margin-top: 2px;
-  height: 4px;
-  width: 4px;
+  margin-top: 0.125rem;
+  height: 0.25rem;
+  width: 0.25rem;
   border-radius: 9999px;
   background: ${({ $active }) => ($active ? '#6f5b4d' : 'transparent')};
 `;

@@ -7,10 +7,10 @@ import { getContrastTextColor } from '../../../utils/getContrastTextColor';
 const CardLink = styled(Link)`
   position: relative;
   display: block;
-  width: 308px;
-  height: 234px;
-  min-height: 234px;
-  max-height: 234px;
+  width: 19.25rem;
+  height: 14.625rem;
+  min-height: 14.625rem;
+  max-height: 14.625rem;
   overflow: hidden;
   border-radius: 10px;
   background: #f2f2f2;
@@ -19,7 +19,7 @@ const CardLink = styled(Link)`
 
 const CoverImage = styled.img`
   width: 100%;
-  height: 234px;
+  height: 14.625rem;
   object-fit: cover;
 `;
 
@@ -28,13 +28,13 @@ const Overlay = styled.div`
   inset: auto 0 0 0;
   display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 0 16px 16px;
+  gap: 0.375rem;
+  padding: 0 1rem 1rem;
 `;
 
 const Title = styled.h3`
   margin: 0;
-  font-size: 24px;
+  font-size: 1.5rem;
   font-weight: 700;
   color: ${({ $color }) => $color};
 `;

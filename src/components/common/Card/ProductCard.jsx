@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 const CardShell = styled.div`
   display: block;
-  width: ${({ $featured }) => ($featured ? '184px' : '161px')};
-  height: ${({ $featured }) => ($featured ? '234px' : '205px')};
+  width: ${({ $featured }) => ($featured ? '11.5rem' : '10.0625rem')};
+  height: ${({ $featured }) => ($featured ? '14.625rem' : '12.8125rem')};
   flex-shrink: 0;
   overflow: hidden;
   border-radius: 10px;
