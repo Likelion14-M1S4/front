@@ -2,11 +2,11 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import BackHeader from '../../components/common/Header/BackHeader';
 import { useSeasonProducts } from '../../hooks/useSeasonProducts';
-import { APP_WIDTH } from '../../styles/theme';
+import { APP_MAX_WIDTH_REM } from '../../styles/theme';
 
 const Page = styled.div`
   width: 100%;
-  max-width: ${APP_WIDTH}px;
+  max-width: ${APP_MAX_WIDTH_REM}rem;
   margin: 0 auto;
   padding: 0 0 48px;
   box-sizing: border-box;
