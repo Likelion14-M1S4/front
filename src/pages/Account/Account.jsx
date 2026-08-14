@@ -124,6 +124,12 @@ function Account() {
       case 'owned-charm':
         navigate('/account/owned-charms');
         break;
+      case 'privacy':
+        navigate('/account/privacy');
+        break;
+      case 'terms':
+        navigate('/account/terms');
+        break;
       case 'logout':
         // TODO: logout();
         break;

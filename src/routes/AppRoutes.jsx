@@ -26,6 +26,8 @@ import RegisteredProductDetail from '../pages/Account/RegisteredProductDetail';
 import StoreTagDetail from '../pages/Account/StoreTagDetail';
 import AvailableCharms from '../pages/Account/AvailableCharms';
 import OwnedCharms from '../pages/Account/OwnedCharms';
+import PrivacyPolicy from '../pages/Account/PrivacyPolicy';
+import TermsOfService from '../pages/Account/TermsOfService';
 
 // 페이지 경로와 컴포넌트 매핑
 function AppRoutes() {
@@ -58,6 +60,8 @@ function AppRoutes() {
       <Route path="/account/tag-history/:storeId" element={<StoreTagDetail />} />
       <Route path="/account/available-charms" element={<AvailableCharms />} />
       <Route path="/account/owned-charms" element={<OwnedCharms />} />
+      <Route path="/account/privacy" element={<PrivacyPolicy />} />
+      <Route path="/account/terms" element={<TermsOfService />} />
     </Routes>
   );
 }
