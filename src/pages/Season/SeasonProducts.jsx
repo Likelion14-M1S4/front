@@ -14,10 +14,8 @@ const Page = styled.div`
 `;
 
 const Hero = styled.div`
-  width: 24.5rem;
-  max-width: 100%;
-  height: 16.1875rem;
-  margin: 0 auto;
+  width: 100%;
+  aspect-ratio: 392 / 259;
   background: #f2f2f2;
   overflow: hidden;
 `;
@@ -39,8 +37,7 @@ const Description = styled.p`
 
 const Grid = styled.div`
   display: grid;
-  grid-template-columns: 11.8125rem 11.8125rem;
-  justify-content: center;
+  grid-template-columns: repeat(2, 1fr);
   column-gap: 0.75rem;
   row-gap: 1.75rem;
   margin-top: 2rem;
@@ -48,15 +45,15 @@ const Grid = styled.div`
 
 const Card = styled(Link)`
   display: flex;
-  width: 11.8125rem;
+  width: 100%;
   flex-direction: column;
   color: inherit;
   text-decoration: none;
 `;
 
 const Thumb = styled.div`
-  width: 11.8125rem;
-  height: 12.5rem;
+  width: 100%;
+  aspect-ratio: 189 / 200;
   background: #f2f2f2;
   overflow: hidden;
 `;
@@ -79,10 +76,9 @@ const ProductName = styled.p`
 `;
 
 const FooterBanner = styled.div`
-  width: 24.4375rem;
-  max-width: 100%;
-  height: 16.375rem;
-  margin: 2.5rem auto 0;
+  width: 100%;
+  aspect-ratio: 391 / 262;
+  margin: 2.5rem 0 0;
   background: #f2f2f2;
   overflow: hidden;
 `;
