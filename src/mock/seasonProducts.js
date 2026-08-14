@@ -1,16 +1,16 @@
 import bannerImage from '../assets/images/image1.svg';
 import storyImage from '../assets/images/image2.svg';
 import productImage from '../assets/images/image3.svg';
+import seasonHeroImage from '../assets/images/image_2.svg';
 
 // =============================================================================
 // 더미 데이터 — GET /api/season/products, GET /api/season/products/:id 응답과 동일 스키마 유지
 // =============================================================================
 
 export const seasonProductsPage = {
-  heroImageUrl: bannerImage,
+  heroImageUrl: seasonHeroImage,
   description:
     '회고적이면서도 미래지향적인 2026 가을-겨울 컬렉션은 뮌헨의 문화와 음악을 통해 MCM 50주년을 기념하며, 최첨단 소재와 미래지향적인 스타일을 조화롭게 담아냈습니다. 스터드 디테일의 실루엣과 혁신적인 가죽 제품은 예술과 기술, 여행이 교차하는 하우스의 정체성을 드러냅니다.',
-  footerImageUrl: storyImage,
   products: [
     {
       id: 'visetos-lion-charm',

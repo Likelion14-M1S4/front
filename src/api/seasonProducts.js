@@ -11,7 +11,7 @@ import {
  *
  * 응답:
  * {
- *   heroImageUrl, description, footerImageUrl,
+ *   heroImageUrl, description,
  *   products: [{ id, name, price, imageUrl }]
  * }
  */
@@ -27,7 +27,6 @@ function normalizeSeasonProductsPage(data) {
     return {
       heroImageUrl: '',
       description: '',
-      footerImageUrl: '',
       products: [],
     };
   }
@@ -35,7 +34,6 @@ function normalizeSeasonProductsPage(data) {
   return {
     heroImageUrl: data.heroImageUrl ?? '',
     description: data.description ?? '',
-    footerImageUrl: data.footerImageUrl ?? '',
     products: Array.isArray(data.products)
       ? data.products.map((item) => ({
           id: item.id,
