@@ -17,7 +17,7 @@ const Page = styled.div`
 const MessageList = styled.div`
   flex: 1;
   overflow-y: auto;
-  padding: 20px 16px 12px;
+  padding: 1.25rem 1rem 0.75rem;
   -ms-overflow-style: none;
   scrollbar-width: none;
 
@@ -29,13 +29,13 @@ const MessageList = styled.div`
 const CharacterRow = styled.div`
   display: flex;
   align-items: flex-start;
-  gap: 10px;
-  margin-bottom: 16px;
+  gap: 0.625rem;
+  margin-bottom: 1rem;
 `;
 
 const Avatar = styled.div`
-  width: 36px;
-  height: 36px;
+  width: 2.25rem;
+  height: 2.25rem;
   border-radius: 9999px;
   background: #f2f2f2;
   overflow: hidden;
@@ -51,22 +51,22 @@ const Avatar = styled.div`
 const CharacterBody = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 0.375rem;
   max-width: 78%;
 `;
 
 const CharacterName = styled.p`
   margin: 0;
-  font-size: 13px;
+  font-size: 0.8125rem;
   font-weight: 500;
   color: #000000;
 `;
 
 const CharacterBubble = styled.div`
-  padding: 12px 14px;
+  padding: 0.75rem 0.875rem;
   border-radius: 12px;
   background: #fffaf5;
-  font-size: 14px;
+  font-size: 0.875rem;
   line-height: 1.55;
   color: #333333;
   white-space: pre-line;
@@ -75,23 +75,23 @@ const CharacterBubble = styled.div`
 const UserRow = styled.div`
   display: flex;
   justify-content: flex-end;
-  margin-bottom: 16px;
+  margin-bottom: 1rem;
 `;
 
 const UserBubble = styled.div`
   max-width: 78%;
-  padding: 12px 14px;
+  padding: 0.75rem 0.875rem;
   border-radius: 12px;
   background: #000000;
-  font-size: 14px;
+  font-size: 0.875rem;
   line-height: 1.55;
   color: #ffffff;
   white-space: pre-line;
 `;
 
 const UserImage = styled.div`
-  width: 180px;
-  height: 180px;
+  width: 11.25rem;
+  height: 11.25rem;
   border-radius: 12px;
   overflow: hidden;
   background: #f2f2f2;
@@ -112,12 +112,12 @@ const Composer = styled.div`
 const SheetHandle = styled.div`
   display: flex;
   justify-content: center;
-  padding-top: 10px;
+  padding-top: 0.625rem;
 `;
 
 const HandleBar = styled.span`
-  width: 36px;
-  height: 3px;
+  width: 2.25rem;
+  height: 0.1875rem;
   border-radius: 9999px;
   background: #d9d2cb;
 `;
@@ -125,17 +125,17 @@ const HandleBar = styled.span`
 const QuickReplies = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  padding: 14px 16px 8px;
+  gap: 0.625rem;
+  padding: 0.875rem 1rem 0.5rem;
 `;
 
 const QuickReplyButton = styled.button`
   width: 100%;
-  padding: 14px 16px;
+  padding: 0.875rem 1rem;
   border: 1px solid #e5e0da;
   border-radius: 12px;
   background: #ffffff;
-  font-size: 14px;
+  font-size: 0.875rem;
   color: #333333;
   text-align: center;
 
@@ -147,16 +147,16 @@ const QuickReplyButton = styled.button`
 const InputBar = styled.div`
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 10px 14px calc(10px + env(safe-area-inset-bottom, 0px));
+  gap: 0.625rem;
+  padding: 0.625rem 0.875rem calc(0.625rem + env(safe-area-inset-bottom, 0px));
 `;
 
 const IconButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
+  width: 2.25rem;
+  height: 2.25rem;
   flex-shrink: 0;
 
   img {
@@ -170,12 +170,12 @@ const IconButton = styled.button`
 
 const TextInput = styled.input`
   flex: 1;
-  height: 40px;
+  height: 2.5rem;
   border: none;
   border-radius: 9999px;
   background: #f2f2f2;
-  padding: 0 16px;
-  font-size: 14px;
+  padding: 0 1rem;
+  font-size: 0.875rem;
   color: #000000;
   outline: none;
 
@@ -189,9 +189,9 @@ const HiddenFileInput = styled.input`
 `;
 
 const Status = styled.p`
-  margin: 40px 16px;
+  margin: 2.5rem 1rem;
   text-align: center;
-  font-size: 14px;
+  font-size: 0.875rem;
   color: #8a7a6c;
 `;
 

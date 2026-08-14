@@ -13,20 +13,20 @@ const EmailRow = styled.div`
 display: flex;
 align-items: center;
 justify-content: space-between;
-padding: 24px 0;
+padding: 1.5rem 0;
 border-bottom: 1px solid #e5e4e7;
 `;
 
 const EmailLabel = styled.span`
 color: black;
-font-size: 16px;
+font-size: 1rem;
 font-family: 'SD Minburi';
 font-weight: 500;
 `;
 
 const EmailValue = styled.span`
 color: #999999;
-font-size: 16px;
+font-size: 1rem;
 font-family: 'SD Minburi';
 font-weight: 400;
 `;
@@ -35,27 +35,27 @@ font-weight: 400;
 const InfoRow = styled.div`
 display: flex;
 flex-direction: column;
-gap: 8px;
-padding: 20px 0;
+gap: 0.5rem;
+padding: 1.25rem 0;
 `;
 
 const InfoLabel = styled.span`
 color: #999999;
-font-size: 14px;
+font-size: 0.875rem;
 font-family: 'SD Minburi';
 font-weight: 400;
 `;
 
 const InfoValue = styled.span`
 color: black;
-font-size: 16px;
+font-size: 1rem;
 font-family: 'SD Minburi';
 font-weight: 500;
 `;
 
 // 생년월일 아래 구분선
 const Divider = styled.div`
-margin-top: 35.5px;       //겨우 맞춤
+margin-top: 2.21875rem;       //겨우 맞춤
 border-bottom: 1px solid #e5e4e7;
 `;
 

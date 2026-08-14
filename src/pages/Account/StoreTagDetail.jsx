@@ -6,35 +6,35 @@ import { getStoreTagDetail } from '../../api/storeTagDetail';
 import plusIcon from '../../assets/icons/nav/plus_icon.svg';
 import minusIcon from '../../assets/icons/nav/minus_arrow.svg';
 
-// AccountDetailLayout의 좌우 20px 패딩을 상쇄하고 24px로 재적용
+// AccountDetailLayout의 좌우 1.25rem 패딩을 상쇄하고 1.5rem로 재적용
 const Body = styled.div`
-  margin: 0 -20px;
-  padding: 0 24px 40px;
+  margin: 0 -1.25rem;
+  padding: 0 1.5rem 2.5rem;
 `;
 
-// 매장명 + 태그 제품 추가 버튼 — 구분선과 76px 간격
+// 매장명 + 태그 제품 추가 버튼 — 구분선과 4.75rem 간격
 const StoreNameRow = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 76px;
+  margin-top: 4.75rem;
 `;
 
 const StoreName = styled.p`
   margin: 0;
   color: black;
-  font-size: 20px;
+  font-size: 1.25rem;
   font-family: 'SD Minburi';
   font-weight: 500;
 `;
 
-// 매장 정보 펼치기/접기 토글 — 아이콘이 바뀌어도 위치가 고정되도록 24x24 고정
+// 매장 정보 펼치기/접기 토글 — 아이콘이 바뀌어도 위치가 고정되도록 정사각형 고정
 const ToggleButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 24px;
-  height: 24px;
+  width: 1.5rem;
+  height: 1.5rem;
   padding: 0;
   border: none;
   background: none;
@@ -42,48 +42,48 @@ const ToggleButton = styled.button`
 `;
 
 const PlusIcon = styled.img`
-  width: 24px;
-  height: 24px;
+  width: 1.5rem;
+  height: 1.5rem;
 `;
 
 const MinusIcon = styled.img`
-  width: 14px;
-  height: 2px;
+  width: 0.875rem;
+  height: 0.125rem;
 `;
 
-// 매장 주소 — 매장명과 28px 간격
+// 매장 주소 — 매장명과 1.75rem 간격
 const Address = styled.p`
-  margin: 28px 0 0;
+  margin: 1.75rem 0 0;
   color: black;
-  font-size: 14px;
+  font-size: 0.875rem;
   font-family: 'SD Minburi';
   font-weight: 400;
 `;
 
-// 매장 전화번호 — 주소와 4px 간격
+// 매장 전화번호 — 주소와 0.25rem 간격
 const Phone = styled.p`
-  margin: 4px 0 0;
+  margin: 0.25rem 0 0;
   color: black;
-  font-size: 14px;
+  font-size: 0.875rem;
   font-family: 'SD Minburi';
   font-weight: 400;
 `;
 
-// 요일별 운영시간 목록 — 전화번호와 20px 간격
+// 요일별 운영시간 목록 — 전화번호와 1.25rem 간격
 const HoursList = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 20px;
+  margin-top: 1.25rem;
 `;
 
-// 요일 + 운영시간 한 블록 — 다음 블록과 4px 간격
+// 요일 + 운영시간 한 블록 — 다음 블록과 0.25rem 간격
 const HoursRow = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 4px;
+  margin-top: 0.25rem;
   color: black;
-  font-size: 14px;
+  font-size: 0.875rem;
   font-family: 'SD Minburi';
   font-weight: 400;
 
@@ -92,25 +92,25 @@ const HoursRow = styled.div`
   }
 `;
 
-// 매장 내 태그 제품 — 매장명과 56px 간격
+// 매장 내 태그 제품 — 매장명과 3.5rem 간격
 const SectionTitle = styled.p`
-  margin: 56px 0 0;
+  margin: 3.5rem 0 0;
   color: black;
-  font-size: 16px;
+  font-size: 1rem;
   font-family: 'SD Minburi';
   font-weight: 500;
 `;
 
-// 날짜별 태그 제품 묶음 목록 — 섹션 제목과 24px 간격
+// 날짜별 태그 제품 묶음 목록 — 섹션 제목과 1.5rem 간격
 const GroupList = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 24px;
+  margin-top: 1.5rem;
 `;
 
-// 그룹 1개 — 다음 그룹과 36px 간격
+// 그룹 1개 — 다음 그룹과 2.25rem 간격
 const Group = styled.div`
-  margin-bottom: 36px;
+  margin-bottom: 2.25rem;
 
   &:last-child {
     margin-bottom: 0;
@@ -120,16 +120,16 @@ const Group = styled.div`
 const DateLabel = styled.p`
   margin: 0;
   color: black;
-  font-size: 14px;
+  font-size: 0.875rem;
   font-family: 'SD Minburi';
   font-weight: 400;
 `;
 
-// 제품 목록 — 날짜와 8px 간격, 화면 밖으로 넘치면 옆으로 스크롤
+// 제품 목록 — 날짜와 0.5rem 간격, 화면 밖으로 넘치면 옆으로 스크롤
 const ProductRow = styled.div`
   display: flex;
-  gap: 8px;
-  margin-top: 8px;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
   overflow-x: auto;
 
   &::-webkit-scrollbar {
@@ -144,19 +144,19 @@ const ProductCard = styled.div`
 `;
 
 const Thumbnail = styled.img`
-  width: 96px;
-  height: 96px;
+  width: 6rem;
+  height: 6rem;
   background: #f6f4f2;
   object-fit: cover;
 `;
 
-// 제품명 — 사진과 12px 간격
+// 제품명 — 사진과 0.75rem 간격
 const ProductName = styled.p`
-  margin: 12px 0 0;
-  width: 96px;
+  margin: 0.75rem 0 0;
+  width: 6rem;
   overflow: hidden;
   color: black;
-  font-size: 13px;
+  font-size: 0.8125rem;
   font-family: 'SD Minburi';
   font-weight: 400;
   white-space: nowrap;

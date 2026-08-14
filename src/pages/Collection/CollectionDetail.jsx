@@ -10,30 +10,30 @@ const ChatLinkButton = styled(Link)`
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 0.5rem;
   width: 100%;
-  margin-top: 20px;
-  padding: 14px 16px;
+  margin-top: 1.25rem;
+  padding: 0.875rem 1rem;
   border-radius: 10px;
   background: #000000;
   color: #ffffff;
-  font-size: 15px;
+  font-size: 0.9375rem;
   font-weight: 500;
 
   img {
     display: block;
-    width: 20px;
-    height: 19px;
+    width: 1.25rem;
+    height: 1.1875rem;
   }
 `;
 
 const Page = styled.div`
-  padding: 0 0 40px;
+  padding: 0 0 2.5rem;
 `;
 
 const Hero = styled.div`
   width: 100%;
-  margin-top: 24px;
+  margin-top: 1.5rem;
   aspect-ratio: 1 / 1;
   background: #f2f2f2;
   overflow: hidden;
@@ -46,20 +46,20 @@ const HeroImage = styled.img`
 `;
 
 const Intro = styled.div`
-  padding: 24px 20px 0;
+  padding: 1.5rem 1.25rem 0;
 `;
 
 const CharacterName = styled.h1`
   margin: 0;
-  font-size: 24px;
+  font-size: 1.5rem;
   font-weight: 700;
   text-align: center;
   color: #000000;
 `;
 
 const CollectionName = styled.p`
-  margin: 8px 0 0;
-  font-size: 16px;
+  margin: 0.5rem 0 0;
+  font-size: 1rem;
   font-weight: 400;
   letter-spacing: 0.04em;
   text-align: center;
@@ -67,23 +67,23 @@ const CollectionName = styled.p`
 `;
 
 const CollectionSubtitle = styled.p`
-  margin: 4px 0 0;
-  font-size: 16px;
+  margin: 0.25rem 0 0;
+  font-size: 1rem;
   font-weight: 400;
   text-align: center;
   color: #8a7a6c;
 `;
 
 const Description = styled.p`
-  margin: 16px 0 0;
-  font-size: 14px;
+  margin: 1rem 0 0;
+  font-size: 0.875rem;
   line-height: 1.7;
   text-align: left;
   color: #000000;
 `;
 
 const Accordion = styled.div`
-  margin-top: 28px;
+  margin-top: 1.75rem;
   border-top: 1px solid #e8e2dc;
 `;
 
@@ -96,8 +96,8 @@ const AccordionHeader = styled.button`
   width: 100%;
   align-items: center;
   justify-content: space-between;
-  padding: 18px 20px;
-  font-size: 16px;
+  padding: 1.125rem 1.25rem;
+  font-size: 1rem;
   font-weight: 500;
   color: #333333;
   text-align: left;
@@ -111,12 +111,12 @@ const Chevron = styled(HiOutlineChevronDown)`
 `;
 
 const AccordionBody = styled.div`
-  padding: 0 20px 20px;
+  padding: 0 1.25rem 1.25rem;
 `;
 
 const PanelText = styled.p`
   margin: 0;
-  font-size: 14px;
+  font-size: 0.875rem;
   line-height: 1.7;
   color: #666666;
 `;
@@ -127,8 +127,8 @@ const ProductCard = styled.div`
 `;
 
 const ProductImage = styled.div`
-  width: 347px;
-  height: 342px;
+  width: 21.6875rem;
+  height: 21.375rem;
   margin: 0 auto;
   overflow: hidden;
   background: #f2f2f2;
@@ -143,40 +143,40 @@ const ProductImage = styled.div`
 const ProductMeta = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  margin-top: 12px;
+  gap: 0.25rem;
+  margin-top: 0.75rem;
 `;
 
 const ProductRow = styled.div`
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  gap: 12px;
+  gap: 0.75rem;
 `;
 
 const ProductName = styled.p`
   margin: 0;
-  font-size: 15px;
+  font-size: 0.9375rem;
   font-weight: 500;
   color: #333333;
 `;
 
 const DetailLink = styled.a`
-  font-size: 12px;
+  font-size: 0.75rem;
   color: #8a7a6c;
   white-space: nowrap;
 `;
 
 const ProductColor = styled.p`
   margin: 0;
-  font-size: 13px;
+  font-size: 0.8125rem;
   color: #8a7a6c;
 `;
 
 const Empty = styled.div`
-  padding: 40px 20px;
+  padding: 2.5rem 1.25rem;
   text-align: center;
-  font-size: 14px;
+  font-size: 0.875rem;
   color: #8a7a6c;
 `;
 

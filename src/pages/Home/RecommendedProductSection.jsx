@@ -2,29 +2,29 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import styled from 'styled-components';
 import ProductCard from '../../components/common/Card/ProductCard';
 import { useRecommendedProducts } from '../../hooks/useRecommendedProducts';
-import { SECTION_GAP } from '../../styles/theme';
+import { SECTION_GAP_REM } from '../../styles/theme';
 
-const CENTER_WIDTH = 184;
-const CENTER_HEIGHT = 234;
-const GAP = 12;
+const CENTER_WIDTH = 11.5;
+const CENTER_HEIGHT = 14.625;
+const GAP = 0.75;
 
 const Section = styled.section`
-  padding: ${SECTION_GAP}px 0 24px;
+  padding: ${SECTION_GAP_REM}rem 0 1.5rem;
 `;
 
 const Carousel = styled.div`
   display: flex;
   align-items: center;
-  height: ${CENTER_HEIGHT}px;
-  min-height: ${CENTER_HEIGHT}px;
-  gap: ${GAP}px;
+  height: ${CENTER_HEIGHT}rem;
+  min-height: ${CENTER_HEIGHT}rem;
+  gap: ${GAP}rem;
   overflow-x: auto;
   overscroll-behavior-x: contain;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
   touch-action: pan-x;
-  padding: 0 calc((100% - ${CENTER_WIDTH}px) / 2);
+  padding: 0 calc((100% - ${CENTER_WIDTH}rem) / 2);
   -ms-overflow-style: none;
   scrollbar-width: none;
 
@@ -35,9 +35,9 @@ const Carousel = styled.div`
 
 // 슬롯 크기는 가운데 카드 기준으로 고정 → 크기 바뀌어도 아래 텍스트가 안 밀림
 const Slide = styled.div`
-  flex: 0 0 ${CENTER_WIDTH}px;
-  width: ${CENTER_WIDTH}px;
-  height: ${CENTER_HEIGHT}px;
+  flex: 0 0 ${CENTER_WIDTH}rem;
+  width: ${CENTER_WIDTH}rem;
+  height: ${CENTER_HEIGHT}rem;
   scroll-snap-align: center;
   scroll-snap-stop: always;
   display: flex;
@@ -46,32 +46,32 @@ const Slide = styled.div`
 `;
 
 const TextBlock = styled.div`
-  margin-top: 48px;
-  padding: 0 32px;
+  margin-top: 3rem;
+  padding: 0 2rem;
   text-align: center;
 `;
 
 const Title = styled.h2`
   margin: 0;
-  font-size: 24px;
+  font-size: 1.5rem;
   font-weight: 700;
   line-height: 1.3;
   color: #000000;
 `;
 
 const ProductName = styled.h3`
-  margin: 8px 0 0;
-  min-height: 52px;
-  font-size: 20px;
+  margin: 0.5rem 0 0;
+  min-height: 3.25rem;
+  font-size: 1.25rem;
   font-weight: 400;
   line-height: 1.3;
   color: #000000;
 `;
 
 const Description = styled.p`
-  margin: 8px 0 0;
-  min-height: calc(14px * 1.625 * 3);
-  font-size: 14px;
+  margin: 0.5rem 0 0;
+  min-height: calc(0.875rem * 1.625 * 3);
+  font-size: 0.875rem;
   line-height: 1.625;
   color: #000000;
 `;

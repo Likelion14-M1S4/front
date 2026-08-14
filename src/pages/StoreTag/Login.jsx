@@ -9,22 +9,22 @@ const Page = styled.div`
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
-  padding: 0 24px;
+  padding: 0 1.5rem;
   background: #FFFAF5;
 `;
 
 // 로고
 const Logo = styled.img`
-  width: 57px;
-  height: 57px;
-  margin-top: 220px;
+  width: 3.5625rem;
+  height: 3.5625rem;
+  margin-top: 13.75rem;
 `;
 
 // "로그인" 타이틀
 const Title = styled.h1`
-  margin: 44px 0 0;
+  margin: 2.75rem 0 0;
   color: black;
-  font-size: 32px;
+  font-size: 2rem;
   font-family: 'SD Minburi';
   font-weight: 400;
 `;
@@ -34,23 +34,24 @@ const KakaoButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 22px;
+  gap: 1.375rem;
   width: 100%;
-  height: 56px;
-  margin-top: 28px;
+  height: 3.5rem;
+  margin-top: 1.75rem;
+  border-radius: 0.3125rem;
   border: none;
-  background: #191919;
+  background: #000000;
   cursor: pointer;
 `;
 
 const KakaoIcon = styled.img`
-  width: 24px;
-  height: 24px;
+  width: 1.5rem;
+  height: 1.5rem;
 `;
 
 const KakaoText = styled.span`
   color: white;
-  font-size: 20px;
+  font-size: 1.25rem;
   font-family: 'SD Minburi';
   font-weight: 500;
 `;

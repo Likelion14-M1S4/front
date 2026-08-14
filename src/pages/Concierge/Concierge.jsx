@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 
 const Page = styled.div`
-  padding: 24px 20px 40px;
+  padding: 1.5rem 1.25rem 2.5rem;
 `;
 
 const Title = styled.h1`
   margin: 0;
-  font-size: 20px;
+  font-size: 1.25rem;
   font-weight: 700;
   color: #1a1a1a;
 `;

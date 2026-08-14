@@ -8,15 +8,15 @@ import { getStoreTagHistory } from '../../api/storeTagHistory';
 const List = styled.div`
     display: flex;
     flex-direction: column;
-    margin-top: 46px;
+    margin-top: 2.875rem;
 `;
 
 // 매장 1곳의 방문 이력 — 테두리 없는 버튼, 누르면 해당 매장 상세로 이동
 const Row = styled(Link)`
     display: block;
-    padding-bottom: 16px;
+    padding-bottom: 1rem;
     border-bottom: 0.25px solid #EBE8E5;
-    margin-bottom: 32px;
+    margin-bottom: 2rem;
 
     &:last-child {
         border-bottom: none;
@@ -27,53 +27,53 @@ const Row = styled(Link)`
 const StoreName = styled.p`
     margin: 0;
     color: black;
-    font-size: 16px;
+    font-size: 1rem;
     font-family: 'SD Minburi';
     font-weight: 500;
 `;
 
 // 마지막 방문 일자
 const LastVisited = styled.p`
-    margin: 12px 0 0;
+    margin: 0.75rem 0 0;
     color: #000000;
-    font-size: 14px;
+    font-size: 0.875rem;
     font-family: 'SD Minburi';
     font-weight: 400;
 `;
 
 // 매장 태그 이력이 없을 때
 const EmptyState = styled.div`
-    margin-top: 179px;
+    margin-top: 11.1875rem;
     text-align: center;
 `;
 
 const EmptyTitle = styled.p`
     margin: 0;
     color: black;
-    font-size: 16px;
+    font-size: 1rem;
     font-family: 'SD Minburi';
     font-weight: 500;
 `;
 
-// 안내 문구 — 제목과 9px 간격
+// 안내 문구 — 제목과 0.5625rem 간격
 const EmptySubtitle = styled.p`
-    margin: 9px 0 0;
+    margin: 0.5625rem 0 0;
     color: #000000;
-    font-size: 16px;
+    font-size: 1rem;
     font-family: 'SD Minburi';
     font-weight: 400;
 `;
 
-// 스토리 링크 — 안내 문구와 40px 간격
+// 스토리 링크 — 안내 문구와 2.5rem 간격
 const EmptyLink = styled(Link)`
     display: inline-block;
-    margin-top: 40px;
+    margin-top: 2.5rem;
     color: black;
-    font-size: 16px;
+    font-size: 1rem;
     font-family: 'SD Minburi';
     font-weight: 400;
     text-decoration: underline;
-    text-underline-offset: 3px;
+    text-underline-offset: 0.1875rem;
 `;
 
 // 매장 태그 이력 페이지 — 매장에서 태그한 방문 이력을 보여줌

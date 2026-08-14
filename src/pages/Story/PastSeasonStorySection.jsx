@@ -3,27 +3,27 @@ import { pastSeasonStories } from '../../mock/story';
 
 const Section = styled.section`
   width: 100%;
-  margin-top: 276px;
+  margin-top: 17.25rem;
 `;
 
 // 섹션 제목 (예: 지난 시즌 스토리)
 const Title = styled.h2`
-  margin: 0 0 32px;
+  margin: 0 0 2rem;
   text-align: center;
   color: black;
-  font-size: 24px;
+  font-size: 1.5rem;
   font-family: 'SD Minburi';
   font-weight: 500;
-  line-height: 22.75px;
+  line-height: 1.421875rem;
   word-wrap: break-word;
 `;
 
-// 가로 스크롤 카드 목록 — 좌우 패딩(20px)을 상쇄해 카드가 화면 끝까지 이어지도록 함
+// 가로 스크롤 카드 목록 — 좌우 패딩(1.25rem)을 상쇄해 카드가 화면 끝까지 이어지도록 함
 const List = styled.div`
   display: flex;
-  gap: 14px;
-  margin: 0 -20px;
-  padding: 0 20px;
+  gap: 0.875rem;
+  margin: 0 -1.25rem;
+  padding: 0 1.25rem;
   overflow-x: auto;
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -35,13 +35,13 @@ const List = styled.div`
 
 // 카드 너비를 고정해 다음 카드가 화면 끝에 살짝 걸쳐 보이도록 함 (스크롤 유도)
 const Card = styled.div`
-  flex: 0 0 244px;
-  width: 244px;
+  flex: 0 0 15.25rem;
+  width: 15.25rem;
 `;
 
 const Cover = styled.div`
-  width: 244px;
-  height: 372px;
+  width: 15.25rem;
+  height: 23.25rem;
   overflow: hidden;
   background: #f2f2f2;
 `;
@@ -54,12 +54,12 @@ const CoverImage = styled.img`
 
 // 카드 하단 캡션 (스토리 제목)
 const CardTitle = styled.p`
-  margin: 16px 0 0;
+  margin: 1rem 0 0;
   color: black;
-  font-size: 16px;
+  font-size: 1rem;
   font-family: 'SD Minburi';
   font-weight: 500;
-  line-height: 22.75px;
+  line-height: 1.421875rem;
   word-wrap: break-word;
 `;
 

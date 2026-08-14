@@ -11,7 +11,7 @@ import vector2Icon from '../../assets/icons/recommend/Vector2.svg';
 import vector3Icon from '../../assets/icons/recommend/Vector3.svg';
 
 const Page = styled.div`
-  padding: 0 0 48px;
+  padding: 0 0 3rem;
   background: #ffffff;
 `;
 
@@ -29,20 +29,20 @@ const HeroImage = styled.img`
 `;
 
 const Info = styled.div`
-  padding: 20px 20px 0;
+  padding: 1.25rem 1.25rem 0;
 `;
 
 const TitleRow = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
+  gap: 0.75rem;
 `;
 
 const ProductName = styled.h1`
   margin: 0;
   flex: 1;
-  font-size: 20px;
+  font-size: 1.25rem;
   font-weight: 600;
   line-height: 1.3;
   color: #000000;
@@ -53,43 +53,43 @@ const LikeButton = styled.button`
   flex-shrink: 0;
   align-items: center;
   justify-content: center;
-  width: 28px;
-  height: 28px;
+  width: 1.75rem;
+  height: 1.75rem;
 `;
 
 const LikeIcon = styled.img`
-  width: 19px;
-  height: 18px;
+  width: 1.1875rem;
+  height: 1.125rem;
 `;
 
 const Price = styled.p`
-  margin: 10px 0 0;
-  font-size: 20px;
+  margin: 0.625rem 0 0;
+  font-size: 1.25rem;
   font-weight: 700;
   line-height: 1.3;
   color: #000000;
 `;
 
 const ColorBlock = styled.div`
-  margin-top: 28px;
+  margin-top: 1.75rem;
 `;
 
 const ColorLabel = styled.p`
   margin: 0;
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 400;
   color: #000000;
 `;
 
 const ColorList = styled.div`
   display: flex;
-  gap: 10px;
-  margin-top: 12px;
+  gap: 0.625rem;
+  margin-top: 0.75rem;
 `;
 
 const ColorSwatch = styled.button`
-  width: 48px;
-  height: 48px;
+  width: 3rem;
+  height: 3rem;
   overflow: hidden;
   background: #f2f2f2;
   outline: ${({ $active }) => ($active ? '1px solid #000000' : 'none')};
@@ -103,7 +103,7 @@ const ColorImage = styled.img`
 `;
 
 const SizeBlock = styled.div`
-  margin-top: 28px;
+  margin-top: 1.75rem;
 `;
 
 const SizeToggle = styled.button`
@@ -111,31 +111,31 @@ const SizeToggle = styled.button`
   width: 100%;
   align-items: center;
   justify-content: space-between;
-  padding: 4px 0;
-  font-size: 16px;
+  padding: 0.25rem 0;
+  font-size: 1rem;
   font-weight: 400;
   color: #000000;
   text-align: left;
 `;
 
 const SizeChevron = styled.img`
-  width: 8px;
-  height: 11px;
+  width: 0.5rem;
+  height: 0.6875rem;
   transition: transform 0.2s ease;
   transform: ${({ $open }) => ($open ? 'rotate(-90deg)' : 'rotate(0deg)')};
 `;
 
 const SizeMenu = styled.div`
-  margin-top: 12px;
-  padding: 16px 18px;
+  margin-top: 0.75rem;
+  padding: 1rem 1.125rem;
   background: #fbfbfb;
 `;
 
 const SizeOption = styled.button`
   display: block;
   width: 100%;
-  padding: 10px 0;
-  font-size: 16px;
+  padding: 0.625rem 0;
+  font-size: 1rem;
   font-weight: 400;
   color: #000000;
   text-align: left;
@@ -153,20 +153,20 @@ const StoreRow = styled.a`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 28px;
-  padding: 4px 0;
-  font-size: 16px;
+  margin-top: 1.75rem;
+  padding: 0.25rem 0;
+  font-size: 1rem;
   font-weight: 400;
   color: #000000;
 `;
 
 const StoreArrow = styled.img`
-  width: 49px;
-  height: 9px;
+  width: 3.0625rem;
+  height: 0.5625rem;
 `;
 
 const DetailBlock = styled.div`
-  margin-top: 28px;
+  margin-top: 1.75rem;
   border-top: 1px solid #e8e2dc;
   border-bottom: 1px solid #e8e2dc;
 `;
@@ -176,8 +176,8 @@ const DetailToggle = styled.button`
   width: 100%;
   align-items: center;
   justify-content: space-between;
-  padding: 18px 0;
-  font-size: 20px;
+  padding: 1.125rem 0;
+  font-size: 1.25rem;
   font-weight: 400;
   color: #000000;
   text-align: left;
@@ -185,49 +185,49 @@ const DetailToggle = styled.button`
 `;
 
 const DetailChevron = styled.img`
-  width: 8px;
-  height: 14px;
+  width: 0.5rem;
+  height: 0.875rem;
   transition: transform 0.2s ease;
   transform: ${({ $open }) => ($open ? 'rotate(-90deg)' : 'rotate(0deg)')};
 `;
 
 const DetailBody = styled.div`
-  padding: 20px 0 24px;
+  padding: 1.25rem 0 1.5rem;
 `;
 
 const DetailHeadline = styled.p`
   margin: 0;
-  font-size: 15px;
+  font-size: 0.9375rem;
   font-weight: 700;
   line-height: 1.6;
   color: #000000;
 `;
 
 const DetailDescription = styled.p`
-  margin: 16px 0 0;
-  font-size: 12px;
+  margin: 1rem 0 0;
+  font-size: 0.75rem;
   font-weight: 400;
   line-height: 1.7;
   color: #000000;
 `;
 
 const SpecList = styled.ul`
-  margin: 16px 0 0;
-  padding: 0 0 0 18px;
+  margin: 1rem 0 0;
+  padding: 0 0 0 1.125rem;
   list-style: disc;
 `;
 
 const SpecItem = styled.li`
-  margin: 0 0 6px;
-  font-size: 14px;
+  margin: 0 0 0.375rem;
+  font-size: 0.875rem;
   line-height: 1.6;
   color: #000000;
 `;
 
 const Status = styled.p`
-  margin: 40px 20px;
+  margin: 2.5rem 1.25rem;
   text-align: center;
-  font-size: 14px;
+  font-size: 0.875rem;
   color: #8a7a6c;
 `;
 

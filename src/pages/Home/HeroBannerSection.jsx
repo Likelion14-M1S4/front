@@ -6,15 +6,15 @@ const Section = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 16px;
+  padding-top: 1rem;
 `;
 
 const Description = styled.p`
-  margin: 16px 0 0;
-  width: 308px;
+  margin: 1rem 0 0;
+  width: 19.25rem;
   white-space: pre-line;
   text-align: left;
-  font-size: 14px;
+  font-size: 0.875rem;
   line-height: 1.625;
   color: #000000;
   box-sizing: border-box;
