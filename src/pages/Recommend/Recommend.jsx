@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { useRecommendPage } from '../../hooks/useRecommendPage';
-import { formatPrice } from '../../utils/formatPrice';
 import { APP_MAX_WIDTH_REM } from '../../styles/theme';
 
 const CONTENT_X = 1;
@@ -153,14 +152,6 @@ const ProductName = styled.p`
   text-overflow: ellipsis;
 `;
 
-const ProductPrice = styled.p`
-  margin: 0.25rem 0 0;
-  font-size: 0.8125rem;
-  font-weight: 500;
-  line-height: 1.4;
-  color: #000000;
-`;
-
 const Status = styled.p`
   margin: 2.5rem 1.25rem;
   text-align: center;
@@ -229,7 +220,6 @@ function Recommend() {
                 ) : null}
               </ProductThumb>
               <ProductName>{product.name}</ProductName>
-              <ProductPrice>{formatPrice(product.price)}</ProductPrice>
             </ProductLink>
           ))}
         </ProductRail>

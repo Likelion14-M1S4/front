@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import BackHeader from '../../components/common/Header/BackHeader';
 import Button from '../../components/common/Button/Button';
 import { useSeasonProductDetail } from '../../hooks/useSeasonProductDetail';
-import { formatPrice } from '../../utils/formatPrice';
 import line2Icon from '../../assets/icons/recommend/line2.svg';
 import vector2Icon from '../../assets/icons/recommend/Vector2.svg';
 import { APP_MAX_WIDTH_REM } from '../../styles/theme';
@@ -40,21 +39,6 @@ const ProductName = styled.h1`
   font-size: 1.25rem;
   font-weight: 600;
   line-height: 1.3;
-  color: #000000;
-`;
-
-const Price = styled.p`
-  margin: 0.625rem 0 0;
-  font-size: 1.25rem;
-  font-weight: 400;
-  line-height: 1.3;
-  color: #000000;
-`;
-
-const ColorLabel = styled.p`
-  margin: 1.25rem 0 0;
-  font-size: 1rem;
-  font-weight: 400;
   color: #000000;
 `;
 
@@ -199,10 +183,6 @@ function SeasonProductDetail() {
 
       <Info>
         <ProductName>{product.name}</ProductName>
-        <Price>{formatPrice(product.price)}</Price>
-        {product.colorLabel ? (
-          <ColorLabel>색상: {product.colorLabel}</ColorLabel>
-        ) : null}
 
         <StoreRow to={product.storeUrl || '/story/stores'}>
           <span>{product.storeCheckLabel}</span>
