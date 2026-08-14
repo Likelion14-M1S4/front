@@ -8,10 +8,10 @@ const Box = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: calc(100% + 40px);
-  height: 590px;
-  margin: 0 -20px;
-  padding: 344px 20px 0;
+  width: calc(100% + 2.5rem);
+  height: 36.875rem;
+  margin: 0 -1.25rem;
+  padding: 21.5rem 1.25rem 0;
   background: linear-gradient(180deg, #f6f4f2 0%, #f9f8f7 61.11%, #ffffff 100%);
   box-sizing: border-box;
 `;
@@ -19,41 +19,41 @@ const Box = styled.section`
 const Season = styled.p`
   margin: 0;
   color: black;
-  font-size: 20px;
+  font-size: 1.25rem;
   font-family: 'SD Minburi';
   font-weight: 500;
-  line-height: 22.75px;
+  line-height: 1.421875rem;
   word-wrap: break-word;
 `;
 
 const Title = styled.h1`
-  margin: 32px 0 0;
+  margin: 2rem 0 0;
   color: black;
-  font-size: 32px;
+  font-size: 2rem;
   font-family: 'SD Minburi';
   font-weight: 600;
-  line-height: 22.75px;
+  line-height: 1.421875rem;
   word-wrap: break-word;
 `;
 
 const CtaButton = styled.button`
-  margin: 66px 0 0;
+  margin: 4.125rem 0 0;
   padding: 0;
   border: none;
   background: none;
   color: black;
-  font-size: 20px;
+  font-size: 1.25rem;
   font-family: 'SD Minburi';
   font-weight: 500;
-  line-height: 22.75px;
+  line-height: 1.421875rem;
   cursor: pointer;
 `;
 
 const Divider = styled.span`
   display: block;
-  width: 140px;
+  width: 8.75rem;
   height: 1px;
-  margin: 13px 0 0;
+  margin: 0.8125rem 0 0;
   background-color: #000000;
 `;
 
@@ -61,10 +61,10 @@ const Divider = styled.span`
 const Thumbnail = styled.div`
   position: absolute;
   left: 50%;
-  bottom: -27px;
+  bottom: -1.6875rem;
   transform: translateX(-50%);
-  width: 64px;
-  height: 64px;
+  width: 4rem;
+  height: 4rem;
   overflow: hidden;
   background: #f2f2f2;
 `;

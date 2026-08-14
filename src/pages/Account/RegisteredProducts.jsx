@@ -4,15 +4,15 @@ import { Link } from 'react-router-dom';
 import AccountDetailLayout from '../../components/Layout/AccountDetailLayout';
 import { getRegisteredProducts } from '../../api/registeredProducts';
 
-// 상품 그리드 — AccountDetailLayout의 좌우 20px 패딩을 상쇄하고 23px로 재적용
-// margin-top 16px: Title의 margin-bottom 16px와 합쳐 구분선과 32px 간격을 만듦
+// 상품 그리드 — AccountDetailLayout의 좌우 1.25rem 패딩을 상쇄하고 1.3125rem로 재적용
+// margin-top 1rem: Title의 margin-bottom 1rem와 합쳐 구분선과 2rem 간격을 만듦
 const Grid = styled.div`
     display: grid;
-    grid-template-columns: repeat(2, 162px);
-    column-gap: 22px;
-    row-gap: 32px;
-    margin: 16px -20px 0;
-    padding: 0 21px;
+    grid-template-columns: repeat(2, 10.125rem);
+    column-gap: 1.375rem;
+    row-gap: 2rem;
+    margin: 1rem -1.25rem 0;
+    padding: 0 1.3125rem;
 `;
 
 // 상품 1개 카드 (썸네일 + 이름 + 등록일) — 누르면 상세 페이지로 이동
@@ -21,21 +21,21 @@ const Card = styled(Link)`
     flex-direction: column;
 `;
 
-// 썸네일 — 162x162, 로딩 전/이미지 없을 때 대비한 배경색
+// 썸네일 — 정사각형, 로딩 전/이미지 없을 때 대비한 배경색
 const Thumbnail = styled.img`
-    width: 162px;
-    height: 162px;
+    width: 10.125rem;
+    height: 10.125rem;
     background: #f6f4f2;
     object-fit: cover;
 `;
 
 // 상품명 — 한 줄로 자르고 넘치면 말줄임표 처리
 const Name = styled.p`
-    margin: 14px 0 0;
-    width: 162px;
+    margin: 0.875rem 0 0;
+    width: 10.125rem;
     overflow: hidden;
     color: black;
-    font-size: 14px;
+    font-size: 0.875rem;
     font-family: 'SD Minburi';
     font-weight: 500;
     white-space: nowrap;
@@ -44,46 +44,46 @@ const Name = styled.p`
 
 // 등록일
 const RegisteredDate = styled.p`
-    margin: 6px 0 0;
+    margin: 0.375rem 0 0;
     color: #000000;
-    font-size: 13px;
+    font-size: 0.8125rem;
     font-family: 'SD Minburi';
     font-weight: 400;
 `;
 
 // 등록한 제품이 없을 때
 const EmptyState = styled.div`
-    margin-top: 179px;
+    margin-top: 11.1875rem;
     text-align: center;
 `;
 
 const EmptyTitle = styled.p`
     margin: 0;
     color: black;
-    font-size: 16px;
+    font-size: 1rem;
     font-family: 'SD Minburi';
     font-weight: 500;
 `;
 
-// 안내 문구 — 제목과 9px 간격
+// 안내 문구 — 제목과 0.5625rem 간격
 const EmptySubtitle = styled.p`
-    margin: 9px 0 0;
+    margin: 0.5625rem 0 0;
     color: #000000;
-    font-size: 16px;
+    font-size: 1rem;
     font-family: 'SD Minburi';
     font-weight: 400;
 `;
 
-// 추천 제품 링크 — 안내 문구와 40px 간격
+// 추천 제품 링크 — 안내 문구와 2.5rem 간격
 const EmptyLink = styled(Link)`
     display: inline-block;
-    margin-top: 40px;
+    margin-top: 2.5rem;
     color: black;
-    font-size: 16px;
+    font-size: 1rem;
     font-family: 'SD Minburi';
     font-weight: 400;
     text-decoration: underline;
-    text-underline-offset: 3px;
+    text-underline-offset: 0.1875rem;
 `;
 
 // 등록한 제품 페이지 — 계정에 등록한 제품 목록을 보여줌

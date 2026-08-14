@@ -2,7 +2,7 @@ import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import Header from '../common/Header/Header';
 import Navigation from '../common/Navigation/Navigation';
-import { APP_WIDTH, HEADER_HEIGHT } from '../../styles/theme';
+import { APP_MAX_WIDTH_REM, HEADER_HEIGHT_REM } from '../../styles/theme';
 
 const PageShell = styled.div`
   display: flex;
@@ -15,8 +15,7 @@ const AppFrame = styled.div`
   position: relative;
   display: flex;
   height: 100dvh;
-  width: ${APP_WIDTH}px;
-  max-width: 100%;
+  width: min(100vw, ${APP_MAX_WIDTH_REM}rem);
   flex-shrink: 0;
   flex-direction: column;
   overflow: hidden;
@@ -28,8 +27,8 @@ const Main = styled.main`
   width: 100%;
   overflow-y: ${({ $fullBleed }) => ($fullBleed ? 'hidden' : 'auto')};
   overscroll-behavior: contain;
-  padding-top: ${({ $hideHeader }) => ($hideHeader ? '0' : `${HEADER_HEIGHT}px`)};
-  padding-bottom: ${({ $hideNav }) => ($hideNav ? '0' : '96px')};
+  padding-top: ${({ $hideHeader }) => ($hideHeader ? '0' : `${HEADER_HEIGHT_REM}rem`)};
+  padding-bottom: ${({ $hideNav }) => ($hideNav ? '0' : '6rem')};
   -ms-overflow-style: none;
   scrollbar-width: none;
 
@@ -38,7 +37,8 @@ const Main = styled.main`
   }
 `;
 
-// 390px 고정 프레임 — 모든 페이지는 이 컨테이너 안에서만 렌더링됩니다.
+// 390px 기준 디자인 프레임 — 화면 폭에 따라 최대 430px까지 유동적으로 커집니다.
+// 모든 페이지는 이 컨테이너 안에서만 렌더링됩니다.
 // 라우트가 바뀌어도 프레임(헤더·네비)은 유지되고 main 영역만 교체됩니다.
 function Layout({ children }) {
   const { pathname } = useLocation();

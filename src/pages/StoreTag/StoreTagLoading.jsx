@@ -7,7 +7,7 @@ import pointMedium from '../../assets/icons/tag/point 2.svg';
 import pointSmall from '../../assets/icons/tag/point 3.svg';
 import { useStoreTagNfc } from '../../hooks/useStoreTagNfc';
 import { useAuth } from '../../context/AuthContext';
-import { APP_WIDTH } from '../../styles/theme';
+import { APP_MAX_WIDTH_REM } from '../../styles/theme';
 
 const L = pointLarge;
 const M = pointMedium;
@@ -29,7 +29,7 @@ const NFC_READ_KEY = 'mcm_store_tag_nfc_read';
 const Page = styled.div`
   display: flex;
   width: 100%;
-  max-width: ${APP_WIDTH}px;
+  max-width: ${APP_MAX_WIDTH_REM}rem;
   min-height: 100%;
   margin: 0 auto;
   flex-direction: column;
@@ -43,12 +43,12 @@ const Content = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: -48px;
+  margin-top: -3rem;
 `;
 
 const Logo = styled.img`
-  width: 72px;
-  height: 72px;
+  width: 4.5rem;
+  height: 4.5rem;
   object-fit: contain;
 `;
 
@@ -56,20 +56,20 @@ const Dots = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  margin-top: 36px;
-  min-height: 16px;
+  gap: 0.625rem;
+  margin-top: 2.25rem;
+  min-height: 1rem;
 `;
 
 const Dot = styled.img`
   display: block;
-  width: ${({ $size }) => $size}px;
-  height: ${({ $size }) => $size}px;
+  width: ${({ $size }) => $size}rem;
+  height: ${({ $size }) => $size}rem;
 `;
 
 const Message = styled.p`
-  margin: 28px 0 0;
-  font-size: 16px;
+  margin: 1.75rem 0 0;
+  font-size: 1rem;
   font-weight: 500;
   line-height: 1.4;
   color: #000000;
@@ -77,8 +77,8 @@ const Message = styled.p`
 `;
 
 const ErrorMessage = styled.p`
-  margin: 16px 20px 0;
-  font-size: 14px;
+  margin: 1rem 1.25rem 0;
+  font-size: 0.875rem;
   font-weight: 400;
   line-height: 1.5;
   color: #8a7a6c;
@@ -86,20 +86,20 @@ const ErrorMessage = styled.p`
 `;
 
 const RetryButton = styled.button`
-  margin-top: 20px;
-  padding: 10px 20px;
+  margin-top: 1.25rem;
+  padding: 0.625rem 1.25rem;
   border: 1px solid #1a1a1a;
   background: transparent;
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 500;
   color: #1a1a1a;
   cursor: pointer;
 `;
 
 function getDotSize(src) {
-  if (src === L) return 16;
-  if (src === M) return 12;
-  return 8;
+  if (src === L) return 1;
+  if (src === M) return 0.75;
+  return 0.5;
 }
 
 // 매장 태그 로딩 — NFC API 연결될 때까지 유지

@@ -13,8 +13,8 @@ const Page = styled.div`
 const Header = styled.header`
     display: flex;
     align-items: center;
-    height: 96px;
-    padding: 0 20px;
+    height: 6rem;
+    padding: 0 1.25rem;
     border-bottom: 1px solid #F2EBE7;
 `;
 
@@ -28,16 +28,16 @@ const BackButton = styled.button`
 `;
 
 const BackArrowIcon = styled.img`
-    width: 13px;
-    height: 23px;
+    width: 0.8125rem;
+    height: 1.4375rem;
 `;
 
 // 페이지 제목 영역
 const Title = styled.h1`
-    margin: 32px 20px 16px;
-    padding: 0 0 16px;
+    margin: 2rem 1.25rem 1rem;
+    padding: 0 0 1rem;
     color: black;
-    font-size: 28px;
+    font-size: 1.75rem;
     font-family: 'SD Minburi';
     font-weight: 500;
     border-bottom: 1.5px solid #000000;
@@ -46,7 +46,7 @@ const Title = styled.h1`
 // 실제 페이지 콘텐츠(children)가 렌더링되는 영역
 const Content = styled.div`
     flex: 1;
-    padding: 0 20px;
+    padding: 0 1.25rem;
 `;
 
 // 계정 상세 페이지들(로그인 정보, 등록 상품, 매장 태그 내역 등)에서 공통으로 사용하는 레이아웃

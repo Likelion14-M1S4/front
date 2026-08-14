@@ -2,22 +2,20 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import BackHeader from '../../components/common/Header/BackHeader';
 import { useSeasonProducts } from '../../hooks/useSeasonProducts';
-import { APP_WIDTH } from '../../styles/theme';
+import { APP_MAX_WIDTH_REM } from '../../styles/theme';
 
 const Page = styled.div`
   width: 100%;
-  max-width: ${APP_WIDTH}px;
+  max-width: ${APP_MAX_WIDTH_REM}rem;
   margin: 0 auto;
-  padding: 0 0 48px;
+  padding: 0 0 3rem;
   box-sizing: border-box;
   background: #ffffff;
 `;
 
 const Hero = styled.div`
-  width: 392px;
-  max-width: 100%;
-  height: 259px;
-  margin: 0 auto;
+  width: 100%;
+  aspect-ratio: 392 / 259;
   background: #f2f2f2;
   overflow: hidden;
 `;
@@ -29,9 +27,9 @@ const HeroImage = styled.img`
 `;
 
 const Description = styled.p`
-  margin: 24px 20px 0;
+  margin: 1.5rem 1.25rem 0;
   white-space: pre-line;
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: 400;
   line-height: 1.7;
   color: #000000;
@@ -39,24 +37,23 @@ const Description = styled.p`
 
 const Grid = styled.div`
   display: grid;
-  grid-template-columns: 189px 189px;
-  justify-content: center;
-  column-gap: 12px;
-  row-gap: 28px;
-  margin-top: 32px;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 0.75rem;
+  row-gap: 1.75rem;
+  margin-top: 2rem;
 `;
 
 const Card = styled(Link)`
   display: flex;
-  width: 189px;
+  width: 100%;
   flex-direction: column;
   color: inherit;
   text-decoration: none;
 `;
 
 const Thumb = styled.div`
-  width: 189px;
-  height: 200px;
+  width: 100%;
+  aspect-ratio: 189 / 200;
   background: #f2f2f2;
   overflow: hidden;
 `;
@@ -68,9 +65,9 @@ const ThumbImage = styled.img`
 `;
 
 const ProductName = styled.p`
-  margin: 12px 0 0;
+  margin: 0.75rem 0 0;
   overflow: hidden;
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 400;
   line-height: 1.4;
   color: #000000;
@@ -79,10 +76,9 @@ const ProductName = styled.p`
 `;
 
 const FooterBanner = styled.div`
-  width: 391px;
-  max-width: 100%;
-  height: 262px;
-  margin: 40px auto 0;
+  width: 100%;
+  aspect-ratio: 391 / 262;
+  margin: 2.5rem 0 0;
   background: #f2f2f2;
   overflow: hidden;
 `;
@@ -94,9 +90,9 @@ const FooterImage = styled.img`
 `;
 
 const Status = styled.p`
-  margin: 40px 20px;
+  margin: 2.5rem 1.25rem;
   text-align: center;
-  font-size: 14px;
+  font-size: 0.875rem;
   color: #8a7a6c;
 `;
 

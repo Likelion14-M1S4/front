@@ -56,14 +56,14 @@ const UIOverlay = styled.div`
 // 상단 진행 바 (여러 세그먼트) — 지나온 슬라이드까지 흰색으로 채워짐
 const ProgressBar = styled.div`
   display: flex;
-  gap: 8px;
-  width: calc(100% - 46px);
-  margin: 32px 23px 0;
+  gap: 0.5rem;
+  width: calc(100% - 2.875rem);
+  margin: 2rem 1.4375rem 0;
 `;
 
 const Segment = styled.div`
   flex: 1;
-  height: 2px;
+  height: 0.125rem;
   border-radius: 2px;
   background: ${({ $active }) =>
     $active ? '#ffffff' : 'rgba(255, 255, 255, 0.5)'};
@@ -72,7 +72,7 @@ const Segment = styled.div`
 // 닫기 버튼
 const CloseButton = styled.button`
   align-self: flex-end;
-  margin: 20px 23px 0;
+  margin: 1.25rem 1.4375rem 0;
   padding: 0;
   border: none;
   background: none;
@@ -81,22 +81,22 @@ const CloseButton = styled.button`
 `;
 
 const CloseIcon = styled.img`
-  width: 24px;
-  height: 24px;
+  width: 1.5rem;
+  height: 1.5rem;
 `;
 
 // 하단 설명 박스 위에 살짝 걸치는 썸네일 — 추후 캐릭터 사진이 들어갈 자리
 const Thumbnail = styled.div`
-  width: 64px;
-  height: 80px;
-  margin: auto 0 -18px 34px;
+  width: 4rem;
+  height: 5rem;
+  margin: auto 0 -1.125rem 2.125rem;
   background: #ffffff;
 `;
 
 // 하단 설명 박스 — 선택지 슬라이드일 때만 탭이 여기서 멈추도록(pointer-events: auto) 처리
 const InfoBox = styled.div`
-  margin: 0 17px 56px;
-  padding: 34px 20px;
+  margin: 0 1.0625rem 3.5rem;
+  padding: 2.125rem 1.25rem;
   background: rgb(255 255 255 / 70%);
   border-radius: 5px;
   pointer-events: ${({ $interactive }) => ($interactive ? 'auto' : 'none')};
@@ -106,17 +106,17 @@ const InfoBox = styled.div`
 const InfoText = styled.p`
   margin: 0;
   color: #333333;
-  font-size: 15px;
+  font-size: 0.9375rem;
   font-family: 'SD Minburi';
   font-weight: 400;
   line-height: 1.7;
 `;
 
-// 선택지 프롬프트 — 답변과 8px 간격
+// 선택지 프롬프트 — 답변과 1rem 간격
 const Prompt = styled.p`
-  margin: 0 0 16px;
+  margin: 0 0 1rem;
   color: #333333;
-  font-size: 15px;
+  font-size: 0.9375rem;
   font-family: 'SD Minburi';
   font-weight: 500;
   line-height: 1.7;
@@ -125,21 +125,21 @@ const Prompt = styled.p`
 const ChoiceList = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 0.5rem;
 `;
 
 const ChoiceButton = styled.button`
-  padding: 12px 16px;
+  padding: 0.75rem 1rem;
   border: 1px solid #ffffff;
   background: #ffffff;
   color: #000000;
-  font-size: 16px;
+  font-size: 1rem;
   font-family: 'SD Minburi';
   font-weight: 500;
   text-align: center;
   cursor: pointer;
   border-radius: 5px;
-  
+
   &:disabled {
     border-color: #cccccc;
     background-color: #DADADA;

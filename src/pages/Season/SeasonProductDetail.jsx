@@ -7,13 +7,13 @@ import { useSeasonProductDetail } from '../../hooks/useSeasonProductDetail';
 import { formatPrice } from '../../utils/formatPrice';
 import line2Icon from '../../assets/icons/recommend/line2.svg';
 import vector2Icon from '../../assets/icons/recommend/Vector2.svg';
-import { APP_WIDTH } from '../../styles/theme';
+import { APP_MAX_WIDTH_REM } from '../../styles/theme';
 
 const Page = styled.div`
   width: 100%;
-  max-width: ${APP_WIDTH}px;
+  max-width: ${APP_MAX_WIDTH_REM}rem;
   margin: 0 auto;
-  padding: 0 0 48px;
+  padding: 0 0 3rem;
   box-sizing: border-box;
   background: #ffffff;
 `;
@@ -32,28 +32,28 @@ const HeroImage = styled.img`
 `;
 
 const Info = styled.div`
-  padding: 24px 20px 0;
+  padding: 1.5rem 1.25rem 0;
 `;
 
 const ProductName = styled.h1`
   margin: 0;
-  font-size: 20px;
+  font-size: 1.25rem;
   font-weight: 600;
   line-height: 1.3;
   color: #000000;
 `;
 
 const Price = styled.p`
-  margin: 10px 0 0;
-  font-size: 20px;
+  margin: 0.625rem 0 0;
+  font-size: 1.25rem;
   font-weight: 400;
   line-height: 1.3;
   color: #000000;
 `;
 
 const ColorLabel = styled.p`
-  margin: 20px 0 0;
-  font-size: 16px;
+  margin: 1.25rem 0 0;
+  font-size: 1rem;
   font-weight: 400;
   color: #000000;
 `;
@@ -62,26 +62,26 @@ const StoreRow = styled(Link)`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 20px;
-  padding: 0 0 14px;
+  margin-top: 1.25rem;
+  padding: 0 0 0.875rem;
   border-bottom: 1px solid #ededed;
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 400;
   color: #000000;
   text-decoration: none;
 `;
 
 const StoreArrow = styled.img`
-  width: 49px;
-  height: 9px;
+  width: 3.0625rem;
+  height: 0.5625rem;
 `;
 
 const CtaWrap = styled.div`
-  margin-top: 28px;
+  margin-top: 1.75rem;
 `;
 
 const DetailBlock = styled.div`
-  margin-top: 28px;
+  margin-top: 1.75rem;
   border-top: 1px solid #ededed;
   border-bottom: 1px solid #ededed;
 `;
@@ -91,8 +91,8 @@ const DetailToggle = styled.button`
   width: 100%;
   align-items: center;
   justify-content: space-between;
-  padding: 18px 0;
-  font-size: 16px;
+  padding: 1.125rem 0;
+  font-size: 1rem;
   font-weight: 400;
   color: #000000;
   text-align: left;
@@ -102,50 +102,50 @@ const DetailToggle = styled.button`
 `;
 
 const DetailChevron = styled.img`
-  width: 8px;
-  height: 14px;
+  width: 0.5rem;
+  height: 0.875rem;
   transition: transform 0.2s ease;
   transform: ${({ $open }) => ($open ? 'rotate(-90deg)' : 'rotate(0deg)')};
 `;
 
 const DetailBody = styled.div`
-  padding: 0 0 24px;
+  padding: 0 0 1.5rem;
   border-top: 1px solid #ededed;
 `;
 
 const DetailHeadline = styled.p`
-  margin: 20px 0 0;
-  font-size: 15px;
+  margin: 1.25rem 0 0;
+  font-size: 0.9375rem;
   font-weight: 700;
   line-height: 1.6;
   color: #000000;
 `;
 
 const DetailDescription = styled.p`
-  margin: 16px 0 0;
-  font-size: 12px;
+  margin: 1rem 0 0;
+  font-size: 0.75rem;
   font-weight: 400;
   line-height: 1.7;
   color: #000000;
 `;
 
 const SpecList = styled.ul`
-  margin: 16px 0 0;
-  padding: 0 0 0 18px;
+  margin: 1rem 0 0;
+  padding: 0 0 0 1.125rem;
   list-style: disc;
 `;
 
 const SpecItem = styled.li`
-  margin: 0 0 6px;
-  font-size: 14px;
+  margin: 0 0 0.375rem;
+  font-size: 0.875rem;
   line-height: 1.6;
   color: #000000;
 `;
 
 const Status = styled.p`
-  margin: 40px 20px;
+  margin: 2.5rem 1.25rem;
   text-align: center;
-  font-size: 14px;
+  font-size: 0.875rem;
   color: #8a7a6c;
 `;
 

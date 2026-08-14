@@ -9,79 +9,80 @@ const Page = styled.div`
   display: flex;
   flex-direction: column;
   min-height: 100dvh;
-  padding-bottom: 196px;
+  padding-bottom: 12.25rem;
   background: #ffffff;
 `;
 
-// "정품 인증서" 타이틀 — 페이지 맨 위에서 72px, 좌우 중앙 정렬
+// "정품 인증서" 타이틀 — 페이지 맨 위에서 4.5rem, 좌우 중앙 정렬
 const Title = styled.h1`
-  margin: 72px 0 0;
+  margin: 4.5rem 0 0;
   color: black;
-  font-size: 24px;
+  font-size: 1.5rem;
   font-family: 'SD Minburi';
   font-weight: 500;
   text-align: center;
 `;
 
-// 제품 사진 박스 — 타이틀과 36px 간격, 360x233, 좌우 15px씩
+// 제품 사진 박스 — 타이틀과 2.25rem 간격, 좌우 0.9375rem씩
+// width/height를 고정하지 않고 aspect-ratio로 비율만 유지해, 프레임이 390px보다 커져도 폭에 맞춰 늘어남
 const Thumbnail = styled.img`
-  width: 360px;
-  height: 233px;
-  margin: 36px 15px 0;
+  width: calc(100% - 1.875rem);
+  aspect-ratio: 360 / 233;
+  margin: 2.25rem 0.9375rem 0;
   background: #f6f4f2;
   object-fit: cover;
 `;
 
-// 제품명 — 사진 박스와 36px 간격, 왼쪽 24px
+// 제품명 — 사진 박스와 2.25rem 간격, 왼쪽 1.5rem
 const ProductName = styled.p`
-  margin: 36px 0 0 24px;
+  margin: 2.25rem 0 0 1.5rem;
   color: black;
-  font-size: 20px;
+  font-size: 1.25rem;
   font-family: 'SD Minburi';
   font-weight: 500;
 `;
 
-// 상품 주문번호 — 제품명과 36px 간격, 왼쪽 24px
+// 상품 주문번호 — 제품명과 2.25rem 간격, 왼쪽 1.5rem
 const OrderNumber = styled.p`
-  margin: 36px 0 0 24px;
+  margin: 2.25rem 0 0 1.5rem;
   color: black;
-  font-size: 16px;
+  font-size: 1rem;
   font-family: 'SD Minburi';
   font-weight: 400;
 `;
 
-// 상품 번호 — 주문번호와 4px 간격
+// 상품 번호 — 주문번호와 0.25rem 간격
 const ProductNumber = styled.p`
-  margin: 4px 0 0 24px;
+  margin: 0.25rem 0 0 1.5rem;
   color: black;
-  font-size: 16px;
+  font-size: 1rem;
   font-family: 'SD Minburi';
   font-weight: 400;
 `;
 
-// 보증서 발급일 — 상품 번호와 16px 간격
+// 보증서 발급일 — 상품 번호와 1rem 간격
 const IssuedAt = styled.p`
-  margin: 16px 0 0 24px;
+  margin: 1rem 0 0 1.5rem;
   color: black;
-  font-size: 16px;
+  font-size: 1rem;
   font-family: 'SD Minburi';
   font-weight: 400;
 `;
 
-// 구매 일시 — 보증서 발급일과 24px 간격
+// 구매 일시 — 보증서 발급일과 1.5rem 간격
 const PurchasedAt = styled.p`
-  margin: 24px 0 0 24px;
+  margin: 1.5rem 0 0 1.5rem;
   color: black;
-  font-size: 16px;
+  font-size: 1rem;
   font-family: 'SD Minburi';
   font-weight: 400;
 `;
 
-// 수령 일시 / 판매자 / 구매처 — 바로 위 항목과 각각 4px 간격
+// 수령 일시 / 판매자 / 구매처 — 바로 위 항목과 각각 0.25rem 간격
 const InfoRow = styled.p`
-  margin: 4px 0 0 24px;
+  margin: 0.25rem 0 0 1.5rem;
   color: black;
-  font-size: 16px;
+  font-size: 1rem;
   font-family: 'SD Minburi';
   font-weight: 400;
 `;
@@ -89,15 +90,15 @@ const InfoRow = styled.p`
 // 다음 버튼 — 컬렉션에 추가 버튼과 화면상 같은 위치에 겹치도록 페이지 하단에 고정
 const NextButton = styled.button`
   position: absolute;
-  left: 24px;
-  right: 24px;
-  bottom: 140px;
-  height: 56px;
+  left: 1.5rem;
+  right: 1.5rem;
+  bottom: 7.25rem;
+  height: 3.5rem;
   border: none;
   border-radius: 5px;
   background: #1E1E1E;
   color: #ffffff;
-  font-size: 20px;
+  font-size: 1.25rem;
   font-family: 'SD Minburi';
   font-weight: 500;
   cursor: pointer;

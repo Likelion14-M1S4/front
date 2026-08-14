@@ -17,8 +17,8 @@ const StyledButton = styled.button`
   align-items: center;
   justify-content: center;
   border-radius: 0;
-  padding: 12px 20px;
-  font-size: 14px;
+  padding: 0.75rem 1.25rem;
+  font-size: 0.875rem;
   font-weight: 500;
   letter-spacing: 0.025em;
   transition: opacity 0.15s;

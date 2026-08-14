@@ -2,13 +2,13 @@ import styled from 'styled-components';
 import HeroBannerSection from './HeroBannerSection';
 import StorySection from './StorySection';
 import RecommendedProductSection from './RecommendedProductSection';
-import { APP_WIDTH } from '../../styles/theme';
+import { APP_MAX_WIDTH_REM } from '../../styles/theme';
 
 const Page = styled.div`
   width: 100%;
-  max-width: ${APP_WIDTH}px;
+  max-width: ${APP_MAX_WIDTH_REM}rem;
   margin: 0 auto;
-  padding-bottom: 16px;
+  padding-bottom: 1rem;
   box-sizing: border-box;
 `;
 

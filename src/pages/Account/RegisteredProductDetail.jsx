@@ -5,117 +5,117 @@ import AccountDetailLayout from '../../components/Layout/AccountDetailLayout';
 import { getRegisteredProductDetail } from '../../api/registeredProductDetail';
 import halfArrow from '../../assets/icons/nav/half_arrow.svg';
 
-// AccountDetailLayout의 좌우 20px 패딩을 상쇄 — 썸네일을 기기 너비(390px)에 꽉 채우기 위함
+// AccountDetailLayout의 좌우 1.25rem 패딩을 상쇄 — 썸네일을 기기 너비에 꽉 채우기 위함
 const Bleed = styled.div`
-    margin: 0 -20px;
+    margin: 0 -1.25rem;
 `;
 
-// 제품 사진 — 390(고정) x 328, api 연동 전이라 자리만 잡아둠
+// 제품 사진 — api 연동 전이라 자리만 잡아둠
 const Thumbnail = styled.img`
     width: 100%;
-    height: 328px;
+    height: 20.5rem;
     background: #f6f4f2;
     object-fit: cover;
 `;
 
-// 텍스트 영역 — AccountDetailLayout의 좌우 20px 패딩을 상쇄하고 24px로 재적용
+// 텍스트 영역 — AccountDetailLayout의 좌우 1.25rem 패딩을 상쇄하고 1.5rem로 재적용
 const Body = styled.div`
-    margin: 0 -20px;
-    padding: 0 24px 40px;
+    margin: 0 -1.25rem;
+    padding: 0 1.5rem 2.5rem;
 `;
 
-// 제품명 — 썸네일과 72px 간격
+// 제품명 — 썸네일과 4.5rem 간격
 const Name = styled.p`
-    margin: 72px 0 0;
+    margin: 4.5rem 0 0;
     color: black;
-    font-size: 20px;
+    font-size: 1.25rem;
     font-family: 'SD Minburi';
     font-weight: 500;
     line-height: 1.4;
 `;
 
-// 색상 — 제품명과 34px 간격
+// 색상 — 제품명과 2.125rem 간격
 const ColorLabel = styled.p`
-    margin: 34px 0 0;
+    margin: 2.125rem 0 0;
     color: black;
-    font-size: 16px;
+    font-size: 1rem;
     font-family: 'SD Minburi';
     font-weight: 400;
 `;
 
-// 사이즈 — 색상과 12px 간격
+// 사이즈 — 색상과 0.75rem 간격
 const SizeLabel = styled.p`
-    margin: 12px 0 0;
+    margin: 0.75rem 0 0;
     color: black;
-    font-size: 16px;
+    font-size: 1rem;
     font-family: 'SD Minburi';
     font-weight: 400;
 `;
 
-// 제품 확인하기 버튼 — 사이즈와 103px 간격
+// 제품 확인하기 버튼 — 사이즈와 6.4375rem 간격
 const CheckButton = styled.button`
     display: block;
     width: 100%;
-    margin-top: 103px;
-    padding: 15px 0 14px;
+    margin-top: 6.4375rem;
+    padding: 0.9375rem 0 0.875rem;
     border: 1px solid black;
     border-radius: 5px;
     background: none;
     color: black;
-    font-size: 20px;
+    font-size: 1.25rem;
     font-family: 'SD Minburi';
     font-weight: 500;
     text-align: center;
     cursor: pointer;
 `;
 
-// 구매 정보 제목 — 버튼과 97px 간격
+// 구매 정보 제목 — 버튼과 6.0625rem 간격
 const PurchaseTitle = styled.p`
-    margin: 97px 0 0;
+    margin: 6.0625rem 0 0;
     color: black;
-    font-size: 16px;
+    font-size: 1rem;
     font-family: 'SD Minburi';
     font-weight: 500;
 `;
 
-// 구매 일시/등록 일시/구매 매장 — 첫 줄은 구매 정보와 16px, 이후 줄은 서로 8px 간격
+// 구매 일시/등록 일시/구매 매장 — 첫 줄은 구매 정보와 1rem, 이후 줄은 서로 0.5rem 간격
 const PurchaseRow = styled.p`
-    margin: 16px 0 0;
+    margin: 1rem 0 0;
     color: black;
-    font-size: 14px;
+    font-size: 0.875rem;
     font-family: 'SD Minburi';
     font-weight: 400;
 
     & + & {
-        margin-top: 8px;
+        margin-top: 0.5rem;
     }
 `;
 
-// 정품 인증서 확인 — 구매 매장과 76px 간격, 화살표는 같은 줄 오른쪽 끝
+// 정품 인증서 확인 — 구매 매장과 4.75rem 간격, 화살표는 같은 줄 오른쪽 끝
 const CertRow = styled.button`
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    margin-top: 76px;
+    margin-top: 4.75rem;
     padding: 0;
     border: none;
     background: none;
     color: black;
-    font-size: 15px;
+    font-size: 0.9375rem;
     font-family: 'SD Minburi';
     font-weight: 400;
     cursor: pointer;
 `;
 
 const CertArrow = styled.img`
-    width: 49px;
-    height: 9px;
+    width: 3.0625rem;
+    height: 0.5625rem;
 `;
 
-// 정품 인증서 확인 블록과 15px 간격의 구분선
+// 정품 인증서 확인 블록과 0.9375rem 간격의 구분선
 const CertDivider = styled.div`
-    margin-top: 15px;
+    margin-top: 0.9375rem;
     border-bottom: 1px solid #e5e4e7;
 `;
 

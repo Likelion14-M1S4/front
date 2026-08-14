@@ -8,32 +8,32 @@ const Page = styled.div`
   flex-direction: column;
 `;
 
-// 환영 문구 박스
+// 환영 문구 박스 — 프레임 폭에 맞춰 늘어나도록 width는 100%로 채움
 const WelcomeBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 389px;
-  height: 187px;
+  width: 100%;
+  height: 11.6875rem;
   background: #f6f4f2;
 `;
 
 const WelcomeText = styled.p`
   margin: 0;
   color: black;
-  font-size: 24px;
+  font-size: 1.5rem;
   font-family: 'SD Minburi';
   font-weight: 400;
 `;
 
-// 위시리스트 (단독 항목) — 좌우 20px 여백
+// 위시리스트 (단독 항목) — 좌우 1.25rem 여백
 const WishlistRow = styled.button`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: calc(100% - 40px);
-  margin: 0 20px;
-  padding: 24px 0 27px;
+  width: calc(100% - 2.5rem);
+  margin: 0 1.25rem;
+  padding: 1.5rem 0 1.6875rem;
   border: none;
   border-bottom: 1px solid #000000;
   background: none;
@@ -42,35 +42,35 @@ const WishlistRow = styled.button`
 
 const WishlistLabel = styled.span`
   color: black;
-  font-size: 20px;
+  font-size: 1.25rem;
   font-family: 'SD Minburi';
   font-weight: 500;
 `;
 
-// 섹션 (내 정보 / 시즌 한정 참 / 설정 / 계정 관리) — 좌우 20px
+// 섹션 (내 정보 / 시즌 한정 참 / 설정 / 계정 관리) — 좌우 1.25rem
 const Section = styled.section`
-  padding: 0 20px;
-  margin-top: 48px;
+  padding: 0 1.25rem;
+  margin-top: 3rem;
 `;
 
 const SectionTitle = styled.h2`
-  margin: 0 0 12px;
-  padding: 0 0 12px 16px;
+  margin: 0 0 0.75rem;
+  padding: 0 0 0.75rem 1rem;
   color: black;
-  font-size: 20px;
+  font-size: 1.25rem;
   font-family: 'SD Minburi';
   font-weight: 500;
   border-bottom: 1px solid #000000;
 `;
 
-// 섹션 내 항목 — 줄 전체 버튼, 텍스트는 왼쪽 16px 들어감
+// 섹션 내 항목 — 줄 전체 버튼, 텍스트는 왼쪽 1rem 들어감
 const ItemRow = styled.button`
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  padding: 10px 0 10px 16px;
-  margin-bottom: 20px;
+  padding: 0.625rem 0 0.625rem 1rem;
+  margin-bottom: 1.25rem;
   border: none;
   background: none;
   cursor: pointer;
@@ -82,14 +82,14 @@ const ItemRow = styled.button`
 
 const ItemLabel = styled.span`
   color: black;
-  font-size: 16px;
+  font-size: 1rem;
   font-family: 'SD Minburi';
   font-weight: 400;
 `;
 
 const Arrow = styled.img`
-  width: 8px;
-  height: 14px;
+  width: 0.5rem;
+  height: 0.875rem;
 `;
 
 // 내계정 페이지 — 로그인 상태에 따라 분기

@@ -3,19 +3,19 @@ import styled from 'styled-components';
 import hamburgerIcon from '../../assets/icons/nav/header/hamburger.svg';
 import { useCollectedCharacters } from '../../hooks/useCollectedCharacters';
 const Page = styled.div`
-  padding: 8px 16px 40px;
+  padding: 0.5rem 1rem 2.5rem;
 `;
 
 const PageHeader = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 24px;
+  margin-bottom: 1.5rem;
 `;
 
 const PageTitle = styled.h1`
   margin: 0;
-  font-size: 24px;
+  font-size: 1.5rem;
   font-weight: 700;
   color: #000000;
 `;
@@ -24,13 +24,13 @@ const MenuButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
+  width: 2rem;
+  height: 2rem;
 `;
 
 const MenuIcon = styled.img`
-  width: 18px;
-  height: 12px;
+  width: 1.125rem;
+  height: 0.75rem;
 `;
 
 const List = styled.ul`
@@ -39,7 +39,7 @@ const List = styled.ul`
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 64px;
+  gap: 4rem;
 `;
 
 const Card = styled(Link)`
@@ -48,8 +48,8 @@ const Card = styled(Link)`
 `;
 
 const Cover = styled.div`
-  width: 240px;
-  height: 252px;
+  width: 15rem;
+  height: 15.75rem;
   margin: 0 auto;
   overflow: hidden;
   border-radius: 0;
@@ -64,34 +64,34 @@ const CoverImage = styled.img`
 
 const Divider = styled.span`
   display: block;
-  width: 78px;
-  height: ${({ $thin }) => ($thin ? '2.5px' : '3px')};
-  margin: 32px auto 16px;
+  width: 4.875rem;
+  height: ${({ $thin }) => ($thin ? '0.15625rem' : '0.1875rem')};
+  margin: 2rem auto 1rem;
   border-radius: 9999px;
   background-color: #6F5B4D;
 `;
 
 const Name = styled.h2`
   margin: 0;
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: 500;
-  line-height: 18px;
+  line-height: 1.125rem;
   letter-spacing: 0.04em;
   color: #c4b1a4;
 `;
 
 const CharacterName = styled.p`
-  margin: 2px 0 0;
-  font-size: 11px;
+  margin: 0.125rem 0 0;
+  font-size: 0.6875rem;
   font-weight: 300;
-  line-height: 16px;
+  line-height: 1rem;
   color: #000000;
 `;
 
 const Status = styled.p`
-  margin: 40px 0 0;
+  margin: 2.5rem 0 0;
   text-align: center;
-  font-size: 14px;
+  font-size: 0.875rem;
   color: #8a7a6c;
 `;
 
@@ -106,9 +106,9 @@ function Collection() {
     <Page>
       <PageHeader>
         <PageTitle>갤러리</PageTitle>
-        <MenuButton type="button" aria-label="메뉴 열기">
+        {/* <MenuButton type="button" aria-label="메뉴 열기">
           <MenuIcon src={hamburgerIcon} alt="" aria-hidden />
-        </MenuButton>
+        </MenuButton> */} 
       </PageHeader>
 
       {isLoading ? <Status>불러오는 중...</Status> : null}
