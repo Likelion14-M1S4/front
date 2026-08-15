@@ -93,14 +93,12 @@ const Thumbnail = styled.div`
   background: #ffffff;
 `;
 
-// 하단 설명 박스 — 선택지 슬라이드일 때만 탭이 여기서 멈추도록(pointer-events: auto) 처리
 const InfoBox = styled.div`
   margin: 0 1.0625rem 3.5rem;
   padding: 2.125rem 1.25rem;
   background: rgb(255 255 255 / 70%);
   border-radius: 5px;
-  pointer-events: ${({ $interactive }) => ($interactive ? 'auto' : 'none')};
-  cursor: ${({ $dismissible }) => ($dismissible ? 'pointer' : 'default')};
+  pointer-events: none;
 `;
 
 const InfoText = styled.p`
@@ -112,42 +110,6 @@ const InfoText = styled.p`
   line-height: 1.7;
 `;
 
-// 선택지 프롬프트 — 답변과 1rem 간격
-const Prompt = styled.p`
-  margin: 0 0 1rem;
-  color: #333333;
-  font-size: 0.9375rem;
-  font-family: 'SD Minburi';
-  font-weight: 500;
-  line-height: 1.7;
-`;
-
-const ChoiceList = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-`;
-
-const ChoiceButton = styled.button`
-  padding: 0.75rem 1rem;
-  border: 1px solid #ffffff;
-  background: #ffffff;
-  color: #000000;
-  font-size: 1rem;
-  font-family: 'SD Minburi';
-  font-weight: 500;
-  text-align: center;
-  cursor: pointer;
-  border-radius: 5px;
-
-  &:disabled {
-    border-color: #cccccc;
-    background-color: #DADADA;
-    color: #7F7F7F;
-    cursor: not-allowed;
-  }
-`;
-
 // 스토리 뷰어 페이지 — URL의 id로 챕터 구분, 슬라이드는 왼쪽/오른쪽 탭으로 이동
 function StoryView() {
   const { id } = useParams();
@@ -157,21 +119,11 @@ function StoryView() {
   const slides = chapter?.slides ?? [];
 
   const [slideIndex, setSlideIndex] = useState(0);
-  const [activeChoiceId, setActiveChoiceId] = useState(null);
-  // 슬라이드별로 이미 답한 선택지 id 목록 — 다시 그 슬라이드로 돌아와도 비활성 상태 유지
-  const [answeredBySlide, setAnsweredBySlide] = useState({});
 
   // 챕터가 바뀌면 처음 슬라이드부터 다시 시작
   useEffect(() => {
     setSlideIndex(0);
-    setActiveChoiceId(null);
-    setAnsweredBySlide({});
   }, [id]);
-
-  // 슬라이드가 바뀌면 항상 선택지 목록부터 보여줌
-  useEffect(() => {
-    setActiveChoiceId(null);
-  }, [slideIndex]);
 
   if (!chapter || slides.length === 0) {
     return (
@@ -190,30 +142,12 @@ function StoryView() {
   }
 
   const currentSlide = slides[slideIndex];
-  const isChoiceSlide = currentSlide.type === 'choice';
-  const isViewingAnswer = isChoiceSlide && activeChoiceId !== null;
-  const answeredIds = answeredBySlide[currentSlide.id] ?? [];
-  // 선택지 슬라이드는 모든 선택지를 다 물어봐야 다음으로 넘어갈 수 있음
-  const isChoiceIncomplete = isChoiceSlide && answeredIds.length < currentSlide.choices.length;
 
-  // 선택지 답변을 보는 중엔 좌우 탭 모두 선택지 화면으로 되돌아감
   const goToPrevSlide = () => {
-    if (isViewingAnswer) {
-      setActiveChoiceId(null);
-      return;
-    }
     setSlideIndex((prev) => Math.max(prev - 1, 0));
   };
 
   const goToNextSlide = () => {
-    if (isViewingAnswer) {
-      setActiveChoiceId(null);
-      return;
-    }
-    if (isChoiceIncomplete) {
-      // 선택지를 다 안 물어봤으면 다음으로 못 넘어감
-      return;
-    }
     if (slideIndex < slides.length - 1) {
       setSlideIndex((prev) => prev + 1);
       return;
@@ -231,15 +165,6 @@ function StoryView() {
     });
   };
 
-  const handleChoiceSelect = (choiceId) => {
-    setActiveChoiceId(choiceId);
-    setAnsweredBySlide((prev) => {
-      const answered = new Set(prev[currentSlide.id] ?? []);
-      answered.add(choiceId);
-      return { ...prev, [currentSlide.id]: Array.from(answered) };
-    });
-  };
-
   return (
     <Page>
       <TapZoneLeft type="button" onClick={goToPrevSlide} aria-label="이전 스토리" />
@@ -253,51 +178,15 @@ function StoryView() {
           ))}
         </ProgressBar>
 
-        {/* 닫기 버튼 */}
         <CloseButton type="button" onClick={() => navigate(-1)} aria-label="닫기">
           <CloseIcon src={xIcon} alt="" aria-hidden />
         </CloseButton>
 
-        {/* 이미지 자리 (박스) */}
         <Thumbnail />
 
-        {/* 하단 설명 박스 */}
-        {isChoiceSlide ? (
-          <InfoBox
-            $interactive
-            $dismissible={isViewingAnswer}
-            onClick={isViewingAnswer ? () => setActiveChoiceId(null) : undefined}
-          >
-            {isViewingAnswer ? (
-              <InfoText>
-                {currentSlide.choices.find((choice) => choice.id === activeChoiceId)?.answer}
-              </InfoText>
-            ) : (
-              <>
-                <Prompt>{currentSlide.prompt}</Prompt>
-                <ChoiceList>
-                  {currentSlide.choices.map((choice) => (
-                    <ChoiceButton
-                      key={choice.id}
-                      type="button"
-                      disabled={answeredIds.includes(choice.id)}
-                      onClick={(event) => {
-                        event.stopPropagation();
-                        handleChoiceSelect(choice.id);
-                      }}
-                    >
-                      {choice.label}
-                    </ChoiceButton>
-                  ))}
-                </ChoiceList>
-              </>
-            )}
-          </InfoBox>
-        ) : (
-          <InfoBox>
-            <InfoText>{currentSlide.text}</InfoText>
-          </InfoBox>
-        )}
+        <InfoBox>
+          <InfoText>{currentSlide.text}</InfoText>
+        </InfoBox>
       </UIOverlay>
     </Page>
   );

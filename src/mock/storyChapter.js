@@ -41,26 +41,21 @@ export const chapters = [
       },
       {
         id: 5,
-        type: 'choice',
+        type: 'normal',
         imageUrl: '',
-        prompt: '라이언에게 궁금한 걸 물어보세요.',
-        choices: [
-          {
-            id: 'fav-material',
-            label: '이번 시즌의 제품에는 어떤 것이 있어?',
-            answer: '비세토스 캔버스요. 하우스의 헤리티지를 가장 잘 담고 있거든요.',
-          },
-          {
-            id: 'inspiration',
-            label: '이번 시즌 컬렉션의 주목해야할 부분은?',
-            answer: '뮌헨의 건축과 여행에서 영감을 많이 받아요.',
-          },
-          {
-            id: 'next-collection',
-            label: '50주년 프로젝트에 대해 알고 싶어.',
-            answer: '아직 비밀이에요! 시즌 스토리를 계속 지켜봐 주세요.',
-          },
-        ],
+        text: '비세토스 캔버스요. 하우스의 헤리티지를 가장 잘 담고 있거든요.',
+      },
+      {
+        id: 6,
+        type: 'normal',
+        imageUrl: '',
+        text: '뮌헨의 건축과 여행에서 영감을 많이 받아요.',
+      },
+      {
+        id: 7,
+        type: 'normal',
+        imageUrl: '',
+        text: '아직 비밀이에요! 시즌 스토리를 계속 지켜봐 주세요.',
       },
     ],
   },
