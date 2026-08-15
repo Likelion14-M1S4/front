@@ -56,7 +56,7 @@ function Layout({ children }) {
   const isStoreTagLoading = pathname === '/';
   const isCharmRecommend = pathname === '/recommend/charms';
   const isStoryChapter = pathname === '/story/chapter';
-  const isLogin = pathname === '/login';
+  const isLogin = pathname === '/login' || pathname === '/oauth/kakao';
   const isCertificate = pathname === '/certificate';
   const isTagCharacterAdd = pathname === '/character/add';
   // 제품 상세·시즌·매장태그 로딩·참 추천·컬렉션 상세·채팅·스토리 챕터에서는 MCM 로고 헤더 숨김
