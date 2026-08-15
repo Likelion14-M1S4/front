@@ -19,13 +19,12 @@ export const accountSections = [
     ],
 },
 
-    //URL 작성해야됨
     {
     id: 'settings',
     title: '설정',
     items: [
-        { id: 'terms', label: '온라인 서비스 이용 약관', url: 'https://약관URL' },
-        { id: 'privacy', label: '개인정보 처리방침', url: 'https://개인정보URL' },
+        { id: 'terms', label: '온라인 서비스 이용약관' },
+        { id: 'privacy', label: '개인정보 처리방침' },
         { id: 'cookie', label: 'COOKIE POLICY', url: 'https://쿠키정책URL' },
     ],
     },
