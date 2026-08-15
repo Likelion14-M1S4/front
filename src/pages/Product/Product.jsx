@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import BackHeader from '../../components/common/Header/BackHeader';
 import { useProductDetail } from '../../hooks/useProductDetail';
-import { formatPrice } from '../../utils/formatPrice';
+import { removeWishlistItem } from '../../api/wishlist';
 import hartIcon from '../../assets/icons/recommend/hart.svg';
 import hart2Icon from '../../assets/icons/recommend/hart2.svg';
 import line2Icon from '../../assets/icons/recommend/line2.svg';
@@ -60,46 +60,6 @@ const LikeButton = styled.button`
 const LikeIcon = styled.img`
   width: 1.1875rem;
   height: 1.125rem;
-`;
-
-const Price = styled.p`
-  margin: 0.625rem 0 0;
-  font-size: 1.25rem;
-  font-weight: 700;
-  line-height: 1.3;
-  color: #000000;
-`;
-
-const ColorBlock = styled.div`
-  margin-top: 1.75rem;
-`;
-
-const ColorLabel = styled.p`
-  margin: 0;
-  font-size: 1rem;
-  font-weight: 400;
-  color: #000000;
-`;
-
-const ColorList = styled.div`
-  display: flex;
-  gap: 0.625rem;
-  margin-top: 0.75rem;
-`;
-
-const ColorSwatch = styled.button`
-  width: 3rem;
-  height: 3rem;
-  overflow: hidden;
-  background: #f2f2f2;
-  outline: ${({ $active }) => ($active ? '1px solid #000000' : 'none')};
-  outline-offset: 2px;
-`;
-
-const ColorImage = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
 `;
 
 const SizeBlock = styled.div`
@@ -231,13 +191,17 @@ const Status = styled.p`
   color: #8a7a6c;
 `;
 
+/** POST /api/wishlist — 백엔드 연동 시 api.post('/wishlist', { productId: item.id }) */
+async function addWishlistItem(item) {
+  return Promise.resolve(item?.id);
+}
+
 // 제품 상세 페이지 — GET /api/products/:productId
 function Product() {
   const { productId } = useParams();
   const { product, isLoading, error } = useProductDetail(productId);
 
   const [liked, setLiked] = useState(false);
-  const [selectedColorId, setSelectedColorId] = useState('');
   const [selectedSize, setSelectedSize] = useState('');
   const [sizeOpen, setSizeOpen] = useState(false);
   const [detailOpen, setDetailOpen] = useState(false);
@@ -245,11 +209,31 @@ function Product() {
   useEffect(() => {
     if (!product) return;
     setLiked(product.isLiked);
-    setSelectedColorId(product.colors[0]?.id ?? '');
     setSelectedSize(product.selectedSize || product.sizes[0] || '');
     setSizeOpen(false);
     setDetailOpen(false);
   }, [product]);
+
+  const handleLikeClick = async () => {
+    if (!product) return;
+
+    const nextLiked = !liked;
+    setLiked(nextLiked);
+
+    try {
+      if (nextLiked) {
+        await addWishlistItem({
+          id: product.id,
+          name: product.name,
+          imageUrl: product.imageUrl,
+        });
+      } else {
+        await removeWishlistItem(product.id);
+      }
+    } catch {
+      setLiked(!nextLiked);
+    }
+  };
 
   if (isLoading) {
     return (
@@ -268,18 +252,14 @@ function Product() {
     );
   }
 
-  const activeColor =
-    product.colors.find((color) => color.id === selectedColorId) ??
-    product.colors[0];
-  const displayImage = activeColor?.imageUrl || product.imageUrl;
-  const colorName = activeColor?.name || product.colorLabel;
-
   return (
     <Page>
       <BackHeader />
 
       <Hero>
-        {displayImage ? <HeroImage src={displayImage} alt={product.name} /> : null}
+        {product.imageUrl ? (
+          <HeroImage src={product.imageUrl} alt={product.name} />
+        ) : null}
       </Hero>
 
       <Info>
@@ -287,34 +267,13 @@ function Product() {
           <ProductName>{product.name}</ProductName>
           <LikeButton
             type="button"
-            aria-label={liked ? '좋아요 취소' : '좋아요'}
+            aria-label={liked ? '위시리스트에서 삭제' : '위시리스트에 추가'}
             aria-pressed={liked}
-            onClick={() => setLiked((prev) => !prev)}
+            onClick={handleLikeClick}
           >
             <LikeIcon src={liked ? hart2Icon : hartIcon} alt="" />
           </LikeButton>
         </TitleRow>
-
-        <Price>{formatPrice(product.price)}</Price>
-
-        <ColorBlock>
-          <ColorLabel>색상: {colorName}</ColorLabel>
-          <ColorList>
-            {product.colors.map((color) => (
-              <ColorSwatch
-                key={color.id}
-                type="button"
-                aria-label={color.name}
-                $active={color.id === selectedColorId}
-                onClick={() => setSelectedColorId(color.id)}
-              >
-                {color.imageUrl ? (
-                  <ColorImage src={color.imageUrl} alt={color.name} />
-                ) : null}
-              </ColorSwatch>
-            ))}
-          </ColorList>
-        </ColorBlock>
 
         <SizeBlock>
           <SizeToggle
