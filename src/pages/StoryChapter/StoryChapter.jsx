@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import { storyChapterIntro, chapters } from '../../mock/storyChapter';
-import { getCompletedChapterIds } from '../../api/storyProgress';
+import { storyChapterIntro } from '../../mock/storyChapter';
+import { getStoryChapters } from '../../api/storyProgress';
 import BackHeader from '../../components/common/Header/BackHeader';
 import padlockIcon from '../../assets/icons/nav/padlock.svg';
 
@@ -176,25 +176,22 @@ const PadlockIcon = styled.img`
 // 스토리 챕터 페이지
 function StoryChapter() {
 const navigate = useNavigate();
-// 완료된 챕터 id 목록 — localStorage 기반 진행 기록 (api/storyProgress)
-const [completedChapterIds, setCompletedChapterIds] = useState([]);
+const [stories, setStories] = useState([]);
+const [seasonName, setSeasonName] = useState(storyChapterIntro.season);
 
 useEffect(() => {
-    getCompletedChapterIds().then(setCompletedChapterIds);
+    getStoryChapters().then((page) => {
+    setStories(page.currentSeason?.stories ?? []);
+    if (page.currentSeason?.season) {
+        setSeasonName(page.currentSeason.season);
+    }
+    });
 }, []);
 
-// 해당 챕터를 끝까지 봤는지 여부
-const isCompleted = (chapter) => completedChapterIds.includes(chapter.id);
+const isCompleted = (story) => Boolean(story.isDone);
 
-// 해금 규칙: 첫 챕터는 항상 열림, 그 외엔 이전 챕터가 완료되어야 열림
-const isUnlocked = (index) => {
-    if (index === 0) return true;
-    return isCompleted(chapters[index - 1]);
-};
-
-// 챕터 카드 클릭 시 스토리 진행 페이지로 이동
-const handleChapterClick = (chapter, index) => {
-    if (!isUnlocked(index)) return;
+const handleChapterClick = (chapter) => {
+    if (chapter.isLocked) return;
     navigate(`/story/view/${chapter.id}`);
 };
 
@@ -204,18 +201,17 @@ const handleChapterClick = (chapter, index) => {
 
         {/* 시즌/타이틀 소개 영역 */}
         <IntroBox>
-            <Season>{storyChapterIntro.season}</Season>
+            <Season>{seasonName}</Season>
             <Title>{storyChapterIntro.title}</Title>
         </IntroBox>
 
         <ChapterList>
-        {chapters.map((chapter, index) => {
-            const unlocked = isUnlocked(index);
+        {stories.map((chapter, index) => {
+            const unlocked = !chapter.isLocked;
 
-            // 잠긴 챕터 — 이전 챕터 완료 시 해금된다는 안내 막대만 표시
             if (!unlocked) {
-            // 라벨 끝의 마침표(.)를 떼어 "Chapter N 완료 시 해금" 문구를 만듦
-            const prevLabel = chapters[index - 1].label.replace(/\.$/, '');
+            const prev = stories[index - 1];
+            const prevLabel = prev?.unlockOrder != null ? `Chapter ${prev.unlockOrder}` : `Chapter ${index}`;
             return (
                 <LockedBar key={chapter.id}>
                 <PadlockIcon src={padlockIcon} alt="" aria-hidden />
@@ -224,12 +220,11 @@ const handleChapterClick = (chapter, index) => {
             );
             }
 
-            // 해금된 챕터 — chapter.large 여부에 따라 큰 카드/일반 카드로 렌더링
-            return chapter.large ? (
-            <LargeCard key={chapter.id} onClick={() => handleChapterClick(chapter, index)}>
+            return chapter.teaser ? (
+            <LargeCard key={chapter.id} onClick={() => handleChapterClick(chapter)}>
                 <LargeLabelRow>
                     <LargeLabelGroup>
-                        <LargeLabel>{chapter.label}</LargeLabel>
+                        <LargeLabel>{chapter.unlockOrder != null ? `Chapter ${chapter.unlockOrder}.` : ''}</LargeLabel>
                         <LargeName>{chapter.title}</LargeName>
                     </LargeLabelGroup>
                     {/* 완료된 챕터만 다시보기 표시 */}
@@ -245,14 +240,14 @@ const handleChapterClick = (chapter, index) => {
                     </ReplayButton>
                     ) : null}
                 </LargeLabelRow>
-                {chapter.description ? (
-                <Description>{chapter.description}</Description>
+                {chapter.teaser ? (
+                <Description>{chapter.teaser}</Description>
                 ) : null}
             </LargeCard>
             ) : (
-            <ChapterCard key={chapter.id} onClick={() => handleChapterClick(chapter, index)}>
+            <ChapterCard key={chapter.id} onClick={() => handleChapterClick(chapter)}>
                 <ChapterLabelRow>
-                    <ChapterLabel>{chapter.label}</ChapterLabel>
+                    <ChapterLabel>{chapter.unlockOrder != null ? `Chapter ${chapter.unlockOrder}.` : ''}</ChapterLabel>
                     <ChapterName>{chapter.title}</ChapterName>
                 </ChapterLabelRow>
                 {/* 완료된 챕터만 다시보기 표시 */}

@@ -1,8 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import AccountDetailLayout from '../../components/Layout/AccountDetailLayout';
-import { chapters } from '../../mock/storyChapter';
 import { useRecommendedProducts } from '../../hooks/useRecommendedProducts';
 import longEllipse from '../../assets/icons/nav/long_ellipse.svg';
 import grayCircle from '../../assets/icons/nav/gray_circle.svg';
@@ -107,15 +106,11 @@ const Divider = styled.div`
 // 챕터 마지막 슬라이드에서 다음으로 넘어가면 도착하는 완료 화면
 // 실제 완료 처리(api/storyProgress.completeChapter)는 StoryView에서 이 화면으로 넘어오기 직전에 호출됩니다.
 function StoryChapterComplete() {
-  const { id } = useParams();
   const navigate = useNavigate();
   const { products } = useRecommendedProducts();
   const scrollRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
-
-  const chapterIndex = chapters.findIndex((item) => item.id === Number(id));
-  const chapter = chapters[chapterIndex];
-  const isLastChapter = chapterIndex === chapters.length - 1;
+  const isLastChapter = true;
 
   useEffect(() => {
     const el = scrollRef.current;
