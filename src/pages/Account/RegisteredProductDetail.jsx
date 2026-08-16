@@ -155,7 +155,7 @@ function RegisteredProductDetail() {
                 <PurchaseRow>등록 일시: {detail.registeredAt}</PurchaseRow>
                 <PurchaseRow>구매 매장: {detail.storeName}</PurchaseRow>
 
-                <CertRow type="button" onClick={() => navigate('/certificate')}>
+                <CertRow type="button" onClick={() => navigate(`/account/products/${productId}/certificate`)}>
                     정품 인증서 확인
                     <CertArrow src={halfArrow} alt="" aria-hidden />
                 </CertRow>
