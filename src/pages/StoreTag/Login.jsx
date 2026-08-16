@@ -25,7 +25,7 @@ const Title = styled.h1`
   margin: 2.75rem 0 0;
   color: black;
   font-size: 2rem;
-  font-family: 'SD Minburi';
+  font-family: 'Pretendard';
   font-weight: 400;
 `;
 
@@ -52,7 +52,7 @@ const KakaoIcon = styled.img`
 const KakaoText = styled.span`
   color: white;
   font-size: 1.25rem;
-  font-family: 'SD Minburi';
+  font-family: 'Pretendard';
   font-weight: 500;
 `;
 

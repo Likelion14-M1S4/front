@@ -23,7 +23,7 @@ const WelcomeText = styled.p`
   margin: 0;
   color: black;
   font-size: 1.5rem;
-  font-family: 'SD Minburi';
+  font-family: 'Pretendard';
   font-weight: 400;
   text-align: center;
 `;
@@ -45,7 +45,7 @@ const WishlistRow = styled.button`
 const WishlistLabel = styled.span`
   color: black;
   font-size: 1.25rem;
-  font-family: 'SD Minburi';
+  font-family: 'Pretendard';
   font-weight: 500;
 `;
 
@@ -60,7 +60,7 @@ const SectionTitle = styled.h2`
   padding: 0 0 0.75rem 1rem;
   color: black;
   font-size: 1.25rem;
-  font-family: 'SD Minburi';
+  font-family: 'Pretendard';
   font-weight: 500;
   border-bottom: 1px solid #000000;
 `;
@@ -85,7 +85,7 @@ const ItemRow = styled.button`
 const ItemLabel = styled.span`
   color: black;
   font-size: 1rem;
-  font-family: 'SD Minburi';
+  font-family: 'Pretendard';
   font-weight: 400;
 `;
 

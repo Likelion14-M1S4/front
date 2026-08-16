@@ -28,7 +28,7 @@ const CharacterName = styled.h1`
   margin: 2.0625rem 7.3125rem 0;
   color: black;
   font-size: 1.5rem;
-  font-family: 'SD Minburi';
+  font-family: 'Pretendard';
   font-weight: 500;
   text-align: center;
 `;
@@ -38,7 +38,7 @@ const CollectionName = styled.p`
   margin: 0.5rem 6.125rem 0;
   color: black;
   font-size: 1rem;
-  font-family: 'SD Minburi';
+  font-family: 'Pretendard';
   font-weight: 400;
   text-align: center;
 `;
@@ -48,7 +48,7 @@ const Description = styled.p`
   margin: 2.0625rem 1.25rem 0;
   color: black;
   font-size: 0.875rem;
-  font-family: 'SD Minburi';
+  font-family: 'Pretendard';
   font-weight: 400;
   line-height: 1.6;
   text-align: left;
@@ -66,7 +66,7 @@ const AddButton = styled.button`
   background: #1E1E1E;
   color: #ffffff;
   font-size: 1.25rem;
-  font-family: 'SD Minburi';
+  font-family: 'Pretendard';
   font-weight: 500;
   cursor: pointer;
 `;

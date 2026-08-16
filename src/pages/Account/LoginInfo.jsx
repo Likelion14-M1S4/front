@@ -20,14 +20,14 @@ border-bottom: 1px solid #e5e4e7;
 const EmailLabel = styled.span`
 color: black;
 font-size: 1rem;
-font-family: 'SD Minburi';
+font-family: 'Pretendard';
 font-weight: 500;
 `;
 
 const EmailValue = styled.span`
 color: #999999;
 font-size: 1rem;
-font-family: 'SD Minburi';
+font-family: 'Pretendard';
 font-weight: 400;
 `;
 
@@ -42,14 +42,14 @@ padding: 1.25rem 0;
 const InfoLabel = styled.span`
 color: #999999;
 font-size: 0.875rem;
-font-family: 'SD Minburi';
+font-family: 'Pretendard';
 font-weight: 400;
 `;
 
 const InfoValue = styled.span`
 color: black;
 font-size: 1rem;
-font-family: 'SD Minburi';
+font-family: 'Pretendard';
 font-weight: 500;
 `;
 

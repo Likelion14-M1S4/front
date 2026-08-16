@@ -28,7 +28,7 @@ const StoreName = styled.p`
     margin: 0;
     color: black;
     font-size: 1rem;
-    font-family: 'SD Minburi';
+    font-family: 'Pretendard';
     font-weight: 500;
 `;
 
@@ -37,7 +37,7 @@ const LastVisited = styled.p`
     margin: 0.75rem 0 0;
     color: #000000;
     font-size: 0.875rem;
-    font-family: 'SD Minburi';
+    font-family: 'Pretendard';
     font-weight: 400;
 `;
 
@@ -51,7 +51,7 @@ const EmptyTitle = styled.p`
     margin: 0;
     color: black;
     font-size: 1rem;
-    font-family: 'SD Minburi';
+    font-family: 'Pretendard';
     font-weight: 500;
 `;
 
@@ -60,7 +60,7 @@ const EmptySubtitle = styled.p`
     margin: 0.5625rem 0 0;
     color: #000000;
     font-size: 1rem;
-    font-family: 'SD Minburi';
+    font-family: 'Pretendard';
     font-weight: 400;
 `;
 
@@ -70,7 +70,7 @@ const EmptyLink = styled(Link)`
     margin-top: 2.5rem;
     color: black;
     font-size: 1rem;
-    font-family: 'SD Minburi';
+    font-family: 'Pretendard';
     font-weight: 400;
     text-decoration: underline;
     text-underline-offset: 0.1875rem;

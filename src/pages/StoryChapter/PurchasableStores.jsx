@@ -14,7 +14,7 @@ const Heading = styled.p`
   margin: 4.75rem 0 0;
   color: black;
   font-size: 1.25rem;
-  font-family: 'SD Minburi';
+  font-family: 'Pretendard';
   font-weight: 500;
   text-align: center;
 `;
@@ -36,7 +36,7 @@ const SearchInput = styled.input`
   background: none;
   color: black;
   font-size: 0.875rem;
-  font-family: 'SD Minburi';
+  font-family: 'Pretendard';
   font-weight: 400;
 
   &::placeholder {
@@ -78,7 +78,7 @@ const StoreName = styled.p`
   margin: 0;
   color: black;
   font-size: 1rem;
-  font-family: 'SD Minburi';
+  font-family: 'Pretendard';
   font-weight: 500;
 `;
 
@@ -87,7 +87,7 @@ const StoreAddress = styled.p`
   margin: 1rem 0 0;
   color: black;
   font-size: 0.875rem;
-  font-family: 'SD Minburi';
+  font-family: 'Pretendard';
   font-weight: 400;
 `;
 
@@ -96,7 +96,7 @@ const StorePostalCode = styled.p`
   margin: 0.25rem 0 0;
   color: black;
   font-size: 0.875rem;
-  font-family: 'SD Minburi';
+  font-family: 'Pretendard';
   font-weight: 400;
 `;
 
@@ -105,7 +105,7 @@ const StorePhone = styled.p`
   margin: 1rem 0 0;
   color: black;
   font-size: 0.875rem;
-  font-family: 'SD Minburi';
+  font-family: 'Pretendard';
   font-weight: 400;
 `;
 
@@ -124,7 +124,7 @@ const HoursRow = styled.div`
   margin-top: 0.25rem;
   color: black;
   font-size: 0.875rem;
-  font-family: 'SD Minburi';
+  font-family: 'Pretendard';
   font-weight: 400;
 
   &:first-child {
@@ -137,7 +137,7 @@ const NoResults = styled.p`
   margin: 2.875rem 1.6875rem 2.5rem;
   color: #999999;
   font-size: 0.875rem;
-  font-family: 'SD Minburi';
+  font-family: 'Pretendard';
   font-weight: 400;
 `;
 

@@ -104,7 +104,7 @@ const InfoText = styled.p`
   margin: 0;
   color: #333333;
   font-size: 0.9375rem;
-  font-family: 'SD Minburi';
+  font-family: 'Pretendard';
   font-weight: 400;
   line-height: 1.7;
 `;

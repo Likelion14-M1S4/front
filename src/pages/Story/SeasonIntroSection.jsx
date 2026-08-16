@@ -20,7 +20,7 @@ const Season = styled.p`
   margin: 0;
   color: black;
   font-size: 1.25rem;
-  font-family: 'SD Minburi';
+  font-family: 'Pretendard';
   font-weight: 500;
   line-height: 1.421875rem;
   word-wrap: break-word;
@@ -30,7 +30,7 @@ const Title = styled.h1`
   margin: 2rem 0 0;
   color: black;
   font-size: 2rem;
-  font-family: 'SD Minburi';
+  font-family: 'Pretendard';
   font-weight: 600;
   line-height: 1.421875rem;
   word-wrap: break-word;
@@ -43,7 +43,7 @@ const CtaButton = styled.button`
   background: none;
   color: black;
   font-size: 1.25rem;
-  font-family: 'SD Minburi';
+  font-family: 'Pretendard';
   font-weight: 500;
   line-height: 1.421875rem;
   cursor: pointer;

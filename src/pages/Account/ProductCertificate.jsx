@@ -8,7 +8,7 @@ const Title = styled.h1`
   margin: 0;
   color: black;
   font-size: 1.5rem;
-  font-family: 'SD Minburi';
+  font-family: 'Pretendard';
   font-weight: 500;
   text-align: center;
 `;
@@ -27,7 +27,7 @@ const ProductName = styled.p`
   margin: 2.25rem 0 0;
   color: black;
   font-size: 1.25rem;
-  font-family: 'SD Minburi';
+  font-family: 'Pretendard';
   font-weight: 500;
 `;
 
@@ -36,7 +36,7 @@ const OrderNumber = styled.p`
   margin: 2.25rem 0 0;
   color: black;
   font-size: 1rem;
-  font-family: 'SD Minburi';
+  font-family: 'Pretendard';
   font-weight: 400;
 `;
 
@@ -45,7 +45,7 @@ const ProductNumber = styled.p`
   margin: 0.25rem 0 0;
   color: black;
   font-size: 1rem;
-  font-family: 'SD Minburi';
+  font-family: 'Pretendard';
   font-weight: 400;
 `;
 
@@ -54,7 +54,7 @@ const IssuedAt = styled.p`
   margin: 1rem 0 0;
   color: black;
   font-size: 1rem;
-  font-family: 'SD Minburi';
+  font-family: 'Pretendard';
   font-weight: 400;
 `;
 
@@ -63,7 +63,7 @@ const PurchasedAt = styled.p`
   margin: 1.5rem 0 0;
   color: black;
   font-size: 1rem;
-  font-family: 'SD Minburi';
+  font-family: 'Pretendard';
   font-weight: 400;
 `;
 
@@ -72,7 +72,7 @@ const InfoRow = styled.p`
   margin: 0.25rem 0 0;
   color: black;
   font-size: 1rem;
-  font-family: 'SD Minburi';
+  font-family: 'Pretendard';
   font-weight: 400;
 `;
 

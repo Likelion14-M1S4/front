@@ -61,7 +61,7 @@ const CompleteTitle = styled.p`
   margin: 0;
   color: black;
   font-size: 1.5rem;
-  font-family: 'SD Minburi';
+  font-family: 'Pretendard';
   font-weight: 500;
 `;
 
@@ -70,7 +70,7 @@ const CompleteDescription = styled.p`
   margin: 0.5rem 0 0;
   color: black;
   font-size: 0.875rem;
-  font-family: 'SD Minburi';
+  font-family: 'Pretendard';
   font-weight: 400;
   line-height: 1.6;
 `;
@@ -87,7 +87,7 @@ const StoreButton = styled.button`
   background: none;
   color: black;
   font-size: 1rem;
-  font-family: 'SD Minburi';
+  font-family: 'Pretendard';
   font-weight: 400;
   cursor: pointer;
 `;
