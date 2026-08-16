@@ -7,7 +7,7 @@ const Intro = styled.p`
   margin: 0 0 1.75rem;
   color: #000000;
   font-size: 0.875rem;
-  font-family: 'SD Minburi';
+  font-family: 'Pretendard';
   font-weight: 400;
   line-height: 1.7;
 `;
@@ -32,7 +32,7 @@ const Toggle = styled.button`
   padding: 1.125rem 1.5rem;
   color: #000000;
   font-size: 1rem;
-  font-family: 'SD Minburi';
+  font-family: 'Pretendard';
   font-weight: 400;
   text-align: left;
 `;
@@ -54,7 +54,7 @@ const BodyText = styled.p`
   padding: 1.25rem 0;
   color: #000000;
   font-size: 0.8125rem;
-  font-family: 'SD Minburi';
+  font-family: 'Pretendard';
   font-weight: 400;
   line-height: 1.7;
   white-space: pre-line;

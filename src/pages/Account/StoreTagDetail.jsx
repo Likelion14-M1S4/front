@@ -24,7 +24,7 @@ const StoreName = styled.p`
   margin: 0;
   color: black;
   font-size: 1.25rem;
-  font-family: 'SD Minburi';
+  font-family: 'Pretendard';
   font-weight: 500;
 `;
 
@@ -56,7 +56,7 @@ const Address = styled.p`
   margin: 1.75rem 0 0;
   color: black;
   font-size: 0.875rem;
-  font-family: 'SD Minburi';
+  font-family: 'Pretendard';
   font-weight: 400;
 `;
 
@@ -65,7 +65,7 @@ const Phone = styled.p`
   margin: 0.25rem 0 0;
   color: black;
   font-size: 0.875rem;
-  font-family: 'SD Minburi';
+  font-family: 'Pretendard';
   font-weight: 400;
 `;
 
@@ -84,7 +84,7 @@ const HoursRow = styled.div`
   margin-top: 0.25rem;
   color: black;
   font-size: 0.875rem;
-  font-family: 'SD Minburi';
+  font-family: 'Pretendard';
   font-weight: 400;
 
   &:first-child {
@@ -97,7 +97,7 @@ const SectionTitle = styled.p`
   margin: 3.5rem 0 0;
   color: black;
   font-size: 1rem;
-  font-family: 'SD Minburi';
+  font-family: 'Pretendard';
   font-weight: 500;
 `;
 
@@ -121,7 +121,7 @@ const DateLabel = styled.p`
   margin: 0;
   color: black;
   font-size: 0.875rem;
-  font-family: 'SD Minburi';
+  font-family: 'Pretendard';
   font-weight: 400;
 `;
 
@@ -157,7 +157,7 @@ const ProductName = styled.p`
   overflow: hidden;
   color: black;
   font-size: 0.8125rem;
-  font-family: 'SD Minburi';
+  font-family: 'Pretendard';
   font-weight: 400;
   white-space: nowrap;
   text-overflow: ellipsis;

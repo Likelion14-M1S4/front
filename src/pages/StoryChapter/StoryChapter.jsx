@@ -22,7 +22,7 @@ const Season = styled.p`
     margin: 0;
     color: black;
     font-size: 1.5rem;
-    font-family: 'SD Minburi';
+    font-family: 'Pretendard';
     font-weight: 400;
     line-height: 1.421875rem;
 `;
@@ -32,7 +32,7 @@ const Title = styled.h1`
     margin: 1.5rem 0 0;
     color: black;
     font-size: 2rem;
-    font-family: 'SD Minburi';
+    font-family: 'Pretendard';
     font-weight: 500;
     line-height: 1.421875rem;
 `;
@@ -68,7 +68,7 @@ const ChapterLabelRow = styled.div`
 const ChapterLabel = styled.span`
     color: black;
     font-size: 0.875rem;
-    font-family: 'SD Minburi';
+    font-family: 'Pretendard';
     font-weight: 500;
     line-height: 1.421875rem;
 `;
@@ -77,7 +77,7 @@ const ChapterLabel = styled.span`
 const ChapterName = styled.span`
     color: black;
     font-size: 0.875rem;
-    font-family: 'SD Minburi';
+    font-family: 'Pretendard';
     font-weight: 400;
     line-height: 1.421875rem;
 `;
@@ -90,7 +90,7 @@ const ReplayButton = styled.button`
     cursor: pointer;
     color: black;
     font-size: 0.875rem;
-    font-family: 'SD Minburi';
+    font-family: 'Pretendard';
     font-weight: 500;
     line-height: 1.421875rem;
 `;
@@ -124,7 +124,7 @@ const LargeLabelGroup = styled.div`
 const LargeLabel = styled.span`
     color: black;
     font-size: 1rem;
-    font-family: 'SD Minburi';
+    font-family: 'Pretendard';
     font-weight: 500;
     line-height: 1.421875rem;
 `;
@@ -133,7 +133,7 @@ const LargeLabel = styled.span`
 const LargeName = styled.span`
     color: black;
     font-size: 1rem;
-    font-family: 'SD Minburi';
+    font-family: 'Pretendard';
     font-weight: 400;
     line-height: 1.421875rem;
 `;
@@ -143,7 +143,7 @@ const Description = styled.p`
     margin: 0.4375rem 0 0;
     color: black;
     font-size: 0.875rem;
-    font-family: 'SD Minburi';
+    font-family: 'Pretendard';
     font-weight: 400;
     line-height: 1.421875rem;
 `;
@@ -163,7 +163,7 @@ const LockedBar = styled.div`
 const LockedText = styled.span`
     color: #ffffff;
     font-size: 1rem;
-    font-family: 'SD Minburi';
+    font-family: 'Pretendard';
     font-weight: 500;
 `;
 

@@ -12,7 +12,7 @@ const Title = styled.h2`
   text-align: center;
   color: black;
   font-size: 1.5rem;
-  font-family: 'SD Minburi';
+  font-family: 'Pretendard';
   font-weight: 500;
   line-height: 1.421875rem;
   word-wrap: break-word;
@@ -57,7 +57,7 @@ const CardTitle = styled.p`
   margin: 1rem 0 0;
   color: black;
   font-size: 1rem;
-  font-family: 'SD Minburi';
+  font-family: 'Pretendard';
   font-weight: 500;
   line-height: 1.421875rem;
   word-wrap: break-word;

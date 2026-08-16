@@ -38,7 +38,7 @@ const Title = styled.h1`
     padding: 0 0 1rem;
     color: black;
     font-size: 1.75rem;
-    font-family: 'SD Minburi';
+    font-family: 'Pretendard';
     font-weight: 500;
     border-bottom: 1.5px solid #000000;
 `;

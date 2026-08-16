@@ -6,7 +6,7 @@ const Body = styled.p`
   margin: 0 0 2.5rem;
   color: #000000;
   font-size: 0.8125rem;
-  font-family: 'SD Minburi';
+  font-family: 'Pretendard';
   font-weight: 400;
   line-height: 1.7;
   white-space: pre-line;

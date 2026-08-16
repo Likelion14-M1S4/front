@@ -30,7 +30,7 @@ const Name = styled.p`
     margin: 4.5rem 0 0;
     color: black;
     font-size: 1.25rem;
-    font-family: 'SD Minburi';
+    font-family: 'Pretendard';
     font-weight: 500;
     line-height: 1.4;
 `;
@@ -40,7 +40,7 @@ const ColorLabel = styled.p`
     margin: 2.125rem 0 0;
     color: black;
     font-size: 1rem;
-    font-family: 'SD Minburi';
+    font-family: 'Pretendard';
     font-weight: 400;
 `;
 
@@ -49,7 +49,7 @@ const SizeLabel = styled.p`
     margin: 0.75rem 0 0;
     color: black;
     font-size: 1rem;
-    font-family: 'SD Minburi';
+    font-family: 'Pretendard';
     font-weight: 400;
 `;
 
@@ -64,7 +64,7 @@ const CheckButton = styled.button`
     background: none;
     color: black;
     font-size: 1.25rem;
-    font-family: 'SD Minburi';
+    font-family: 'Pretendard';
     font-weight: 500;
     text-align: center;
     cursor: pointer;
@@ -75,7 +75,7 @@ const PurchaseTitle = styled.p`
     margin: 6.0625rem 0 0;
     color: black;
     font-size: 1rem;
-    font-family: 'SD Minburi';
+    font-family: 'Pretendard';
     font-weight: 500;
 `;
 
@@ -84,7 +84,7 @@ const PurchaseRow = styled.p`
     margin: 1rem 0 0;
     color: black;
     font-size: 0.875rem;
-    font-family: 'SD Minburi';
+    font-family: 'Pretendard';
     font-weight: 400;
 
     & + & {
@@ -104,7 +104,7 @@ const CertRow = styled.button`
     background: none;
     color: black;
     font-size: 0.9375rem;
-    font-family: 'SD Minburi';
+    font-family: 'Pretendard';
     font-weight: 400;
     cursor: pointer;
 `;

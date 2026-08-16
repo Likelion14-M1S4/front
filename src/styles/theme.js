@@ -1,6 +1,5 @@
 // 앱 기본 폰트
-export const FONT_FAMILY =
-  "'SD Minburi', 'SD 민부리', 'SD Minburi Space1', 'Apple SD Gothic Neo', sans-serif";
+export const FONT_FAMILY = "'Pretendard', sans-serif";
 
 // ── 반응형(rem) 단위 — 1rem = 16px 기준 ──────────────────────────
 // html font-size가 clamp(14px, 4.1vw, 17px)로 뷰포트에 맞춰 유동적으로
