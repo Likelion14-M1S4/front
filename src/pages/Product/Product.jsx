@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import BackHeader from '../../components/common/Header/BackHeader';
 import { useProductDetail } from '../../hooks/useProductDetail';
@@ -109,7 +109,7 @@ const SizeOption = styled.button`
   }
 `;
 
-const StoreRow = styled.a`
+const StoreRow = styled(Link)`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -306,14 +306,7 @@ function Product() {
           ) : null}
         </SizeBlock>
 
-        <StoreRow
-          href={product.storeUrl || '#'}
-          target={product.storeUrl ? '_blank' : undefined}
-          rel={product.storeUrl ? 'noopener noreferrer' : undefined}
-          onClick={(event) => {
-            if (!product.storeUrl) event.preventDefault();
-          }}
-        >
+        <StoreRow to={product.storeUrl || '/story/stores'}>
           <span>{product.storeCheckLabel}</span>
           <StoreArrow src={line2Icon} alt="" />
         </StoreRow>

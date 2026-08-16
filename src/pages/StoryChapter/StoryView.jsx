@@ -188,7 +188,7 @@ function StoryView() {
         navigate(`/story/view/${id}/complete`, { replace: true });
         return;
       }
-      navigate(-1);
+      navigate('/story/chapter', { replace: true });
     });
   };
 

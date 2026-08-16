@@ -69,7 +69,7 @@ const Grid = styled.div`
     margin-top: 1.5rem;
 `;
 
-const Card = styled.div`
+const Card = styled(Link)`
     display: flex;
     flex-direction: column;
 `;
@@ -199,7 +199,7 @@ function AvailableCharms() {
 
       <Grid>
         {page.charms.map((charm) => (
-          <Card key={charm.id}>
+          <Card key={charm.id} to="/story/stores">
             <Thumbnail src={charm.imageUrl} alt={charm.name} />
             <CharmName>{charm.name}</CharmName>
             <CharmCollection>{charm.collectionName}</CharmCollection>

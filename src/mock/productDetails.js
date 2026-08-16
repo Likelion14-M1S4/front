@@ -22,7 +22,7 @@ const starkDetail = {
   sizes: ['미니', 'S'],
   selectedSize: '미니',
   storeCheckLabel: '구매 가능 매장 확인하기',
-  storeUrl: 'https://www.mcmworldwide.com/en-kr/stores',
+  storeUrl: '/story/stores',
   detail: {
     headline:
       '피라미드 모양 스터드 장식과 천연 나파 가죽 트림이 특징인 비세토스 모노그램 캔버스 백팩',
@@ -61,7 +61,7 @@ const arenDetail = {
   sizes: ['미니', 'S'],
   selectedSize: '미니',
   storeCheckLabel: '구매 가능 매장 확인하기',
-  storeUrl: 'https://www.mcmworldwide.com/en-kr/stores',
+  storeUrl: '/story/stores',
   detail: {
     headline: '부드러운 실루엣의 비세토스 호보 백',
     description:
@@ -90,7 +90,7 @@ const toteDetail = {
   sizes: ['미니', 'S'],
   selectedSize: 'S',
   storeCheckLabel: '구매 가능 매장 확인하기',
-  storeUrl: 'https://www.mcmworldwide.com/en-kr/stores',
+  storeUrl: '/story/stores',
   detail: {
     headline: '아이코닉한 비세토스 패턴의 에센셜 토트백',
     description: '넉넉한 수납과 클래식한 실루엣으로 완성된 MCM 에센셜 토트입니다.',
@@ -111,4 +111,10 @@ export const productDetailsById = {
 
 export function getProductDetailByIdFromMock(productId) {
   return productDetailsById[productId] ?? null;
+}
+
+// 이름이 같은 제품의 id 조회 — 등록한 제품 상세에서 "제품 확인하기" 연결용
+export function getProductIdByName(name) {
+  const match = Object.values(productDetailsById).find((product) => product.name === name);
+  return match?.id ?? null;
 }
