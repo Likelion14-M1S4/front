@@ -4,7 +4,6 @@ export const accountSections = [
     id: 'my-info',
     title: '내 정보',
     items: [
-    { id: 'login-info', label: '로그인 정보' },
     { id: 'registered-product', label: '등록한 제품' },
     { id: 'store-tag-history', label: '매장 태그 이력' },
     ],
