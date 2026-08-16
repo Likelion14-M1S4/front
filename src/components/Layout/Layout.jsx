@@ -48,6 +48,7 @@ function Layout({ children }) {
   const isStoryComplete = /^\/story\/view\/[^/]+\/complete$/.test(pathname);
   const isAccountDetail = /^\/account\/[^/]+$/.test(pathname);
   const isRegisteredProductDetail = /^\/account\/products\/[^/]+$/.test(pathname);
+  const isProductCertificate = /^\/account\/products\/[^/]+\/certificate$/.test(pathname);
   const isStoreTagDetail = /^\/account\/tag-history\/[^/]+$/.test(pathname);
   const isPurchasableStores = pathname === '/story/stores';
   const isWishlist = pathname === '/wishlist';
@@ -75,6 +76,7 @@ function Layout({ children }) {
     isTagCharacterAdd ||
     isAccountDetail ||
     isRegisteredProductDetail ||
+    isProductCertificate ||
     isStoreTagDetail ||
     isPurchasableStores ||
     isWishlist;
@@ -93,6 +95,7 @@ function Layout({ children }) {
     isTagCharacterAdd ||
     isAccountDetail ||
     isRegisteredProductDetail ||
+    isProductCertificate ||
     isStoreTagDetail ||
     isPurchasableStores ||
     isWishlist;
