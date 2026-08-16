@@ -1,38 +1,60 @@
 import api from './axios';
-import { availableCharmsPage } from '../mock/availableCharms';
-
-// 백엔드 연동 전까지 mock 사용. 연동 시 axios 호출만 살리면 됩니다.
 
 /**
- * GET /api/account/available-charms
- *
- * 응답:
- * {
- *   collectionName,  // 현재 선택된 컬렉션
- *   charms: [{ id, name, collectionName, imageUrl }]
- * }
+ * GET /api/charms/purchasable
+ * 구매(수령) 가능한 시즌 한정 참 목록.
  */
 export async function getAvailableCharms() {
-  // const { data } = await api.get('/account/available-charms');
-  // return normalizeAvailableCharms(data);
+  const { data } = await api.get('/api/charms/purchasable');
+  return normalizeAvailableCharms(data.data);
+}
 
-  return Promise.resolve(normalizeAvailableCharms(availableCharmsPage));
+function normalizeCharmCard(charm) {
+  return {
+    id: charm.id,
+    name: charm.name ?? '',
+    collectionName: charm.collectionName ?? charm.collection_name ?? '',
+    imageUrl: charm.imgUrl ?? charm.imageUrl ?? '',
+  };
+}
+
+function flattenGroupedCharms(data) {
+  if (!data || typeof data !== 'object') return [];
+
+  const groupedArray = data.collections ?? data.groups ?? data.collectionGroups;
+  if (Array.isArray(groupedArray)) {
+    return groupedArray.flatMap((group) =>
+      (group.charms ?? []).map((charm) => ({
+        ...normalizeCharmCard(charm),
+        collectionName:
+          charm.collectionName ??
+          charm.collection_name ??
+          group.collectionName ??
+          group.collection_name ??
+          '',
+      })),
+    );
+  }
+
+  if (Array.isArray(data.charms)) {
+    return data.charms.map(normalizeCharmCard);
+  }
+
+  return Object.entries(data)
+    .filter(([, value]) => Array.isArray(value))
+    .flatMap(([collectionName, charms]) =>
+      charms.map((charm) => ({
+        ...normalizeCharmCard(charm),
+        collectionName: charm.collectionName ?? charm.collection_name ?? collectionName,
+      })),
+    );
 }
 
 function normalizeAvailableCharms(data) {
-  if (!data || typeof data !== 'object') {
-    return { collectionName: '', charms: [] };
-  }
+  const charms = flattenGroupedCharms(data);
 
   return {
-    collectionName: data.collectionName ?? '',
-    charms: Array.isArray(data.charms)
-      ? data.charms.map((charm) => ({
-          id: charm.id,
-          name: charm.name ?? '',
-          collectionName: charm.collectionName ?? '',
-          imageUrl: charm.imageUrl ?? '',
-        }))
-      : [],
+    collectionName: data?.collectionName ?? charms[0]?.collectionName ?? '',
+    charms,
   };
 }

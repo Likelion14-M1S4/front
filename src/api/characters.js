@@ -1,73 +1,68 @@
 import api from './axios';
-import {
-  collectedCharacters,
-  getCollectedCharacterById as getCollectedCharacterByIdFromMock,
-} from '../mock/characters';
-
-// 백엔드 연동 전까지 mock을 사용합니다.
-// 연동 시 주석 처리된 axios 호출만 살리면 됩니다.
 
 /**
- * GET /api/characters/collected
- * @returns {Promise<Array<{
- *   id: string,
- *   name: string,
- *   collectionName: string,
- *   collectionSubtitle: string,
- *   thumbnailUrl: string,
- *   collectedAt: string | null
- * }>>}
+ * GET /api/charms
+ * 컬렉션(갤러리) 목록.
  */
 export async function getCollectedCharacters() {
-  // const { data } = await api.get('/characters/collected');
-  // return data;
+  const { data } = await api.get('/api/charms');
+  return normalizeCharmList(data.data);
+}
 
-  return Promise.resolve(collectedCharacters);
+function normalizeCharmList(payload) {
+  const charms = Array.isArray(payload?.charms)
+    ? payload.charms
+    : Array.isArray(payload)
+      ? payload
+      : [];
+
+  return charms.map((charm) => ({
+    id: charm.id,
+    name: charm.name ?? '',
+    collectionName: charm.collectionName ?? charm.collection_name ?? '',
+    collectionSubtitle: charm.collectionSubtitle ?? '',
+    thumbnailUrl: charm.imgUrl ?? charm.thumbnailUrl ?? charm.imageUrl ?? '',
+    collectedAt: charm.collectedAt ?? null,
+  }));
 }
 
 /**
- * GET /api/characters/collected/:characterId
- *
- * UI는 캐릭터 섹션만 렌더합니다. product / care 는 내려와도 버립니다.
+ * GET /api/charms/{charmId}
+ * 컬렉션에서 참을 눌렀을 때 쓰는 상세.
  */
 export async function getCollectedCharacterById(characterId) {
-  // const { data } = await api.get(`/characters/collected/${characterId}`);
-  // return normalizeCollectedCharacterDetail(data);
-
-  const data = getCollectedCharacterByIdFromMock(characterId);
-  return Promise.resolve(normalizeCollectedCharacterDetail(data));
+  const { data } = await api.get(`/api/charms/${characterId}`);
+  return normalizeCollectedCharacterDetail(data.data);
 }
 
-/** API/mock 응답을 화면에서 쓰기 안전한 형태로 맞춤 */
 export function normalizeCollectedCharacterDetail(data) {
   if (!data) return null;
+
+  const imageUrl = data.imgUrl ?? data.imageUrl ?? data.thumbnailUrl ?? '';
+  const personality = data.character?.personality ?? '';
 
   const sections = Array.isArray(data.sections)
     ? data.sections
         .filter((section) => section?.type === 'character')
-        .map((section) => normalizeSection(section))
-        .filter(Boolean)
-    : [];
+        .map((section) => ({
+          type: section.type,
+          title: section.title ?? '',
+          content: section.content ?? '',
+        }))
+        .filter((section) => section.type)
+    : personality
+      ? [{ type: 'character', title: '캐릭터', content: personality }]
+      : [];
 
   return {
     id: data.id,
     name: data.name ?? '',
-    collectionName: data.collectionName ?? '',
+    collectionName: data.collectionName ?? data.collection_name ?? '',
     collectionSubtitle: data.collectionSubtitle ?? '',
-    thumbnailUrl: data.thumbnailUrl ?? '',
-    imageUrl: data.imageUrl ?? '',
-    description: data.description ?? '',
+    thumbnailUrl: imageUrl,
+    imageUrl,
+    description: data.description ?? personality,
     collectedAt: data.collectedAt ?? null,
     sections,
-  };
-}
-
-function normalizeSection(section) {
-  if (!section?.type) return null;
-
-  return {
-    type: section.type,
-    title: section.title ?? '',
-    content: section.content ?? '',
   };
 }

@@ -1,10 +1,5 @@
 import api from './axios';
-import {
-  seasonProductsPage,
-  getSeasonProductDetailByIdFromMock,
-} from '../mock/seasonProducts';
-
-// 백엔드 연동 전까지 mock 사용. 연동 시 axios 호출만 살리면 됩니다.
+import { seasonProductsPage } from '../mock/seasonProducts';
 
 /**
  * GET /api/season/products
@@ -16,9 +11,6 @@ import {
  * }
  */
 export async function getSeasonProducts() {
-  // const { data } = await api.get('/season/products');
-  // return normalizeSeasonProductsPage(data);
-
   return Promise.resolve(normalizeSeasonProductsPage(seasonProductsPage));
 }
 
@@ -46,46 +38,38 @@ function normalizeSeasonProductsPage(data) {
 }
 
 /**
- * GET /api/season/products/:productId
- *
- * 응답:
- * {
- *   id, name, price, imageUrl, colorLabel,
- *   isPurchased, requiresStory,
- *   storeCheckLabel, storeUrl,
- *   detail: { headline, description, specs: string[] }
- * }
+ * GET /api/charms/{charmId}
+ * 시즌 참 상세.
  */
 export async function getSeasonProductById(productId) {
-  // const { data } = await api.get(`/season/products/${productId}`);
-  // return normalizeSeasonProductDetail(data);
-
-  const data = getSeasonProductDetailByIdFromMock(productId);
-  if (!data) {
+  const { data } = await api.get(`/api/charms/${productId}`);
+  const detail = normalizeSeasonProductDetail(data.data);
+  if (!detail) {
     const error = new Error('Season product not found');
     error.status = 404;
     return Promise.reject(error);
   }
-
-  return Promise.resolve(normalizeSeasonProductDetail(data));
+  return detail;
 }
 
 function normalizeSeasonProductDetail(data) {
   if (!data || typeof data !== 'object') return null;
 
+  const isPurchasable = data.isPurchasable === true;
+
   return {
     id: data.id,
     name: data.name ?? '',
     price: data.price ?? null,
-    imageUrl: data.imageUrl ?? '',
-    colorLabel: data.colorLabel ?? '',
-    isPurchased: Boolean(data.isPurchased),
-    requiresStory: data.requiresStory !== false,
+    imageUrl: data.imgUrl ?? data.imageUrl ?? '',
+    colorLabel: data.colorLabel ?? data.collectionName ?? data.collection_name ?? '',
+    isPurchased: isPurchasable,
+    requiresStory: !isPurchasable,
     storeCheckLabel: data.storeCheckLabel ?? '구매 가능 매장 확인하기',
-    storeUrl: data.storeUrl ?? '',
+    storeUrl: data.storeUrl ?? '/story/stores',
     detail: {
-      headline: data.detail?.headline ?? '',
-      description: data.detail?.description ?? '',
+      headline: data.detail?.headline ?? data.collectionName ?? data.collection_name ?? '',
+      description: data.detail?.description ?? data.description ?? '',
       specs: Array.isArray(data.detail?.specs)
         ? data.detail.specs.map(String)
         : [],
