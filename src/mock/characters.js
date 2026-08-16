@@ -13,7 +13,7 @@ const DUMMY_DESCRIPTION =
 // 캐릭터 마스터 더미
 export const characterCatalog = [
   {
-    id: 'character-visetos-lion',
+    id: '1',
     name: '비세토스 라이언',
     collectionName: 'MCM BASIC COLLECTION',
     collectionSubtitle: '베스트 라인',
@@ -29,7 +29,7 @@ export const characterCatalog = [
     ],
   },
   {
-    id: 'character-classic-rabbit',
+    id: '2',
     name: '클래식 래빗',
     collectionName: 'MCM BASIC COLLECTION',
     collectionSubtitle: '베스트 라인',
@@ -45,7 +45,7 @@ export const characterCatalog = [
     ],
   },
   {
-    id: 'character-munich-bear',
+    id: '3',
     name: '뮌헨 베어',
     collectionName: 'MCM BASIC COLLECTION',
     collectionSubtitle: '베스트 라인',
@@ -62,16 +62,12 @@ export const characterCatalog = [
   },
 ];
 
-export const collectedCharacterIds = [
-  'character-visetos-lion',
-  'character-classic-rabbit',
-  'character-munich-bear',
-];
+export const collectedCharacterIds = ['1', '2', '3'];
 
 export const collectedCharacterMeta = {
-  'character-visetos-lion': { collectedAt: '2026-07-12T10:00:00.000Z' },
-  'character-classic-rabbit': { collectedAt: '2026-07-28T14:30:00.000Z' },
-  'character-munich-bear': { collectedAt: '2026-08-05T09:15:00.000Z' },
+  1: { collectedAt: '2026-07-12T10:00:00.000Z' },
+  2: { collectedAt: '2026-07-28T14:30:00.000Z' },
+  3: { collectedAt: '2026-08-05T09:15:00.000Z' },
 };
 
 // GET /api/characters/collected 더미 응답

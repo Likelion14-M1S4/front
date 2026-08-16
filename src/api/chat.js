@@ -1,102 +1,89 @@
 import api from './axios';
-import {
-  createCharacterTextMessage,
-  createGreetingMessage,
-  createUserImageMessage,
-  createUserTextMessage,
-  DEFAULT_USER_NAME,
-  quickReplies,
-  resolveMockAiReply,
-} from '../mock/chat';
-import { getCollectedCharacterById } from '../mock/characters';
+import { createCharacterTextMessage, createUserImageMessage, createUserTextMessage } from '../mock/chat';
 
-// 백엔드·AI 연동 전까지는 mock으로 동작합니다.
-// 연동 시 주석 처리된 axios 호출로 교체하면 됩니다.
+function toApiHistory(history) {
+  return history.map((message) => ({
+    role: message.role === 'character' ? 'CHARACTER' : 'USER',
+    content: message.content,
+  }));
+}
 
-// 채팅 세션 시작
-// POST /api/chat/sessions { characterId }
-export async function startChatSession(characterId) {
-  // const { data } = await api.post('/chat/sessions', { characterId });
-  // return data;
-
-  const character = getCollectedCharacterById(characterId);
-  if (!character) {
-    return Promise.resolve(null);
+// 채팅 진입 화면 조회
+// GET /api/chat/:characterId/entry
+async function getChatEntry(characterId) {
+  try {
+    const { data } = await api.get(`/api/chat/${characterId}/entry`);
+    console.log('[chat] GET entry 응답:', data);
+    return data.data;
+  } catch (err) {
+    if (err.response?.status === 404) return null;
+    throw err;
   }
+}
 
-  const userName = DEFAULT_USER_NAME;
+// 채팅 세션 시작 (실제로는 세션이 없고, 매번 같은 초기 상태를 반환)
+export async function startChatSession(characterId) {
+  const entry = await getChatEntry(characterId);
+  if (!entry) return null;
 
-  return Promise.resolve({
-    sessionId: `session-${character.id}`,
-    characterId: character.id,
-    characterName: character.name,
-    avatarUrl: character.thumbnailUrl,
-    userName,
-    quickReplies,
+  return {
+    characterId: entry.characterId,
+    characterName: entry.characterName,
+    avatarUrl: entry.characterTagUrl,
+    quickReplies: entry.starterChoices.map((choice) => ({
+      id: choice.id,
+      label: choice.label,
+      tagName: choice.tagName,
+    })),
     messages: [
-      createGreetingMessage({
-        characterName: character.name,
-        userName,
+      createCharacterTextMessage({
+        characterName: entry.characterName,
+        content: entry.greeting,
       }),
     ],
-  });
+  };
 }
 
 // 메시지 전송 (텍스트)
-// POST /api/chat/sessions/:sessionId/messages { type: 'text', content }
-export async function sendChatMessage({ sessionId, characterId, characterName, content }) {
-  // const { data } = await api.post(`/chat/sessions/${sessionId}/messages`, {
-  //   type: 'text',
-  //   content,
-  // });
-  // return data;
-
-  void sessionId;
-  void characterId;
+// POST /api/chat/messages { characterId, message, tagName, history }
+// AI 호출 실패는 서버가 고정 대체 문구로 흡수해 항상 200으로 옴 (여기서 별도 처리 불필요)
+export async function sendChatMessage({ characterId, characterName, content, history, tagName = 'product' }) {
+  const { data } = await api.post('/api/chat/messages', {
+    characterId: Number(characterId),
+    message: content,
+    tagName,
+    history: toApiHistory(history),
+  });
+  console.log('[chat] POST messages 응답:', data);
 
   const userMessage = createUserTextMessage(content);
-  const replyContent = resolveMockAiReply(content);
   const characterMessage = createCharacterTextMessage({
     characterName,
-    content: replyContent,
+    content: data.data.reply,
   });
 
-  // AI 응답 지연 시뮬레이션
-  await new Promise((resolve) => setTimeout(resolve, 450));
-
-  return Promise.resolve({
-    userMessage,
-    characterMessage,
-  });
+  return { userMessage, characterMessage };
 }
 
-// 이미지 메시지 전송
-// POST /api/chat/sessions/:sessionId/messages { type: 'image', content }
-export async function sendChatImageMessage({
-  sessionId,
-  characterId,
-  characterName,
-  imageUrl,
-}) {
-  // const { data } = await api.post(`/chat/sessions/${sessionId}/messages`, {
-  //   type: 'image',
-  //   content: imageUrl,
-  // });
-  // return data;
+// 이미지로 케어 진단 (AI 인스펙터)
+// POST /api/chat/inspector?characterId=&history= (multipart/form-data, image)
+export async function sendChatImageMessage({ characterId, characterName, imageFile, previewUrl, history }) {
+  const formData = new FormData();
+  formData.append('image', imageFile);
 
-  void sessionId;
-  void characterId;
+  const { data } = await api.post('/api/chat/inspector', formData, {
+    params: {
+      characterId: Number(characterId),
+      history: JSON.stringify(toApiHistory(history)),
+    },
+  });
+  console.log('[chat] POST inspector 응답:', data);
 
-  const userMessage = createUserImageMessage(imageUrl);
+  const userMessage = createUserImageMessage(previewUrl);
   const characterMessage = createCharacterTextMessage({
     characterName,
-    content: '사진을 확인해 볼게요. 어떤 부분인지 조금 더 알려주시겠어요?',
+    content: data.data.reply,
   });
 
-  await new Promise((resolve) => setTimeout(resolve, 450));
-
-  return Promise.resolve({
-    userMessage,
-    characterMessage,
-  });
+  return { userMessage, characterMessage };
 }

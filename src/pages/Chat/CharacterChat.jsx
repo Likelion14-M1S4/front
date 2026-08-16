@@ -220,10 +220,10 @@ function CharacterChat() {
     await sendText(text);
   };
 
-  const handleQuickReply = async (label) => {
+  const handleQuickReply = async (choice) => {
     if (isSending) return;
     setShowQuickReplies(false);
-    await sendText(label);
+    await sendText(choice.label, choice.tagName);
   };
 
   const handleKeyDown = (event) => {
@@ -242,9 +242,8 @@ function CharacterChat() {
     event.target.value = '';
     if (!file) return;
 
-    const imageUrl = URL.createObjectURL(file);
     setShowQuickReplies(false);
-    await sendImage(imageUrl);
+    await sendImage(file);
   };
 
   if (isLoading) {
@@ -317,7 +316,7 @@ function CharacterChat() {
                   key={item.id}
                   type="button"
                   disabled={isSending}
-                  onClick={() => handleQuickReply(item.label)}
+                  onClick={() => handleQuickReply(item)}
                 >
                   {item.label}
                 </QuickReplyButton>
