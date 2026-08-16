@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { chapters } from '../../mock/storyChapter';
-import { completeChapter } from '../../api/storyProgress';
+import { completeChapter, getStoryById } from '../../api/storyProgress';
 import xIcon from '../../assets/icons/nav/Xicon.svg';
 
 // 전체 화면 — 회색 배경(추후 이미지로 교체)
@@ -115,15 +114,47 @@ function StoryView() {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const chapter = chapters.find((item) => item.id === Number(id));
-  const slides = chapter?.slides ?? [];
-
+  const [chapter, setChapter] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
   const [slideIndex, setSlideIndex] = useState(0);
 
-  // 챕터가 바뀌면 처음 슬라이드부터 다시 시작
   useEffect(() => {
+    let isMounted = true;
+    setIsLoading(true);
     setSlideIndex(0);
+
+    getStoryById(id)
+      .then((data) => {
+        if (isMounted) setChapter(data);
+      })
+      .catch(() => {
+        if (isMounted) setChapter(null);
+      })
+      .finally(() => {
+        if (isMounted) setIsLoading(false);
+      });
+
+    return () => {
+      isMounted = false;
+    };
   }, [id]);
+
+  const slides = chapter?.slides ?? [];
+
+  if (isLoading) {
+    return (
+      <Page>
+        <UIOverlay>
+          <CloseButton type="button" onClick={() => navigate(-1)} aria-label="닫기">
+            <CloseIcon src={xIcon} alt="" aria-hidden />
+          </CloseButton>
+          <InfoBox>
+            <InfoText>불러오는 중이에요.</InfoText>
+          </InfoBox>
+        </UIOverlay>
+      </Page>
+    );
+  }
 
   if (!chapter || slides.length === 0) {
     return (
@@ -152,15 +183,11 @@ function StoryView() {
       setSlideIndex((prev) => prev + 1);
       return;
     }
-    // 마지막 슬라이드 — 챕터 완료 처리 후 이동
-    // 마지막 챕터만 완료 화면(제품 추천 등)으로, 그 전 챕터들은 챕터 목록으로 복귀
-    const isLastChapter = chapters[chapters.length - 1]?.id === chapter.id;
-    completeChapter(chapter.id).then(() => {
-      if (isLastChapter) {
+    completeChapter(chapter.id).then((result) => {
+      if (result.isSeasonCompleted) {
         navigate(`/story/view/${id}/complete`, { replace: true });
         return;
       }
-      // 챕터 목록은 이미 히스토리에 있으므로 새로 쌓지 않고 그 자리로 돌아감 (뒤로가기 두 번 방지)
       navigate(-1);
     });
   };
