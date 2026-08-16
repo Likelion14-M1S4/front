@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { accountSections } from '../../mock/account';
 import forwardArrow from '../../assets/icons/nav/forward_arrow.svg';
+import { useMyInfo } from '../../hooks/useMyInfo';
 
 const Page = styled.div`
   display: flex;
@@ -24,6 +25,7 @@ const WelcomeText = styled.p`
   font-size: 1.5rem;
   font-family: 'SD Minburi';
   font-weight: 400;
+  text-align: center;
 `;
 
 // 위시리스트 (단독 항목) — 좌우 1.25rem 여백
@@ -95,6 +97,7 @@ const Arrow = styled.img`
 // 내계정 페이지 — 로그인 상태에 따라 분기
 function Account() {
   const navigate = useNavigate();
+  const { myInfo, error } = useMyInfo();
 
   // 항목 클릭 — url 있으면 외부 링크, id에 따라 페이지 이동
   const handleItemClick = (item) => {
@@ -108,9 +111,6 @@ function Account() {
     switch (item.id) {
       case 'wishlist':
         navigate('/wishlist');
-        break;
-      case 'login-info':
-        navigate('/account/login-info');
         break;
       case 'registered-product':
         navigate('/account/products');
@@ -141,10 +141,14 @@ function Account() {
   // 로그인 되어 있으면 마이페이지 내용 표시
   return (
     <Page>
-      {/* 환영 문구 — TODO: 연동 시 user.name으로 교체 */}
       <WelcomeBox>
-        <WelcomeText>000님 환영합니다.</WelcomeText>
+        <WelcomeText>
+          {myInfo?.email ?? '000'}님
+          <br />
+          환영합니다.
+        </WelcomeText>
       </WelcomeBox>
+      {error && <WelcomeText>내 정보를 불러오지 못했습니다. ({error.response?.status ?? error.message})</WelcomeText>}
 
       {/* 위시리스트 */}
       <WishlistRow type="button" onClick={() => handleItemClick({ id: 'wishlist' })}>
