@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import AccountDetailLayout from '../../components/Layout/AccountDetailLayout';
 import { getRegisteredProductDetail } from '../../api/registeredProductDetail';
+import { getProductIdByName } from '../../mock/productDetails';
 import halfArrow from '../../assets/icons/nav/half_arrow.svg';
 
 // AccountDetailLayout의 좌우 1.25rem 패딩을 상쇄 — 썸네일을 기기 너비에 꽉 채우기 위함
@@ -122,6 +123,7 @@ const CertDivider = styled.div`
 // 등록한 제품 상세 페이지 — 등록한 제품 목록에서 제품을 누르면 이동
 function RegisteredProductDetail() {
     const { productId } = useParams();
+    const navigate = useNavigate();
     const [detail, setDetail] = useState(null);
 
     useEffect(() => {
@@ -129,6 +131,11 @@ function RegisteredProductDetail() {
     }, [productId]);
 
     if (!detail) return null;
+
+    const handleCheckProduct = () => {
+        const matchedProductId = getProductIdByName(detail.name);
+        if (matchedProductId) navigate(`/product/${matchedProductId}`);
+    };
 
     return (
         <AccountDetailLayout>
@@ -141,16 +148,14 @@ function RegisteredProductDetail() {
                 <ColorLabel>색상: {detail.colorLabel}</ColorLabel>
                 <SizeLabel>사이즈 : {detail.sizeLabel}</SizeLabel>
 
-                {/* TODO: 제품 상세 페이지 연결 */}
-                <CheckButton type="button">제품 확인하기</CheckButton>
+                <CheckButton type="button" onClick={handleCheckProduct}>제품 확인하기</CheckButton>
 
                 <PurchaseTitle>구매 정보</PurchaseTitle>
                 <PurchaseRow>구매 일시: {detail.purchasedAt}</PurchaseRow>
                 <PurchaseRow>등록 일시: {detail.registeredAt}</PurchaseRow>
                 <PurchaseRow>구매 매장: {detail.storeName}</PurchaseRow>
 
-                {/* TODO: 정품 인증서 확인 페이지 연결 */}
-                <CertRow type="button">
+                <CertRow type="button" onClick={() => navigate('/certificate')}>
                     정품 인증서 확인
                     <CertArrow src={halfArrow} alt="" aria-hidden />
                 </CertRow>
