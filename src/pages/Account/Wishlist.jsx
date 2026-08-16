@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import AccountDetailLayout from '../../components/Layout/AccountDetailLayout';
-import { getWishlist, removeWishlistItem } from '../../api/wishlist';
+import { getWishlist, toggleWishlist } from '../../api/wishlist';
 import xIcon from '../../assets/icons/nav/Xicon.svg';
 
 // 위시리스트 목록 — Title의 기본 margin-bottom(1rem) + margin-top 1.5rem = 구분선과 2.5rem 간격
@@ -43,7 +43,7 @@ const Info = styled.div`
 `;
 
 const Name = styled.p`
-  margin: 0;
+  margin: 1rem 0 0;
   overflow: hidden;
   color: black;
   font-size: 1rem;
@@ -53,7 +53,7 @@ const Name = styled.p`
   text-overflow: ellipsis;
 `;
 
-// 색상 라벨 — 상품명과 0.25rem 간격
+// 컬러 — 상품명과 0.25rem 간격
 const ColorLabel = styled.p`
   margin: 0.25rem 0 0;
   color: #999999;
@@ -121,16 +121,22 @@ function Wishlist() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    getWishlist().then((data) => {
-      setItems(data);
-      setIsLoading(false);
-    });
+    getWishlist()
+      .then((data) => setItems(data))
+      .finally(() => setIsLoading(false));
   }, []);
 
-  // 위시리스트에서 제거
-  const handleRemove = (id) => {
-    setItems((prev) => prev.filter((item) => item.id !== id));
-    removeWishlistItem(id);
+  // 위시리스트에서 제거 — 하트와 같은 toggle API를 써서 찜 해제
+  const handleRemove = async (item) => {
+    setItems((prev) => prev.filter((current) => current.id !== item.id));
+
+    try {
+      await toggleWishlist(
+        item.type === 'CHARM' ? { charmId: item.targetId } : { productId: item.targetId },
+      );
+    } catch {
+      setItems((prev) => [...prev, item]);
+    }
   };
 
   if (!isLoading && items.length === 0) {
@@ -153,11 +159,11 @@ function Wishlist() {
             <Thumbnail src={item.imageUrl} alt={item.name} />
             <Info>
               <Name>{item.name}</Name>
-              <ColorLabel>{item.colorLabel}</ColorLabel>
+              {item.colorLabel && <ColorLabel>{item.colorLabel}</ColorLabel>}
             </Info>
             <RemoveButton
               type="button"
-              onClick={() => handleRemove(item.id)}
+              onClick={() => handleRemove(item)}
               aria-label={`${item.name} 위시리스트에서 삭제`}
             >
               <RemoveIcon src={xIcon} alt="" aria-hidden />

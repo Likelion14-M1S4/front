@@ -21,19 +21,19 @@ export const recommendPage = {
     title: '핸드백 베스트셀러',
     products: [
       {
-        id: 'stark-side-stud-visetos-backpack',
+        id: '1',
         name: 'Stark 사이드 스터드 비세토스 백팩',
         price: 1490000,
         imageUrl: productImage,
       },
       {
-        id: 'aren-visetos-hobo',
+        id: '2',
         name: 'Aren 비세토스 호보',
         price: 1290000,
         imageUrl: storyImage,
       },
       {
-        id: 'mcm-essential-tote',
+        id: '3',
         name: 'MCM 에센셜 토트',
         price: 2290000,
         imageUrl: bannerImage,
