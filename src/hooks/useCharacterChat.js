@@ -4,6 +4,7 @@ import {
   sendChatMessage,
   startChatSession,
 } from '../api/chat';
+import { createCharacterTextMessage, createUserImageMessage, createUserTextMessage } from '../mock/chat';
 
 // 캐릭터 챗봇 세션/메시지 상태를 관리하는 훅
 export function useCharacterChat(characterId) {
@@ -45,45 +46,62 @@ export function useCharacterChat(characterId) {
   }, [characterId]);
 
   const sendText = useCallback(
-    async (content) => {
+    async (content, tagName) => {
       if (!session || !content.trim() || isSending) return;
 
       setIsSending(true);
       try {
         const { userMessage, characterMessage } = await sendChatMessage({
-          sessionId: session.sessionId,
           characterId: session.characterId,
           characterName: session.characterName,
           content: content.trim(),
+          history: messages.filter((message) => message.type === 'text'),
+          tagName,
         });
 
         setMessages((prev) => [...prev, userMessage, characterMessage]);
+      } catch (err) {
+        const userMessage = createUserTextMessage(content.trim());
+        const errorMessage = createCharacterTextMessage({
+          characterName: session.characterName,
+          content: err.response?.data?.message ?? '메시지를 보내지 못했어요. 다시 시도해주세요.',
+        });
+        setMessages((prev) => [...prev, userMessage, errorMessage]);
       } finally {
         setIsSending(false);
       }
     },
-    [session, isSending],
+    [session, isSending, messages],
   );
 
   const sendImage = useCallback(
-    async (imageUrl) => {
-      if (!session || !imageUrl || isSending) return;
+    async (imageFile) => {
+      if (!session || !imageFile || isSending) return;
 
+      const previewUrl = URL.createObjectURL(imageFile);
       setIsSending(true);
       try {
         const { userMessage, characterMessage } = await sendChatImageMessage({
-          sessionId: session.sessionId,
           characterId: session.characterId,
           characterName: session.characterName,
-          imageUrl,
+          imageFile,
+          previewUrl,
+          history: messages.filter((message) => message.type === 'text'),
         });
 
         setMessages((prev) => [...prev, userMessage, characterMessage]);
+      } catch (err) {
+        const userMessage = createUserImageMessage(previewUrl);
+        const errorMessage = createCharacterTextMessage({
+          characterName: session.characterName,
+          content: err.response?.data?.message ?? '사진을 확인하지 못했어요. 다시 시도해주세요.',
+        });
+        setMessages((prev) => [...prev, userMessage, errorMessage]);
       } finally {
         setIsSending(false);
       }
     },
-    [session, isSending],
+    [session, isSending, messages],
   );
 
   return {
