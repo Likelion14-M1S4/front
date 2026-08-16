@@ -1,34 +1,37 @@
 import api from './axios';
-import { wishlistItems } from '../mock/wishlist';
-
-// 백엔드 연동 전까지 mock 사용. 연동 시 axios 호출만 살리면 됩니다.
 
 /**
  * GET /api/wishlist
- *
- * 응답 항목:
- * { id, name, colorLabel, imageUrl }
+ * 찜한 제품·참을 최근 찜한 순으로 반환. targetId는 type에 따라 product.id 또는 charm.id.
  */
 export async function getWishlist() {
-  // const { data } = await api.get('/wishlist');
-  // return normalizeWishlist(data);
-
-  return Promise.resolve(normalizeWishlist(wishlistItems));
+  const { data } = await api.get('/api/wishlist');
+  return normalizeWishlist(data.data.items);
 }
 
-function normalizeWishlist(data) {
-  if (!Array.isArray(data)) return [];
+function normalizeWishlist(items) {
+  if (!Array.isArray(items)) return [];
 
-  return data.map((item) => ({
+  return items.map((item) => ({
     id: item.id,
+    type: item.type,
+    targetId: item.targetId,
     name: item.name ?? '',
+    imageUrl: item.imgUrl ?? '',
     colorLabel: item.colorLabel ?? '',
-    imageUrl: item.imageUrl ?? '',
   }));
 }
 
-/** DELETE /api/wishlist/:id */
-export async function removeWishlistItem(id) {
-  // await api.delete(`/wishlist/${id}`);
-  return Promise.resolve(id);
+/**
+ * POST /api/wishlist/toggle
+ * 이미 찜한 상태면 해제, 아니면 찜 추가. productId/charmId 중 정확히 하나만 보냅니다.
+ * @param {{ productId?: number, charmId?: number }} target
+ * @returns {Promise<{ type: 'PRODUCT' | 'CHARM', targetId: number, isWished: boolean }>}
+ */
+export async function toggleWishlist({ productId, charmId }) {
+  const { data } = await api.post('/api/wishlist/toggle', {
+    productId: productId != null ? Number(productId) : null,
+    charmId: charmId != null ? Number(charmId) : null,
+  });
+  return data.data;
 }

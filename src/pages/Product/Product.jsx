@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import BackHeader from '../../components/common/Header/BackHeader';
 import { useProductDetail } from '../../hooks/useProductDetail';
-import { removeWishlistItem } from '../../api/wishlist';
+import { getWishlist, toggleWishlist } from '../../api/wishlist';
 import hartIcon from '../../assets/icons/recommend/hart.svg';
 import hart2Icon from '../../assets/icons/recommend/hart2.svg';
 import line2Icon from '../../assets/icons/recommend/line2.svg';
@@ -191,11 +191,6 @@ const Status = styled.p`
   color: #8a7a6c;
 `;
 
-/** POST /api/wishlist — 백엔드 연동 시 api.post('/wishlist', { productId: item.id }) */
-async function addWishlistItem(item) {
-  return Promise.resolve(item?.id);
-}
-
 // 제품 상세 페이지 — GET /api/products/:productId
 function Product() {
   const { productId } = useParams();
@@ -208,30 +203,39 @@ function Product() {
 
   useEffect(() => {
     if (!product) return;
-    setLiked(product.isLiked);
     setSelectedSize(product.selectedSize || product.sizes[0] || '');
     setSizeOpen(false);
     setDetailOpen(false);
+
+    let isMounted = true;
+    getWishlist()
+      .then((items) => {
+        if (!isMounted) return;
+        const isWished = items.some(
+          (item) => item.type === 'PRODUCT' && item.targetId === Number(product.id),
+        );
+        setLiked(isWished);
+      })
+      .catch(() => {
+        if (isMounted) setLiked(product.isLiked);
+      });
+
+    return () => {
+      isMounted = false;
+    };
   }, [product]);
 
   const handleLikeClick = async () => {
     if (!product) return;
 
-    const nextLiked = !liked;
-    setLiked(nextLiked);
+    const prevLiked = liked;
+    setLiked(!prevLiked);
 
     try {
-      if (nextLiked) {
-        await addWishlistItem({
-          id: product.id,
-          name: product.name,
-          imageUrl: product.imageUrl,
-        });
-      } else {
-        await removeWishlistItem(product.id);
-      }
+      const { isWished } = await toggleWishlist({ productId: product.id });
+      setLiked(isWished);
     } catch {
-      setLiked(!nextLiked);
+      setLiked(prevLiked);
     }
   };
 
