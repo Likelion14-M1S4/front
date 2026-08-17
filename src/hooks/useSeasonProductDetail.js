@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getSeasonProductById } from '../api/seasonProducts';
+import { getProductById } from '../api/products';
 import { getCompletedChapterIds } from '../api/storyProgress';
 
 // 시즌 제품 상세 + 스토리 진행 여부 — GET /api/season/products/:id, GET /api/story/progress
@@ -21,7 +21,7 @@ export function useSeasonProductDetail(productId) {
     setIsLoading(true);
     setError(null);
 
-    Promise.all([getSeasonProductById(productId), getCompletedChapterIds()])
+    Promise.all([getProductById(productId), getCompletedChapterIds()])
       .then(([productData, completedIds]) => {
         if (!isMounted) return;
         setProduct(productData);
