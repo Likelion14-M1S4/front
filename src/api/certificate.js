@@ -1,19 +1,16 @@
 import api from './axios';
-import { certificateInfo } from '../mock/certificate';
-
-// 백엔드 연동 전까지 mock 사용. 연동 시 axios 호출만 살리면 됩니다.
 
 /**
- * GET /api/store-tag/certificate
- *
- * 응답:
- * { productName, imageUrl, orderNumber, productNumber, issuedAt, purchasedAt, receivedAt, seller, purchasePlace }
+ * GET /api/nfc/certificate
+ * 정품 인증서를 반환한다. 비로그인 호출 허용(태그 직후 로그인 전 화면).
+ * uid(NFC 태그 값)를 넘기면 그 실물 제품의 최신 구매 기록 기준으로 발급한다(유저 무관, verify에서 받은 uid 그대로 전달).
+ * uid를 생략하면 로그인 유저의 최근 구매 1건 기준 (비로그인 + uid 없으면 404).
  */
-export async function getCertificate() {
-  // const { data } = await api.get('/store-tag/certificate');
-  // return normalizeCertificate(data);
-
-  return Promise.resolve(normalizeCertificate(certificateInfo));
+export async function getCertificate(uid) {
+  const { data } = await api.get('/api/nfc/certificate', {
+    params: uid ? { uid } : undefined,
+  });
+  return normalizeCertificate(data.data);
 }
 
 function normalizeCertificate(data) {
