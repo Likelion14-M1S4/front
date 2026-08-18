@@ -1,19 +1,13 @@
 import api from './axios';
-import { registeredProducts } from '../mock/registeredProducts';
-
-// 백엔드 연동 전까지 mock 사용. 연동 시 axios 호출만 살리면 됩니다.
 
 /**
- * GET /api/account/registered-products
- *
- * 응답 항목:
- * { id, name, imageUrl, registeredAt }
+ * GET /api/products/my
+ * 로그인 유저가 구매(등록)한 제품 목록을 최근 구매 순으로 반환한다.
+ * 각 항목의 id는 구매 기록 id이며, GET /api/products/my/:orderItemId 에 그대로 사용한다.
  */
 export async function getRegisteredProducts() {
-  // const { data } = await api.get('/account/registered-products');
-  // return normalizeRegisteredProducts(data);
-
-  return Promise.resolve(normalizeRegisteredProducts(registeredProducts));
+  const { data } = await api.get('/api/products/my');
+  return normalizeRegisteredProducts(data.data);
 }
 
 function normalizeRegisteredProducts(data) {
@@ -22,7 +16,7 @@ function normalizeRegisteredProducts(data) {
   return data.map((item) => ({
     id: item.id,
     name: item.name ?? '',
-    imageUrl: item.imageUrl ?? '',
+    imageUrl: item.imageUrl ?? item.imgUrl ?? '',
     registeredAt: item.registeredAt ?? '',
   }));
 }

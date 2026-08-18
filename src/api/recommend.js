@@ -1,28 +1,13 @@
 import api from './axios';
-import { recommendPage } from '../mock/recommend';
-
-// 백엔드 연동 전까지 mock 사용. 연동 시 axios 호출만 살리면 됩니다.
 
 /**
- * GET /api/recommend
- *
- * 응답:
- * {
- *   heroImageUrl,
- *   heroLinkTo,  // 히어로 클릭 시 이동 경로 (예: /recommend/charms)
- *   journey: { title, subtitle },
- *   curation: { title, imageUrl },
- *   bestsellers: {
- *     title,
- *     products: [{ id, name, price, imageUrl }]
- *   }
- * }
+ * GET /api/products/recommendations
+ * 추천 탭 화면 전체 구성(히어로 배너, 여정, 큐레이션, 베스트셀러)을 한 번에 반환한다.
+ * 베스트셀러 products의 id는 GET /api/products/:productId 에 그대로 사용한다.
  */
 export async function getRecommendPage() {
-  // const { data } = await api.get('/recommend');
-  // return normalizeRecommendPage(data);
-
-  return Promise.resolve(normalizeRecommendPage(recommendPage));
+  const { data } = await api.get('/api/products/recommendations');
+  return normalizeRecommendPage(data.data);
 }
 
 function normalizeRecommendPage(data) {
@@ -41,12 +26,12 @@ function normalizeRecommendPage(data) {
         id: item.id,
         name: item.name ?? '',
         price: item.price ?? null,
-        imageUrl: item.imageUrl ?? '',
+        imageUrl: item.imageUrl ?? item.imgUrl ?? '',
       }))
     : [];
 
   return {
-    heroImageUrl: data.heroImageUrl ?? '',
+    heroImageUrl: data.heroImageUrl ?? data.imgUrl ?? '',
     heroLinkTo: data.heroLinkTo ?? '',
     journey: {
       title: data.journey?.title ?? '',
@@ -54,7 +39,7 @@ function normalizeRecommendPage(data) {
     },
     curation: {
       title: data.curation?.title ?? '',
-      imageUrl: data.curation?.imageUrl ?? '',
+      imageUrl: data.curation?.imageUrl ?? data.curation?.imgUrl ?? '',
     },
     bestsellers: {
       title: data.bestsellers?.title ?? '',

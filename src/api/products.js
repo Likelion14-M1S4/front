@@ -1,23 +1,11 @@
 import api from './axios';
 import { recommendedProducts, todayRecommendedProduct } from '../mock/products';
-import { getProductDetailByIdFromMock } from '../mock/productDetails';
-
-// 백엔드 연동 전까지 mock 사용. 연동 시 axios 호출만 살리면 됩니다.
 
 /**
  * GET /api/products/recommended
- *
- * 응답 항목:
- * {
- *   id, name, description, imageUrl,
- *   detailUrl,  // 제품별 외부 사이트 URL (클릭 시 이동)
- *   price?, isInitial?
- * }
+ * 홈 추천 제품 목록. mock 유지.
  */
 export async function getRecommendedProducts() {
-  // const { data } = await api.get('/products/recommended');
-  // return normalizeRecommendedProducts(data);
-
   return Promise.resolve(normalizeRecommendedProducts(recommendedProducts));
 }
 
@@ -37,28 +25,14 @@ function normalizeRecommendedProducts(data) {
 
 /**
  * GET /api/products/:productId
- *
- * 응답:
- * {
- *   id, name, price, imageUrl, isLiked,
- *   colorLabel, colors: [{ id, name, imageUrl }],
- *   sizes: string[], selectedSize,
- *   storeCheckLabel, storeUrl,
- *   detail: { headline, description, specs: string[] }
- * }
+ * 단일 제품의 상세 정보를 반환한다. 시즌 제품 상세 화면에서도 이 API를 사용한다.
+ * colors: 동일 디자인의 색상 옵션. 각 항목의 id로 이 API를 다시 호출하면 해당 색상 상세로 전환한다.
+ * isLiked / isPurchased: 로그인 유저 기준 찜·구매 여부
+ * requiresStory: 시즌 제품의 스토리 완주 후 구매 가능 정책
  */
 export async function getProductById(productId) {
-  // const { data } = await api.get(`/products/${productId}`);
-  // return normalizeProductDetail(data);
-
-  const data = getProductDetailByIdFromMock(productId);
-  if (!data) {
-    const error = new Error('Product not found');
-    error.status = 404;
-    return Promise.reject(error);
-  }
-
-  return Promise.resolve(normalizeProductDetail(data));
+  const { data } = await api.get(`/api/products/${productId}`);
+  return normalizeProductDetail(data.data);
 }
 
 function normalizeProductDetail(data) {
@@ -68,14 +42,16 @@ function normalizeProductDetail(data) {
     id: data.id,
     name: data.name ?? '',
     price: data.price ?? null,
-    imageUrl: data.imageUrl ?? '',
+    imageUrl: data.imageUrl ?? data.imgUrl ?? '',
     isLiked: Boolean(data.isLiked),
+    isPurchased: Boolean(data.isPurchased),
+    requiresStory: Boolean(data.requiresStory),
     colorLabel: data.colorLabel ?? '',
     colors: Array.isArray(data.colors)
       ? data.colors.map((color) => ({
           id: color.id,
           name: color.name ?? '',
-          imageUrl: color.imageUrl ?? '',
+          imageUrl: color.imageUrl ?? color.imgUrl ?? '',
         }))
       : [],
     sizes: Array.isArray(data.sizes) ? data.sizes.map(String) : [],

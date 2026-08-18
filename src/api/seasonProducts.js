@@ -1,17 +1,14 @@
 import api from './axios';
-import { seasonProductsPage } from '../mock/seasonProducts';
 
 /**
- * GET /api/season/products
- *
- * 응답:
- * {
- *   heroImageUrl, description,
- *   products: [{ id, name, price, imageUrl }]
- * }
+ * GET /api/products/seasons/:season
+ * 특정 시즌의 히어로 배너, 소개 문구, 제품 목록을 반환한다.
+ * 현재 시즌 값: AW2026. 없는 시즌이면 빈 products로 응답한다.
+ * 각 제품의 상세는 GET /api/products/:productId 로 조회한다.
  */
-export async function getSeasonProducts() {
-  return Promise.resolve(normalizeSeasonProductsPage(seasonProductsPage));
+export async function getSeasonProducts(season = 'AW2026') {
+  const { data } = await api.get(`/api/products/seasons/${season}`);
+  return normalizeSeasonProductsPage(data.data);
 }
 
 function normalizeSeasonProductsPage(data) {
@@ -24,21 +21,21 @@ function normalizeSeasonProductsPage(data) {
   }
 
   return {
-    heroImageUrl: data.heroImageUrl ?? '',
+    heroImageUrl: data.heroImageUrl ?? data.imgUrl ?? '',
     description: data.description ?? '',
     products: Array.isArray(data.products)
       ? data.products.map((item) => ({
           id: item.id,
           name: item.name ?? '',
           price: item.price ?? null,
-          imageUrl: item.imageUrl ?? '',
+          imageUrl: item.imageUrl ?? item.imgUrl ?? '',
         }))
       : [],
   };
 }
 
 /**
- * GET /api/charms/{charmId}
+ * GET /api/charms/:charmId
  * 시즌 참 상세.
  */
 export async function getSeasonProductById(productId) {

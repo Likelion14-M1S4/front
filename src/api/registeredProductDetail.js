@@ -1,35 +1,24 @@
 import api from './axios';
-import { registeredProductDetails } from '../mock/registeredProductDetail';
-
-// 백엔드 연동 전까지 mock 사용. 연동 시 axios 호출만 살리면 됩니다.
 
 /**
- * GET /api/account/registered-products/:productId
- *
- * 응답:
- * { id, name, colorLabel, sizeLabel, imageUrl, purchasedAt, registeredAt, storeName }
+ * GET /api/products/my/:orderItemId
+ * 구매 기록 하나의 상세(색상/사이즈/구매·등록 일시/매장)를 반환한다.
+ * orderItemId는 등록 제품 목록 응답의 id를 그대로 사용한다. 본인 구매 기록만 조회된다.
  */
-export async function getRegisteredProductDetail(productId) {
-  // const { data } = await api.get(`/account/registered-products/${productId}`);
-  // return normalizeRegisteredProductDetail(data);
-
-  const data = registeredProductDetails[productId];
-  if (!data) {
-    const error = new Error('Registered product not found');
-    error.status = 404;
-    return Promise.reject(error);
-  }
-
-  return Promise.resolve(normalizeRegisteredProductDetail(data));
+export async function getRegisteredProductDetail(orderItemId) {
+  const { data } = await api.get(`/api/products/my/${orderItemId}`);
+  return normalizeRegisteredProductDetail(data.data);
 }
 
 function normalizeRegisteredProductDetail(data) {
+  if (!data || typeof data !== 'object') return null;
+
   return {
     id: data.id,
     name: data.name ?? '',
     colorLabel: data.colorLabel ?? '',
     sizeLabel: data.sizeLabel ?? '',
-    imageUrl: data.imageUrl ?? '',
+    imageUrl: data.imageUrl ?? data.imgUrl ?? '',
     purchasedAt: data.purchasedAt ?? '',
     registeredAt: data.registeredAt ?? '',
     storeName: data.storeName ?? '',
