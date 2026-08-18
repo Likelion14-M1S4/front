@@ -1,37 +1,33 @@
 import api from './axios';
-import { storeTagNfcResult } from '../mock/storeTagNfc';
-
-// 백엔드 연동 전까지 mock 사용. 연동 시 axios 호출만 살리면 됩니다.
 
 /**
- * POST /api/store-tag/nfc
- *
- * 요청 (연동 시):
- * { tagId?: string, rawPayload?: string }
- *
- * 응답:
- * {
- *   storeId, storeName,
- *   nextPath  // 연결 성공 후 이동 경로 (예: '/home', '/account/tag-history/:storeId')
- * }
- *
- * 로딩 화면은 이 Promise가 resolve될 때까지 유지됩니다.
+ * GET /api/nfc/verify
+ * 실물 NFC(제품 부착)에 각인된 uid로 제품을 식별한다. 비로그인 호출 허용
+ * (온보딩 퍼널: 태그→인증서→캐릭터→로그인).
+ * - 비로그인이면 방문 태그 이력만 생성되고, 검증·캐릭터 정보는 로그인 때와 동일하게 내려간다.
+ * - 부수효과: 매장 태그 방문 이력이 기록된다 (매장 태그 이력 화면에 반영).
+ * - 응답의 character는 캐릭터 컬렉션 추가 화면에서 사용한다 (없으면 null).
+ * - 검증 후 uid를 그대로 정품 인증서 조회(GET /api/nfc/certificate?uid=)에 넘긴다.
  */
-export async function readStoreTagNfc(payload = {}) {
-  // const { data } = await api.post('/store-tag/nfc', payload);
-  // return normalizeStoreTagNfc(data);
-
-  // mock: NFC 읽기 지연 시뮬레이션 (연결될 때까지 로딩 유지)
-  await new Promise((resolve) => setTimeout(resolve, 2500));
-  return Promise.resolve(normalizeStoreTagNfc(storeTagNfcResult));
+export async function readStoreTagNfc(uid) {
+  const { data } = await api.get('/api/nfc/verify', { params: { uid } });
+  return normalizeStoreTagNfc(data.data);
 }
 
 function normalizeStoreTagNfc(data) {
-  if (!data || typeof data !== 'object') return null;
+  if (!data) return null;
 
   return {
-    storeId: data.storeId ?? '',
-    storeName: data.storeName ?? '',
-    nextPath: data.nextPath || '/home',
+    productId: data.productId,
+    productName: data.productName ?? '',
+    character: data.character
+      ? {
+          id: data.character.id,
+          name: data.character.name ?? '',
+          collectionName: data.character.collectionName ?? '',
+          description: data.character.description ?? '',
+          imageUrl: data.character.imageUrl ?? '',
+        }
+      : null,
   };
 }

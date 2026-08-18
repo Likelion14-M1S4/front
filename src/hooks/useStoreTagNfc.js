@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { readStoreTagNfc } from '../api/storeTagNfc';
 
-// 매장 태그 NFC 읽기 — POST /api/store-tag/nfc
+// 매장 태그 NFC 읽기 — GET /api/nfc/verify
 // resolved 전까지 로딩 화면을 유지합니다.
 // requestKey가 바뀌면(다시 시도) 재요청합니다.
 // skip이 true면 요청 없이 즉시 로딩 종료 (세션 내 재방문 시 사용)
-export function useStoreTagNfc({ requestKey = 0, skip = false } = {}) {
+export function useStoreTagNfc({ uid, requestKey = 0, skip = false } = {}) {
   const [result, setResult] = useState(null);
   const [isLoading, setIsLoading] = useState(!skip);
   const [error, setError] = useState(null);
@@ -21,7 +21,7 @@ export function useStoreTagNfc({ requestKey = 0, skip = false } = {}) {
     setError(null);
     setResult(null);
 
-    readStoreTagNfc()
+    readStoreTagNfc(uid)
       .then((data) => {
         if (isMounted) setResult(data);
       })
@@ -35,7 +35,7 @@ export function useStoreTagNfc({ requestKey = 0, skip = false } = {}) {
     return () => {
       isMounted = false;
     };
-  }, [requestKey, skip]);
+  }, [uid, requestKey, skip]);
 
   return { result, isLoading, error };
 }
