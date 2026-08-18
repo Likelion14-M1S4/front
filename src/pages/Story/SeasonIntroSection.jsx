@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { seasonStory } from '../../mock/story';
+import seasonStoryBg from '../../assets/icons/nav/story/stroy-season_story.svg';
 
 // 시즌 소개 박스 — 풀블리드 배경 박스. 하단 썸네일이 경계에 걸치도록 relative 기준
 const Box = styled.section`
@@ -12,7 +13,7 @@ const Box = styled.section`
   height: 36.875rem;
   margin: 0 -1.25rem;
   padding: 21.5rem 1.25rem 0;
-  background: linear-gradient(180deg, #f6f4f2 0%, #f9f8f7 61.11%, #ffffff 100%);
+  background: url(${seasonStoryBg}) center / cover no-repeat;
   box-sizing: border-box;
 `;
 

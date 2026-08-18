@@ -105,6 +105,15 @@ const CharmCollection = styled.p`
     text-overflow: ellipsis;
 `;
 
+// 선택한 컬렉션에 해당하는 참이 없을 때
+const NoResultText = styled.p`
+    margin: 3rem 0 0;
+    text-align: center;
+    color: #8a7a6c;
+    font-size: 0.875rem;
+    font-family: 'Pretendard';
+`;
+
 // 보유한 참이 없을 때
 const EmptyState = styled.div`
     margin-top: 11.1875rem;
@@ -142,24 +151,30 @@ const EmptyLink = styled(Link)`
 
 // 보유한 참 페이지 — 시즌 한정 참 중 보유한 목록을 보여줌
 function OwnedCharms() {
-const [page, setPage] = useState({ collectionName: '', charms: [] });
+const [allCharms, setAllCharms] = useState([]);
+const [collectionName, setCollectionName] = useState(charmCollectionOptions[0]);
 const [isOptionListOpen, setIsOptionListOpen] = useState(false);
 const [isLoading, setIsLoading] = useState(true);
 
 useEffect(() => {
     getOwnedCharms().then((data) => {
-    setPage(data);
+    setAllCharms(data.charms);
     setIsLoading(false);
     });
 }, []);
 
-// 옵션 선택 — TODO: 선택한 컬렉션으로 참 목록 다시 조회
+// 옵션 선택 — 선택한 컬렉션으로 참 목록을 필터링
 const handleSelectOption = (option) => {
-    setPage((prev) => ({ ...prev, collectionName: option }));
+    setCollectionName(option);
     setIsOptionListOpen(false);
 };
 
-if (!isLoading && page.charms.length === 0) {
+const charms =
+    collectionName === '전체 보기'
+        ? allCharms
+        : allCharms.filter((charm) => charm.collectionName === collectionName);
+
+if (!isLoading && allCharms.length === 0) {
     return (
     <AccountDetailLayout title="보유한 참">
         <EmptyState>
@@ -178,7 +193,7 @@ return (
             type="button"
             onClick={() => setIsOptionListOpen((prev) => !prev)}
             >
-            {page.collectionName}
+            {collectionName}
             <ChevronIcon src={belowArrow} alt="" aria-hidden $open={isOptionListOpen} />
             </CollectionSelect>
 
@@ -197,15 +212,19 @@ return (
             ) : null}
         </SelectorWrapper>
 
-        <Grid>
-            {page.charms.map((charm) => (
-            <Card key={charm.id}>
-                <Thumbnail src={charm.imageUrl} alt={charm.name} />
-                <CharmName>{charm.name}</CharmName>
-                <CharmCollection>{charm.collectionName}</CharmCollection>
-            </Card>
-            ))}
-        </Grid>
+        {charms.length > 0 ? (
+            <Grid>
+                {charms.map((charm) => (
+                <Card key={charm.id}>
+                    <Thumbnail src={charm.imageUrl} alt={charm.name} />
+                    <CharmName>{charm.name}</CharmName>
+                    <CharmCollection>{charm.collectionName}</CharmCollection>
+                </Card>
+                ))}
+            </Grid>
+        ) : (
+            <NoResultText>해당 컬렉션에 보유한 참이 없습니다.</NoResultText>
+        )}
     </AccountDetailLayout>
 );
 }

@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { accountSections } from '../../mock/account';
 import forwardArrow from '../../assets/icons/nav/forward_arrow.svg';
+import welcomeImage from '../../assets/icons/nav/mypage/mypage-welcome.svg';
 import { useMyInfo } from '../../hooks/useMyInfo';
 
 const Page = styled.div`
@@ -16,7 +17,7 @@ const WelcomeBox = styled.div`
   justify-content: center;
   width: 100%;
   height: 11.6875rem;
-  background: #f6f4f2;
+  background: #f6f4f2 url(${welcomeImage}) center / cover no-repeat;
 `;
 
 const WelcomeText = styled.p`
