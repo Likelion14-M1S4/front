@@ -1,6 +1,7 @@
-import productImage from '../assets/images/image3.svg';
-import storyImage from '../assets/images/image2.svg';
-import bannerImage from '../assets/images/image1.svg';
+import homeBag1 from '../assets/icons/nav/home/home_bag1.svg';
+import homeBag2 from '../assets/icons/nav/home/home_bag2.svg';
+import homeBag3 from '../assets/icons/nav/home/home_bag3.svg';
+import homeBag4 from '../assets/icons/nav/home/home_bag4.svg';
 
 // =============================================================================
 // 더미 데이터 — GET /api/products/recommended 배열 응답과 동일 스키마 유지
@@ -13,7 +14,7 @@ export const recommendedProducts = [
     id: 'product-classic-tote',
     name: '클래식 토트 - 비세토스',
     description: '아이코닉한 비세토스 패턴의 클래식 토트백입니다.',
-    imageUrl: bannerImage,
+    imageUrl: homeBag1,
     detailUrl: 'https://www.mcmworldwide.com/en-kr/bags/totes/',
     price: 790000,
   },
@@ -22,7 +23,7 @@ export const recommendedProducts = [
     name: '스타크 백팩 - 비세토스',
     description:
       'MCM의 아이코닉한 비세토스 모노그램 캔버스로 제작되어 클래식함과 현대적인 실용성을 동시에 선사합니다.',
-    imageUrl: productImage,
+    imageUrl: homeBag2,
     detailUrl: 'https://www.mcmworldwide.com/en-kr/bags/backpacks/',
     price: 890000,
     isInitial: true,
@@ -31,7 +32,7 @@ export const recommendedProducts = [
     id: 'product-soft-berlin',
     name: '소프트 베를린 - 비세토스',
     description: '부드러운 실루엣의 소프트 베를린 백입니다.',
-    imageUrl: storyImage,
+    imageUrl: homeBag3,
     detailUrl: 'https://www.mcmworldwide.com/en-kr/bags/shoulder-bags/',
     price: 850000,
   },
@@ -39,17 +40,9 @@ export const recommendedProducts = [
     id: 'product-mini-pouch',
     name: '미니 파우치 - 비세토스',
     description: '데일리로 가볍게 들기 좋은 미니 파우치입니다.',
-    imageUrl: bannerImage,
+    imageUrl: homeBag4,
     detailUrl: 'https://www.mcmworldwide.com/en-kr/small-leather-goods/',
     price: 420000,
-  },
-  {
-    id: 'product-belt-bag',
-    name: '벨트 백 - 비세토스',
-    description: '핸즈프리로 착용하는 컴팩트 벨트 백입니다.',
-    imageUrl: storyImage,
-    detailUrl: 'https://www.mcmworldwide.com/en-kr/bags/belt-bags/',
-    price: 680000,
   },
 ];
 

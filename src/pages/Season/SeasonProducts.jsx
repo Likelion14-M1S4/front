@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import BackHeader from '../../components/common/Header/BackHeader';
 import { useSeasonProducts } from '../../hooks/useSeasonProducts';
 import { APP_MAX_WIDTH_REM } from '../../styles/theme';
+import seasonProductBottom from '../../assets/icons/nav/season_product/season_product-bottom.svg';
 
 const Page = styled.div`
   width: 100%;
@@ -14,10 +15,8 @@ const Page = styled.div`
 `;
 
 const Hero = styled.div`
-  width: 392px;
-  max-width: 100%;
+  width: 100%;
   height: 259px;
-  margin: 0 auto;
   background: #f2f2f2;
   overflow: hidden;
 `;
@@ -26,6 +25,14 @@ const HeroImage = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
+`;
+
+const BottomBanner = styled.div`
+  width: 100%;
+  height: 259px;
+  margin-top: 67px;
+  background: #f2f2f2;
+  overflow: hidden;
 `;
 
 const Description = styled.p`
@@ -131,6 +138,10 @@ function SeasonProducts() {
           </Card>
         ))}
       </Grid>
+
+      <BottomBanner>
+        <HeroImage src={seasonProductBottom} alt="시즌 제품" />
+      </BottomBanner>
     </Page>
   );
 }

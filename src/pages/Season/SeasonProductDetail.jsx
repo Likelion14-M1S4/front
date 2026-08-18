@@ -1,11 +1,8 @@
-import { useState } from 'react';
 import { useNavigate, useParams, Link } from 'react-router-dom';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import BackHeader from '../../components/common/Header/BackHeader';
-import Button from '../../components/common/Button/Button';
 import { useSeasonProductDetail } from '../../hooks/useSeasonProductDetail';
 import line2Icon from '../../assets/icons/recommend/line2.svg';
-import vector2Icon from '../../assets/icons/recommend/Vector2.svg';
 import { APP_MAX_WIDTH_REM } from '../../styles/theme';
 
 const Page = styled.div`
@@ -42,13 +39,18 @@ const ProductName = styled.h1`
   color: #000000;
 `;
 
+const ColorLabel = styled.p`
+  margin: 4.25rem 0 0;
+  font-size: 1rem;
+  font-weight: 400;
+  color: #000000;
+`;
+
 const StoreRow = styled(Link)`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 1.25rem;
-  padding: 0 0 0.875rem;
-  border-bottom: 1px solid #ededed;
+  margin-top: 2rem;
   font-size: 1rem;
   font-weight: 400;
   color: #000000;
@@ -60,70 +62,46 @@ const StoreArrow = styled.img`
   height: 0.5625rem;
 `;
 
+const Divider = styled.div`
+  margin-top: 0.9375rem;
+  height: 1px;
+  background: #ededed;
+`;
+
 const CtaWrap = styled.div`
-  margin-top: 1.75rem;
+  margin-top: 4.5rem;
 `;
 
-const DetailBlock = styled.div`
-  margin-top: 1.75rem;
-  border-top: 1px solid #ededed;
-  border-bottom: 1px solid #ededed;
-`;
+// 이 페이지 전용 구매 버튼 — 공통 Button과 별개로 여기서만 디자인 조정
+const purchaseButtonVariants = {
+  primary: css`
+    background: #1a1a1a;
+    color: #ffffff;
+  `,
+  outline: css`
+    border: 1px solid #1a1a1a;
+    color: #1a1a1a;
+    background: transparent;
+  `,
+};
 
-const DetailToggle = styled.button`
-  display: flex;
-  width: 100%;
+const PurchaseButton = styled.button`
+  display: inline-flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 1.125rem 0;
-  font-size: 1rem;
-  font-weight: 400;
-  color: #000000;
-  text-align: left;
-  border: none;
-  background: none;
-  cursor: pointer;
-`;
+  justify-content: center;
+  width: 100%;
+  border-radius: 5px;
+  padding: 0.75rem 1.25rem;
+  font-size: 1.25rem;
+  font-weight: 500;
+  letter-spacing: 0.025em;
+  transition: opacity 0.15s;
 
-const DetailChevron = styled.img`
-  width: 0.5rem;
-  height: 0.875rem;
-  transition: transform 0.2s ease;
-  transform: ${({ $open }) => ($open ? 'rotate(-90deg)' : 'rotate(0deg)')};
-`;
+  ${({ $variant }) => purchaseButtonVariants[$variant] || purchaseButtonVariants.primary}
 
-const DetailBody = styled.div`
-  padding: 0 0 1.5rem;
-  border-top: 1px solid #ededed;
-`;
-
-const DetailHeadline = styled.p`
-  margin: 1.25rem 0 0;
-  font-size: 0.9375rem;
-  font-weight: 700;
-  line-height: 1.6;
-  color: #000000;
-`;
-
-const DetailDescription = styled.p`
-  margin: 1rem 0 0;
-  font-size: 0.75rem;
-  font-weight: 400;
-  line-height: 1.7;
-  color: #000000;
-`;
-
-const SpecList = styled.ul`
-  margin: 1rem 0 0;
-  padding: 0 0 0 1.125rem;
-  list-style: disc;
-`;
-
-const SpecItem = styled.li`
-  margin: 0 0 0.375rem;
-  font-size: 0.875rem;
-  line-height: 1.6;
-  color: #000000;
+  &:active {
+    opacity: 0.7;
+  }
 `;
 
 const Status = styled.p`
@@ -139,7 +117,6 @@ function SeasonProductDetail() {
   const navigate = useNavigate();
   const { product, storyProgressed, isLoading, error } =
     useSeasonProductDetail(productId);
-  const [detailOpen, setDetailOpen] = useState(false);
 
   if (isLoading) {
     return (
@@ -184,50 +161,26 @@ function SeasonProductDetail() {
       <Info>
         <ProductName>{product.name}</ProductName>
 
+        {product.colorLabel ? (
+          <ColorLabel>색상: {product.colorLabel}</ColorLabel>
+        ) : null}
+
         <StoreRow to={product.storeUrl || '/story/stores'}>
           <span>{product.storeCheckLabel}</span>
           <StoreArrow src={line2Icon} alt="" />
         </StoreRow>
 
+        <Divider />
+
         <CtaWrap>
-          <Button
-            fullWidth
-            variant={canPurchase ? 'primary' : 'outline'}
+          <PurchaseButton
+            type="button"
+            $variant={canPurchase ? 'primary' : 'outline'}
             onClick={handlePurchaseClick}
           >
             {canPurchase ? '구매 가능' : '스토리 진행 후 구매 가능'}
-          </Button>
+          </PurchaseButton>
         </CtaWrap>
-
-        <DetailBlock>
-          <DetailToggle
-            type="button"
-            aria-expanded={detailOpen}
-            onClick={() => setDetailOpen((prev) => !prev)}
-          >
-            <span>제품 상세정보</span>
-            <DetailChevron src={vector2Icon} alt="" $open={detailOpen} />
-          </DetailToggle>
-          {detailOpen ? (
-            <DetailBody>
-              {product.detail.headline ? (
-                <DetailHeadline>{product.detail.headline}</DetailHeadline>
-              ) : null}
-              {product.detail.description ? (
-                <DetailDescription>
-                  {product.detail.description}
-                </DetailDescription>
-              ) : null}
-              {product.detail.specs.length > 0 ? (
-                <SpecList>
-                  {product.detail.specs.map((spec) => (
-                    <SpecItem key={spec}>{spec}</SpecItem>
-                  ))}
-                </SpecList>
-              ) : null}
-            </DetailBody>
-          ) : null}
-        </DetailBlock>
       </Info>
     </Page>
   );

@@ -1,6 +1,7 @@
 import bannerImage from '../assets/images/image1.svg';
 import storyImage from '../assets/images/image2.svg';
 import productImage from '../assets/images/image3.svg';
+import seasonCharmImage from '../assets/icons/nav/recommend/recommend-season_charm.svg';
 
 // =============================================================================
 // 더미 데이터 — GET /api/recommend/charms 응답과 동일 스키마 유지
@@ -19,7 +20,7 @@ export const charmRecommendPage = {
   },
   season: {
     title: '시즌의 참 장식',
-    imageUrl: bannerImage,
+    imageUrl: seasonCharmImage,
   },
   charms: [
     {

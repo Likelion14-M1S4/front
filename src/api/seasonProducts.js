@@ -1,10 +1,12 @@
 import api from './axios';
+import seasonProductTop from '../assets/icons/nav/season_product/season_product-top.svg';
 
 /**
  * GET /api/products/seasons/:season
  * 특정 시즌의 히어로 배너, 소개 문구, 제품 목록을 반환한다.
  * 현재 시즌 값: AW2026. 없는 시즌이면 빈 products로 응답한다.
  * 각 제품의 상세는 GET /api/products/:productId 로 조회한다.
+ * 히어로(top) 이미지는 백엔드 응답과 무관하게 프론트 고정 이미지를 사용한다.
  */
 export async function getSeasonProducts(season = 'AW2026') {
   const { data } = await api.get(`/api/products/seasons/${season}`);
@@ -14,14 +16,14 @@ export async function getSeasonProducts(season = 'AW2026') {
 function normalizeSeasonProductsPage(data) {
   if (!data || typeof data !== 'object') {
     return {
-      heroImageUrl: '',
+      heroImageUrl: seasonProductTop,
       description: '',
       products: [],
     };
   }
 
   return {
-    heroImageUrl: data.heroImageUrl ?? data.imgUrl ?? '',
+    heroImageUrl: seasonProductTop,
     description: data.description ?? '',
     products: Array.isArray(data.products)
       ? data.products.map((item) => ({

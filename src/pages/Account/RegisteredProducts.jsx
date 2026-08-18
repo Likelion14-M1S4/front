@@ -4,15 +4,16 @@ import { Link } from 'react-router-dom';
 import AccountDetailLayout from '../../components/Layout/AccountDetailLayout';
 import { getRegisteredProducts } from '../../api/registeredProducts';
 
-// 상품 그리드 — AccountDetailLayout의 좌우 1.25rem 패딩을 상쇄하고 1.3125rem로 재적용
+// 상품 그리드 — 좌우 카드가 각각 왼쪽/오른쪽 구분선(1.25rem)에 딱 맞도록 정렬,
+// 가운데 간격은 22px(1.375rem) 고정. fr로 남는 폭을 카드가 채우므로 화면 폭이 달라져도 항상 양끝에 맞음
 // margin-top 1rem: Title의 margin-bottom 1rem와 합쳐 구분선과 2rem 간격을 만듦
 const Grid = styled.div`
     display: grid;
-    grid-template-columns: repeat(2, 10.125rem);
+    grid-template-columns: repeat(2, 1fr);
     column-gap: 1.375rem;
     row-gap: 2rem;
     margin: 1rem -1.25rem 0;
-    padding: 0 1.3125rem;
+    padding: 0 1.25rem;
 `;
 
 // 상품 1개 카드 (썸네일 + 이름 + 등록일) — 누르면 상세 페이지로 이동
@@ -23,8 +24,8 @@ const Card = styled(Link)`
 
 // 썸네일 — 정사각형, 로딩 전/이미지 없을 때 대비한 배경색
 const Thumbnail = styled.img`
-    width: 10.125rem;
-    height: 10.125rem;
+    width: 100%;
+    aspect-ratio: 1 / 1;
     background: #f6f4f2;
     object-fit: cover;
 `;
@@ -32,7 +33,7 @@ const Thumbnail = styled.img`
 // 상품명 — 한 줄로 자르고 넘치면 말줄임표 처리
 const Name = styled.p`
     margin: 0.875rem 0 0;
-    width: 10.125rem;
+    width: 100%;
     overflow: hidden;
     color: black;
     font-size: 0.875rem;

@@ -7,7 +7,7 @@ const Page = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 2.5rem 1.25rem 2.5rem;
+  padding: 0 1.25rem 2.5rem;
 `;
 
 // 스토리 페이지 — 섹션들을 순서대로 배치하는 역할만 담당
