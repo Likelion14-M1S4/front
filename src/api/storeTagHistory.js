@@ -1,19 +1,13 @@
 import api from './axios';
-import { storeTagHistory } from '../mock/storeTagHistory';
-
-// 백엔드 연동 전까지 mock 사용. 연동 시 axios 호출만 살리면 됩니다.
 
 /**
- * GET /api/account/store-tag-history
- *
- * 응답 항목:
- * { id, storeName, lastVisitedAt }
+ * GET /api/products/tags
+ * 로그인 유저가 태그한 매장 목록을 최근 방문 순으로 반환한다.
+ * 각 항목의 id(매장 id)를 매장 태그 상세 조회(GET /api/products/tags/:storeId)에 그대로 사용한다.
  */
 export async function getStoreTagHistory() {
-  // const { data } = await api.get('/account/store-tag-history');
-  // return normalizeStoreTagHistory(data);
-
-  return Promise.resolve(normalizeStoreTagHistory(storeTagHistory));
+  const { data } = await api.get('/api/products/tags');
+  return normalizeStoreTagHistory(data.data);
 }
 
 function normalizeStoreTagHistory(data) {
