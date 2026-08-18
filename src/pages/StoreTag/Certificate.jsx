@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { getCertificate } from '../../api/certificate';
+import { NFC_UID_KEY } from '../../constants/storeTagSession';
 
 // 헤더/네비게이션 없이 흰 배경으로 꽉 채우는 페이지
 const Page = styled.div`
@@ -110,7 +111,8 @@ function Certificate() {
   const [certificate, setCertificate] = useState(null);
 
   useEffect(() => {
-    getCertificate().then(setCertificate);
+    const uid = sessionStorage.getItem(NFC_UID_KEY) || undefined;
+    getCertificate(uid).then(setCertificate);
   }, []);
 
   if (!certificate) return null;

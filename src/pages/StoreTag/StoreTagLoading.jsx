@@ -8,6 +8,7 @@ import pointSmall from '../../assets/icons/tag/point 3.svg';
 import { useStoreTagNfc } from '../../hooks/useStoreTagNfc';
 import { useAuth } from '../../context/AuthContext';
 import { APP_MAX_WIDTH_REM } from '../../styles/theme';
+import { NFC_READ_KEY, NFC_UID_KEY, NFC_CHARACTER_KEY } from '../../constants/storeTagSession';
 
 const L = pointLarge;
 const M = pointMedium;
@@ -22,9 +23,6 @@ const DOT_FRAMES = [
 ];
 
 const FRAME_MS = 380;
-
-// 이 값이 세션에 있으면 이미 한 번 NFC를 읽은 것으로 보고 로딩 화면을 건너뜀
-const NFC_READ_KEY = 'mcm_store_tag_nfc_read';
 
 const Page = styled.div`
   display: flex;
@@ -108,9 +106,17 @@ function StoreTagLoading() {
   const { isLoggedIn } = useAuth();
   const [frameIndex, setFrameIndex] = useState(0);
   const [requestKey, setRequestKey] = useState(0);
+
+  // 실물 NFC 태그는 태그를 찍으면 uid를 URL 쿼리스트링(?uid=...)에 담아 이 화면을 엽니다.
+  // const uid = new URLSearchParams(window.location.search).get('uid');
+
+  // 실물 NFC 태그가 아직 없어 테스트용 uid를 고정으로 사용합니다.
+  // 실물 NFC 연동 시 위 줄의 주석을 풀고 아래 줄은 지우세요.
+  const uid = 'NFC-0000-0001';
+
   // 이번 세션에 이미 한 번 읽었으면 다시 읽지 않고, 로그인 여부에 따라 바로 이동
   const alreadyRead = sessionStorage.getItem(NFC_READ_KEY) === 'true';
-  const { result, isLoading, error } = useStoreTagNfc({ requestKey, skip: alreadyRead });
+  const { result, isLoading, error } = useStoreTagNfc({ uid, requestKey, skip: alreadyRead });
 
   useEffect(() => {
     if (alreadyRead) navigate(isLoggedIn ? '/home' : '/certificate', { replace: true });
@@ -128,11 +134,18 @@ function StoreTagLoading() {
   }, [isLoading]);
 
   // 연결 성공 시 세션에 기록 후 정품인증 화면으로 이동 (다음 방문부터는 로딩 화면 생략)
+  // uid·character는 세션에 저장해 정품 인증서·캐릭터 컬렉션 추가 화면에서 그대로 사용합니다.
   useEffect(() => {
     if (!result || isLoading) return;
     sessionStorage.setItem(NFC_READ_KEY, 'true');
-    navigate(isLoggedIn ? result.nextPath || '/home' : '/certificate', { replace: true });
-  }, [result, isLoading, isLoggedIn, navigate]);
+    sessionStorage.setItem(NFC_UID_KEY, uid);
+    if (result.character) {
+      sessionStorage.setItem(NFC_CHARACTER_KEY, JSON.stringify(result.character));
+    } else {
+      sessionStorage.removeItem(NFC_CHARACTER_KEY);
+    }
+    navigate(isLoggedIn ? '/home' : '/certificate', { replace: true });
+  }, [result, isLoading, isLoggedIn, navigate, uid]);
 
   const dots = DOT_FRAMES[frameIndex];
 

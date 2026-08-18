@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { getTaggedCharacter, addCharacterToCollection } from '../../api/tagCharacterAdd';
+import { addCharacterToCollection } from '../../api/tagCharacterAdd';
+import { NFC_CHARACTER_KEY } from '../../constants/storeTagSession';
 
 // 헤더/네비게이션 없이 흰 배경으로 꽉 채우는 페이지
 const Page = styled.div`
@@ -76,9 +77,16 @@ function TagCharacterAdd() {
   const navigate = useNavigate();
   const [character, setCharacter] = useState(null);
 
+  // NFC 검증(GET /api/nfc/verify) 응답의 character를 StoreTagLoading이 세션에 저장해둔 것을 사용
+  // 태그한 제품에 캐릭터가 없으면(character: null) 추가할 것이 없으므로 바로 다음 화면으로 이동
   useEffect(() => {
-    getTaggedCharacter().then(setCharacter);
-  }, []);
+    const stored = sessionStorage.getItem(NFC_CHARACTER_KEY);
+    if (!stored) {
+      navigate('/login', { replace: true });
+      return;
+    }
+    setCharacter(JSON.parse(stored));
+  }, [navigate]);
 
   if (!character) return null;
 
