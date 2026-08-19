@@ -181,9 +181,9 @@ const [seasonName, setSeasonName] = useState(storyChapterIntro.season);
 
 useEffect(() => {
     getStoryChapters().then((page) => {
-    setStories(page.currentSeason?.stories ?? []);
-    if (page.currentSeason?.season) {
-        setSeasonName(page.currentSeason.season);
+    setStories(page.stories ?? []);
+    if (page.season) {
+        setSeasonName(page.season);
     }
     });
 }, []);
