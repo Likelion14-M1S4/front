@@ -3,6 +3,7 @@ import StoreTagLoading from '../pages/StoreTag/StoreTagLoading';
 import Certificate from '../pages/StoreTag/Certificate';
 import TagCharacterAdd from '../pages/StoreTag/TagCharacterAdd';
 import Login from '../pages/StoreTag/Login';
+import KakaoCallback from '../pages/StoreTag/KakaoCallback';
 import Home from '../pages/Home/Home';
 import Collection from '../pages/Collection/Collection';
 import CollectionDetail from '../pages/Collection/CollectionDetail';
@@ -38,6 +39,7 @@ function AppRoutes() {
       <Route path="/certificate" element={<Certificate />} />
       <Route path="/character/add" element={<TagCharacterAdd />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/oauth/kakao" element={<KakaoCallback />} />
       <Route path="/home" element={<Home />} />
       <Route path="/collection" element={<Collection />} />
       <Route path="/collection/:characterId" element={<CollectionDetail />} />
