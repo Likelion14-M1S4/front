@@ -3,9 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { seasonStory } from '../../mock/story';
 import seasonStoryBg from '../../assets/icons/nav/story/stroy-season_story.svg';
 
-// 시즌 소개 박스 — 풀블리드 배경 박스. 하단 썸네일이 경계에 걸치도록 relative 기준
+// 시즌 소개 박스 — 풀블리드 배경 박스
 const Box = styled.section`
-  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -58,25 +57,7 @@ const Divider = styled.span`
   background-color: #000000;
 `;
 
-// 박스 하단 경계에 절반 걸치는 정사각형 썸네일
-const Thumbnail = styled.div`
-  position: absolute;
-  left: 50%;
-  bottom: -1.6875rem;
-  transform: translateX(-50%);
-  width: 4rem;
-  height: 4rem;
-  overflow: hidden;
-  background: #f2f2f2;
-`;
-
-const ThumbnailImage = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-`;
-
-// 스토리 페이지 상단 — 시즌 소개 박스 + 스토리 진행 CTA + 경계 썸네일
+// 스토리 페이지 상단 — 시즌 소개 박스 + 스토리 진행 CTA
 function SeasonIntroSection() {
   const navigate = useNavigate();
 
@@ -88,12 +69,6 @@ function SeasonIntroSection() {
         {seasonStory.ctaLabel}
       </CtaButton>
       <Divider aria-hidden />
-
-      <Thumbnail>
-        {seasonStory.thumbnailUrl ? (
-          <ThumbnailImage src={seasonStory.thumbnailUrl} alt={seasonStory.title} />
-        ) : null}
-      </Thumbnail>
     </Box>
   );
 }
