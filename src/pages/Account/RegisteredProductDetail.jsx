@@ -3,7 +3,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import AccountDetailLayout from '../../components/Layout/AccountDetailLayout';
 import { getRegisteredProductDetail } from '../../api/registeredProductDetail';
-import { getProductIdByName } from '../../mock/productDetails';
 import halfArrow from '../../assets/icons/nav/half_arrow.svg';
 
 // AccountDetailLayout의 좌우 1.25rem 패딩을 상쇄 — 썸네일을 기기 너비에 꽉 채우기 위함
@@ -133,8 +132,8 @@ function RegisteredProductDetail() {
     if (!detail) return null;
 
     const handleCheckProduct = () => {
-        const matchedProductId = getProductIdByName(detail.name);
-        if (matchedProductId) navigate(`/product/${matchedProductId}`);
+        const catalogId = detail.productId ?? detail.id;
+        if (catalogId != null && catalogId !== '') navigate(`/product/${catalogId}`);
     };
 
     return (

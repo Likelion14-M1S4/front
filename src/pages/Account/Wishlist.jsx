@@ -26,6 +26,13 @@ const Row = styled.div`
   }
 `;
 
+const ItemLink = styled(Link)`
+  display: flex;
+  align-items: flex-start;
+  flex: 1;
+  min-width: 0;
+`;
+
 const Thumbnail = styled.img`
   width: 6rem;
   height: 6rem;
@@ -156,11 +163,15 @@ function Wishlist() {
       <List>
         {items.map((item) => (
           <Row key={item.id}>
-            <Thumbnail src={item.imageUrl} alt={item.name} />
-            <Info>
-              <Name>{item.name}</Name>
-              {item.colorLabel && <ColorLabel>{item.colorLabel}</ColorLabel>}
-            </Info>
+            <ItemLink
+              to={item.type === 'CHARM' ? `/season/${item.targetId}` : `/product/${item.targetId}`}
+            >
+              <Thumbnail src={item.imageUrl} alt={item.name} />
+              <Info>
+                <Name>{item.name}</Name>
+                {item.colorLabel && <ColorLabel>{item.colorLabel}</ColorLabel>}
+              </Info>
+            </ItemLink>
             <RemoveButton
               type="button"
               onClick={() => handleRemove(item)}

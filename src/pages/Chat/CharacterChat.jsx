@@ -16,6 +16,7 @@ const Page = styled.div`
 
 const MessageList = styled.div`
   flex: 1;
+  min-height: 0;
   overflow-y: auto;
   padding: 1.25rem 1rem 0.75rem;
   -ms-overflow-style: none;

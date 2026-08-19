@@ -13,12 +13,18 @@ export async function getRegisteredProductDetail(orderItemId) {
 function normalizeRegisteredProductDetail(data) {
   if (!data || typeof data !== 'object') return null;
 
+  const imageUrl = data.imageUrl ?? data.imgUrl ?? '';
+
   return {
     id: data.id,
+    productId:
+      data.productId ??
+      String(imageUrl).match(/\/product\/(\d+)/)?.[1] ??
+      null,
     name: data.name ?? '',
     colorLabel: data.colorLabel ?? '',
     sizeLabel: data.sizeLabel ?? '',
-    imageUrl: data.imageUrl ?? data.imgUrl ?? '',
+    imageUrl,
     purchasedAt: data.purchasedAt ?? '',
     registeredAt: data.registeredAt ?? '',
     storeName: data.storeName ?? '',
