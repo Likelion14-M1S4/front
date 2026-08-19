@@ -1,6 +1,10 @@
 import api from './axios';
 import { createCharacterTextMessage, createUserImageMessage, createUserTextMessage } from '../mock/chat';
 
+// AI 인스펙터는 history를 쿼리스트링으로 보내는 스펙이라 URL 길이 제한에 걸릴 수 있음
+// 한글은 URL 인코딩 시 글자당 9바이트로 늘어나 대화가 길어지면 500이 발생함
+const INSPECTOR_HISTORY_LIMIT = 6;
+
 function toApiHistory(history) {
   return history.map((message) => ({
     role: message.role === 'character' ? 'CHARACTER' : 'USER',
@@ -13,7 +17,6 @@ function toApiHistory(history) {
 async function getChatEntry(characterId) {
   try {
     const { data } = await api.get(`/api/chat/${characterId}/entry`);
-    console.log('[chat] GET entry 응답:', data);
     return data.data;
   } catch (err) {
     if (err.response?.status === 404) return null;
@@ -54,7 +57,6 @@ export async function sendChatMessage({ characterId, characterName, content, his
     tagName,
     history: toApiHistory(history),
   });
-  console.log('[chat] POST messages 응답:', data);
 
   const userMessage = createUserTextMessage(content);
   const characterMessage = createCharacterTextMessage({
@@ -76,8 +78,10 @@ export async function sendChatImageMessage({ characterId, characterName, imageFi
       characterId: Number(characterId),
       history: JSON.stringify(toApiHistory(history)),
     },
+    // 인스턴스 기본값(application/json)을 제거해야 브라우저가
+    // multipart/form-data; boundary=... 를 자동으로 붙임
+    headers: { 'Content-Type': undefined },
   });
-  console.log('[chat] POST inspector 응답:', data);
 
   const userMessage = createUserImageMessage(previewUrl);
   const characterMessage = createCharacterTextMessage({

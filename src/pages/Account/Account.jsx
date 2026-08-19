@@ -26,7 +26,7 @@ const WelcomeBox = styled.div`
 
 const WelcomeText = styled.p`
   margin: 0;
-  color: black;
+  color: #ffffff;
   font-size: 1.5rem;
   font-family: 'Pretendard';
   font-weight: 400;

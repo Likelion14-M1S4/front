@@ -34,7 +34,7 @@ const BackArrowIcon = styled.img`
 
 // 페이지 제목 영역
 const Title = styled.h1`
-    margin: 2rem 1.25rem 1rem;
+    margin: 1rem 1.25rem 1rem;
     padding: 0 0 1rem;
     color: black;
     font-size: 1.75rem;

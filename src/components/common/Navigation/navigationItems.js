@@ -12,7 +12,7 @@ import accountIconInactive from '../../../assets/icons/nav/inactive/account.svg'
 // 하단 네비게이션 메뉴
 // active/: 선택 #795921 / inactive/: 비선택 #4D4540
 export const navigationItems = [
-  { label: '홈', path: '/', icon: homeIcon, inactiveIcon: homeIconInactive },
+   { label: '홈', path: '/home', icon: homeIcon, inactiveIcon: homeIconInactive },
   { label: '컬렉션', path: '/collection', icon: collectionIcon, inactiveIcon: collectionIconInactive },
   { label: '스토리', path: '/story', icon: storyIcon, inactiveIcon: storyIconInactive },
   { label: '추천', path: '/recommend', icon: recommendIcon, inactiveIcon: recommendIconInactive },
