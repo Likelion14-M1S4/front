@@ -1,80 +1,40 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import Navigation from '../Navigation/Navigation';
+import mcmLogo from '../../../assets/icons/nav/header/mcm.svg';
+import { APP_MAX_WIDTH_REM, HEADER_HEIGHT_REM } from '../../../styles/theme';
 
-const HeaderWrapper = styled.header`
-  position: sticky;
-  top: 0;
-  z-index: 200;
-  height: ${({ theme }) => theme.layout.headerHeight};
-  background-color: ${({ theme }) => theme.colors.background};
-  border-bottom: 1px solid ${({ theme }) => theme.colors.border};
-`;
-
-const HeaderInner = styled.div`
+const HeaderBar = styled.header`
+  position: absolute;
+  inset: 0 0 auto 0;
+  z-index: 50;
   display: flex;
+  height: ${HEADER_HEIGHT_REM}rem;
+  width: min(100vw, ${APP_MAX_WIDTH_REM}rem);
   align-items: center;
-  justify-content: space-between;
-  gap: 24px;
-  max-width: ${({ theme }) => theme.layout.maxWidth};
-  height: 100%;
-  margin: 0 auto;
-  padding: 0 24px;
+  justify-content: center;
+  padding-top: 0.75rem;
+  background: #ffffff;
+  box-sizing: border-box;
 `;
 
 const LogoLink = styled(Link)`
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-family: ${({ theme }) => theme.fonts.heading};
-  font-size: 20px;
-  font-weight: 600;
-  color: ${({ theme }) => theme.colors.textHeading};
-  white-space: nowrap;
-
-  &:hover {
-    color: ${({ theme }) => theme.colors.accent};
-  }
 `;
 
-const LogoMark = styled.span`
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  border-radius: 8px;
-  background-color: ${({ theme }) => theme.colors.accent};
-  color: ${({ theme }) => theme.colors.white};
-  font-size: 14px;
-  font-weight: 700;
+const LogoImage = styled.img`
+  height: 3.5625rem;
+  width: 3.5625rem;
 `;
 
-const Actions = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 12px;
-`;
-
-function Header({
-  logoText = 'LikeLion',
-  logoShort = 'LL',
-  navItems,
-  actions,
-}) {
+// 모든 페이지 상단에 고정되는 헤더 — 중앙 MCM 로고만 표시
+function Header() {
   return (
-    <HeaderWrapper>
-      <HeaderInner>
-        <LogoLink to="/">
-          <LogoMark aria-hidden="true">{logoShort}</LogoMark>
-          {logoText}
-        </LogoLink>
-
-        <Navigation items={navItems} />
-
-        {actions && <Actions>{actions}</Actions>}
-      </HeaderInner>
-    </HeaderWrapper>
+    <HeaderBar>
+      <LogoLink to="/home" aria-label="홈으로 이동">
+        <LogoImage src={mcmLogo} alt="MCM" />
+      </LogoLink>
+    </HeaderBar>
   );
 }
 

@@ -1,122 +1,79 @@
-import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
-import { HiMenu, HiX } from 'react-icons/hi';
+import { navigationItems } from './navigationItems';
+import { APP_MAX_WIDTH_REM } from '../../../styles/theme';
 
 const Nav = styled.nav`
+  pointer-events: none;
+  position: absolute;
+  inset: auto 0 0 0;
+  z-index: 50;
   display: flex;
-  align-items: center;
+  width: min(100vw, ${APP_MAX_WIDTH_REM}rem);
+  justify-content: center;
+  padding: 0 1rem 1rem;
+  box-sizing: border-box;
 `;
 
-const NavList = styled.ul`
+const NavBar = styled.div`
+  pointer-events: auto;
   display: flex;
+  height: 4rem;
+  width: 100%;
+  max-width: 22.375rem;
   align-items: center;
-  gap: 8px;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-    position: fixed;
-    top: ${({ theme }) => theme.layout.headerHeight};
-    left: 0;
-    right: 0;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0;
-    padding: 16px;
-    background-color: ${({ theme }) => theme.colors.background};
-    border-bottom: 1px solid ${({ theme }) => theme.colors.border};
-    box-shadow: ${({ theme }) => theme.shadows.default};
-    transform: translateY(${({ $isOpen }) => ($isOpen ? '0' : '-110%')});
-    opacity: ${({ $isOpen }) => ($isOpen ? 1 : 0)};
-    visibility: ${({ $isOpen }) => ($isOpen ? 'visible' : 'hidden')};
-    transition: transform 0.25s ease, opacity 0.25s ease, visibility 0.25s;
-    z-index: 100;
-  }
+  justify-content: space-around;
+  border-radius: 9999px;
+  background: #ffffff;
+  padding: 0 0.5rem;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
 `;
 
-const NavItem = styled.li`
-  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-    width: 100%;
-  }
-`;
-
-const StyledNavLink = styled(NavLink)`
-  display: block;
-  padding: 8px 16px;
-  border-radius: 8px;
-  font-size: 15px;
-  font-weight: 500;
-  color: ${({ theme }) => theme.colors.text};
-  transition: background-color 0.2s, color 0.2s;
-
-  &:hover {
-    color: ${({ theme }) => theme.colors.accent};
-    background-color: ${({ theme }) => theme.colors.accentBg};
-  }
-
-  &.active {
-    color: ${({ theme }) => theme.colors.accent};
-    background-color: ${({ theme }) => theme.colors.accentBg};
-  }
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-    padding: 12px 16px;
-  }
-`;
-
-const MenuToggle = styled.button`
-  display: none;
+const Item = styled(NavLink)`
+  display: flex;
+  height: 3rem;
+  width: 3rem;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
-  padding: 0;
-  border: 1px solid ${({ theme }) => theme.colors.border};
-  border-radius: 8px;
-  background-color: transparent;
-  color: ${({ theme }) => theme.colors.textHeading};
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-    display: inline-flex;
-  }
 `;
 
-const defaultNavItems = [
-  { label: '홈', path: '/' },
-  { label: '소개', path: '/about' },
-  { label: '프로젝트', path: '/projects' },
-  { label: '멤버', path: '/members' },
-];
+const Icon = styled.img`
+  height: 1.375rem;
+  width: 1.375rem;
+  transition: transform 0.2s;
+  transform: ${({ $active }) => ($active ? 'translateY(-0.1875rem)' : 'none')};
+`;
 
-function Navigation({ items = defaultNavItems }) {
-  const [isOpen, setIsOpen] = useState(false);
+const Dot = styled.span`
+  margin-top: 0.125rem;
+  height: 0.25rem;
+  width: 0.25rem;
+  border-radius: 9999px;
+  background: ${({ $active }) => ($active ? '#6f5b4d' : 'transparent')};
+`;
 
-  const handleLinkClick = () => {
-    setIsOpen(false);
-  };
-
+// 하단 플로팅 캡슐형 네비게이션 — 아이콘만 표시
+function Navigation() {
   return (
-    <Nav aria-label="메인 네비게이션">
-      <MenuToggle
-        type="button"
-        aria-label={isOpen ? '메뉴 닫기' : '메뉴 열기'}
-        aria-expanded={isOpen}
-        onClick={() => setIsOpen((prev) => !prev)}
-      >
-        {isOpen ? <HiX size={22} /> : <HiMenu size={22} />}
-      </MenuToggle>
-
-      <NavList $isOpen={isOpen}>
-        {items.map(({ label, path }) => (
-          <NavItem key={path}>
-            <StyledNavLink to={path} end={path === '/'} onClick={handleLinkClick}>
-              {label}
-            </StyledNavLink>
-          </NavItem>
+    <Nav>
+      <NavBar>
+        {navigationItems.map(({ label, path, icon, inactiveIcon }) => (
+          <Item key={path} to={path} end={path === '/'} aria-label={label}>
+            {({ isActive }) => (
+              <>
+                <Icon
+                  src={isActive ? icon : inactiveIcon}
+                  alt=""
+                  aria-hidden
+                  $active={isActive}
+                />
+                <Dot $active={isActive} />
+              </>
+            )}
+          </Item>
         ))}
-      </NavList>
+      </NavBar>
     </Nav>
   );
 }
