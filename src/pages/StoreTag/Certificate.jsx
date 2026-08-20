@@ -14,9 +14,9 @@ const Page = styled.div`
   background: #ffffff;
 `;
 
-// "정품 인증서" 타이틀 — 페이지 맨 위에서 2.5rem, 좌우 중앙 정렬
+// "정품 인증서" 타이틀 — 페이지 맨 위에서 4.5rem, 좌우 중앙 정렬
 const Title = styled.h1`
-  margin: 2.5rem 0 0;
+  margin: 4.5rem 0 0;
   color: black;
   font-size: 1.5rem;
   font-family: 'Pretendard';

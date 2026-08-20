@@ -16,9 +16,9 @@ const Page = styled.div`
 // 캐릭터 사진 — 페이지 맨 위에서 4.4375rem, 좌우 1.5625rem씩
 // width/height를 고정하지 않고 aspect-ratio로 비율만 유지해, 프레임이 390px보다 커져도 폭에 맞춰 늘어남
 const Thumbnail = styled.img`
-  width: calc(100% - 5rem);
+  width: calc(100% - 3.125rem);
   aspect-ratio: 340 / 397;
-  margin: 2.5rem 2.5rem 0;
+  margin: 4.4375rem 1.5625rem 0;
   background: #f6f4f2;
   object-fit: cover;
 `;
