@@ -185,7 +185,10 @@ function StoryView() {
     }
     completeChapter(chapter.id).then((result) => {
       if (result.isSeasonCompleted) {
-        navigate(`/story/view/${id}/complete`, { replace: true });
+        navigate(`/story/view/${id}/complete`, {
+          replace: true,
+          state: { charms: result.charms },
+        });
         return;
       }
       navigate('/story/chapter', { replace: true });
