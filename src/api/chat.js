@@ -32,7 +32,7 @@ export async function startChatSession(characterId) {
   return {
     characterId: entry.characterId,
     characterName: entry.characterName,
-    avatarUrl: entry.characterTagUrl,
+    avatarUrl: entry.characterImgUrl,
     quickReplies: entry.starterChoices.map((choice) => ({
       id: choice.id,
       label: choice.label,

@@ -46,23 +46,23 @@ const Description = styled.p`
 
 const Grid = styled.div`
   display: grid;
-  grid-template-columns: 10.25rem 10.25rem;
+  grid-template-columns: 12rem 12rem;
   justify-content: space-between;
   gap: 1.75rem 0;
   margin-top: 2rem;
-  padding: 0 1.25rem;
+  padding: 0;
 `;
 
 const Card = styled(Link)`
   display: flex;
-  width: 10.25rem;
+  width: 12rem;
   flex-direction: column;
   color: inherit;
   text-decoration: none;
 `;
 
 const Thumb = styled.div`
-  width: 10.25rem;
+  width: 12rem;
   height: 12.5rem;
   background: #f2f2f2;
   overflow: hidden;
