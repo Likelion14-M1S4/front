@@ -183,6 +183,9 @@ function Account() {
       case 'terms':
         navigate('/account/terms');
         break;
+      case 'cookie':
+        navigate('/account/cookie');
+        break;
       case 'logout':
         logout().finally(() => navigate('/login', { replace: true }));
         break;
