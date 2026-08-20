@@ -17,7 +17,7 @@ function normalizeRecommendPage(data) {
   if (!data || typeof data !== 'object') {
     return {
       heroImageUrl: charmImage,
-      heroLinkTo: '',
+      heroLinkTo: '/recommend/charms',
       journey: { title: '', subtitle: '' },
       curation: { title: '', imageUrl: handbagImage },
       bestsellers: { title: '', products: [] },
@@ -35,7 +35,7 @@ function normalizeRecommendPage(data) {
 
   return {
     heroImageUrl: charmImage,
-    heroLinkTo: data.heroLinkTo ?? '',
+    heroLinkTo: data.heroLinkTo || '/recommend/charms',
     journey: {
       title: data.journey?.title ?? '',
       subtitle: data.journey?.subtitle ?? '',

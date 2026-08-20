@@ -6,13 +6,6 @@ export const accountSections = [
     items: [
     { id: 'wishlist', label: '위시리스트' },
     { id: 'store-tag-history', label: '매장 태그 이력' },
-    ],
-},
-
-{
-    id: 'season-charm',
-    title: '시즌 한정 참',
-    items: [
     { id: 'available-charm', label: '구매 가능한 참' },
     ],
 },
