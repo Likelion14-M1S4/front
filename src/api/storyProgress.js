@@ -35,6 +35,7 @@ export async function completeChapter(storyId) {
     isSeasonCompleted: payload.isSeasonCompleted,
     characterName: payload.characterName,
     characterImgUrl: payload.characterImgUrl,
+    charms: Array.isArray(payload.charms) ? payload.charms : [],
   };
 }
 

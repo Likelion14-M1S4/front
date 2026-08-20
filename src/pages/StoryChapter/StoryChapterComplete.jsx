@@ -1,8 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import AccountDetailLayout from '../../components/Layout/AccountDetailLayout';
-import { useRecommendedProducts } from '../../hooks/useRecommendedProducts';
 import longEllipse from '../../assets/icons/nav/long_ellipse.svg';
 import grayCircle from '../../assets/icons/nav/gray_circle.svg';
 import halfArrow from '../../assets/icons/nav/half_arrow.svg';
@@ -107,9 +106,10 @@ const Divider = styled.div`
 // 실제 완료 처리(api/storyProgress.completeChapter)는 StoryView에서 이 화면으로 넘어오기 직전에 호출됩니다.
 function StoryChapterComplete() {
   const navigate = useNavigate();
-  const { products } = useRecommendedProducts();
+  const location = useLocation();
+  const charms = Array.isArray(location.state?.charms) ? location.state.charms : [];
   const scrollRef = useRef(null);
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(0);
   const isLastChapter = true;
 
   useEffect(() => {
@@ -117,32 +117,32 @@ function StoryChapterComplete() {
     if (!el) return;
 
     const updateActive = () => {
-      setActiveIndex(Math.round(el.scrollLeft / el.clientWidth));
+      setCurrentIndex(Math.round(el.scrollLeft / el.clientWidth));
     };
 
     el.addEventListener('scroll', updateActive, { passive: true });
     return () => el.removeEventListener('scroll', updateActive);
-  }, [products.length]);
+  }, [charms.length]);
 
   return (
     <AccountDetailLayout>
       <Body>
         <Carousel ref={scrollRef}>
-          {products.map((product) => (
-            <Slide key={product.id}>
-              {product.imageUrl ? (
-                <SlideImage src={product.imageUrl} alt={product.name} />
+          {charms.map((charm, index) => (
+            <Slide key={charm.id ?? index}>
+              {charms[index]?.imgUrl ? (
+                <SlideImage src={charms[index].imgUrl} alt={charms[index].name ?? ''} />
               ) : null}
             </Slide>
           ))}
         </Carousel>
 
-        {products.length > 1 ? (
+        {charms.length > 1 ? (
           <DotsRow>
-            {products.map((product, index) => (
+            {charms.map((charm, index) => (
               <Dot
-                key={product.id}
-                src={index === activeIndex ? longEllipse : grayCircle}
+                key={charm.id ?? index}
+                src={index === currentIndex ? longEllipse : grayCircle}
                 alt=""
                 aria-hidden
               />
@@ -160,7 +160,9 @@ function StoryChapterComplete() {
           </CompleteTitle>
           <CompleteDescription>
             {isLastChapter
-              ? '스토리를 함께한 비세토스 라이언을 실물 제품으로 만나보세요.'
+              ? charms[currentIndex]?.name
+                ? `스토리를 함께한 ${charms[currentIndex].name}을 실물 제품으로 만나보세요.`
+                : '스토리를 함께한 캐릭터를 실물 제품으로 만나보세요.'
               : '다음 챕터가 열렸어요. 이어서 스토리를 진행해보세요.'}
           </CompleteDescription>
         </MessageBlock>

@@ -1,7 +1,8 @@
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import BackHeader from '../../components/common/Header/BackHeader';
 import { useSeasonProductDetail } from '../../hooks/useSeasonProductDetail';
+import line2Icon from '../../assets/icons/recommend/line2.svg';
 import { APP_MAX_WIDTH_REM } from '../../styles/theme';
 
 const Page = styled.div`
@@ -49,14 +50,36 @@ const ProductName = styled.h2`
 `;
 
 const ColorLabel = styled.p`
-  margin: 1.25rem 0 0;
+  margin: 4.25rem 0 0;
   font-size: 1rem;
   font-weight: 400;
   color: #000000;
 `;
 
-const CtaWrap = styled.div`
+const StoreRow = styled(Link)`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   margin-top: 2rem;
+  font-size: 1rem;
+  font-weight: 400;
+  color: #000000;
+  text-decoration: none;
+`;
+
+const StoreArrow = styled.img`
+  width: 3.0625rem;
+  height: 0.5625rem;
+`;
+
+const Divider = styled.div`
+  margin-top: 0.9375rem;
+  height: 1px;
+  background: #ededed;
+`;
+
+const CtaWrap = styled.div`
+  margin-top: 4.5rem;
 `;
 
 // 이 페이지 전용 구매 버튼 — 공통 Button과 별개로 여기서만 디자인 조정
@@ -115,7 +138,7 @@ function openPurchaseUrl(url) {
 function SeasonProductDetail() {
   const { productId } = useParams();
   const navigate = useNavigate();
-  const { product, storyProgressed, isLoading, error } =
+  const { product, storyProgressed: isSeasonCompleted, isLoading, error } =
     useSeasonProductDetail(productId);
 
   if (isLoading) {
@@ -138,9 +161,8 @@ function SeasonProductDetail() {
     );
   }
 
-  // 구매하지 않았고 스토리 미진행이면 잠금 CTA
-  const canPurchase =
-    product.isPurchased || !product.requiresStory || storyProgressed;
+  // isPurchase 대신 isSeasonCompleted 로 구매 버튼 분기
+  const canPurchase = isSeasonCompleted;
 
   const handlePurchaseClick = () => {
     if (!canPurchase) {
@@ -170,6 +192,13 @@ function SeasonProductDetail() {
         {product.colorLabel ? (
           <ColorLabel>색상: {product.colorLabel}</ColorLabel>
         ) : null}
+
+        <StoreRow to={product.storeUrl || '/story/stores'}>
+          <span>{product.storeCheckLabel}</span>
+          <StoreArrow src={line2Icon} alt="" />
+        </StoreRow>
+
+        <Divider />
 
         <CtaWrap>
           <PurchaseButton
