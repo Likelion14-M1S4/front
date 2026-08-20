@@ -66,6 +66,8 @@ function normalizeStoryDetail(payload) {
   return {
     id: payload.id,
     title: payload.title ?? payload.name ?? '',
+    characterName: payload.characterName ?? '',
+    characterImgUrl: payload.characterImgUrl ?? '',
     slides,
   };
 }

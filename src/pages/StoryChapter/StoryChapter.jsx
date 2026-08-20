@@ -37,6 +37,11 @@ const Title = styled.h1`
     line-height: 1.421875rem;
 `;
 
+// GET /api/stories 응답의 챕터 이미지 필드명은 thumbnailUrl
+function getChapterImageUrl(chapter) {
+  return chapter.thumbnailUrl ?? '';
+}
+
 // 챕터 카드 목록
 const ChapterList = styled.div`
     display: flex;
@@ -51,9 +56,10 @@ const ChapterCard = styled.div`
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
-    height: 7.5rem;
+    height: 5.125rem;
     padding: 0 1rem 0.5rem;
-    background: #F6F4F2;
+    background: ${({ $imageUrl }) =>
+      $imageUrl ? `url(${$imageUrl}) center 35% / cover no-repeat` : '#F6F4F2'};
     cursor: pointer;
 `;
 
@@ -66,7 +72,7 @@ const ChapterLabelRow = styled.div`
 
 // "Chapter 1." 같은 챕터 번호 라벨
 const ChapterLabel = styled.span`
-    color: black;
+    color: #ffffff;
     font-size: 0.875rem;
     font-family: 'Pretendard';
     font-weight: 500;
@@ -75,7 +81,7 @@ const ChapterLabel = styled.span`
 
 // 챕터 제목 (예: Introduction)
 const ChapterName = styled.span`
-    color: black;
+    color: #ffffff;
     font-size: 0.875rem;
     font-family: 'Pretendard';
     font-weight: 400;
@@ -88,7 +94,7 @@ const ReplayButton = styled.button`
     border: none;
     background: none;
     cursor: pointer;
-    color: black;
+    color: #ffffff;
     font-size: 0.875rem;
     font-family: 'Pretendard';
     font-weight: 500;
@@ -102,7 +108,8 @@ const LargeCard = styled.div`
     justify-content: flex-end;
     min-height: 18.75rem;
     padding: 1.9375rem 1rem;
-    background: #F6F4F2;
+    background: ${({ $imageUrl }) =>
+      $imageUrl ? `url(${$imageUrl}) center 20% / cover no-repeat` : '#F6F4F2'};
     cursor: pointer;
 `;
 
@@ -122,7 +129,7 @@ const LargeLabelGroup = styled.div`
 
 // 큰 카드의 챕터 번호 라벨
 const LargeLabel = styled.span`
-    color: black;
+    color: #ffffff;
     font-size: 1rem;
     font-family: 'Pretendard';
     font-weight: 500;
@@ -131,7 +138,7 @@ const LargeLabel = styled.span`
 
 // 큰 카드의 챕터 제목
 const LargeName = styled.span`
-    color: black;
+    color: #ffffff;
     font-size: 1rem;
     font-family: 'Pretendard';
     font-weight: 400;
@@ -141,7 +148,7 @@ const LargeName = styled.span`
 // 큰 카드에만 노출되는 챕터 설명 문구
 const Description = styled.p`
     margin: 0.4375rem 0 0;
-    color: black;
+    color: #ffffff;
     font-size: 0.875rem;
     font-family: 'Pretendard';
     font-weight: 400;
@@ -149,13 +156,17 @@ const Description = styled.p`
 `;
 
 // 잠긴 챕터 카드 — 크기와 상관없이 최종 버튼과 같은 4.625rem 막대로 표시
+// 챕터 사진이 있으면 어두운 그라데이션 아래 깔아 가운데가 보이도록 함
 const LockedBar = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
     height: 4.625rem;
-    background: linear-gradient(180deg, #f6f4f2 0%, #000000 200%);
+    background: ${({ $imageUrl }) =>
+      $imageUrl
+        ? `linear-gradient(180deg, rgba(102, 102, 102, 0.55) 0%, rgba(0, 0, 0, 0.85) 100%), url(${$imageUrl}) center 40% / cover no-repeat`
+        : 'linear-gradient(180deg, #666666 0%, #000000 100%)'};
     cursor: not-allowed;
 `;
 
@@ -177,14 +188,12 @@ const PadlockIcon = styled.img`
 function StoryChapter() {
 const navigate = useNavigate();
 const [stories, setStories] = useState([]);
-const [seasonName, setSeasonName] = useState(storyChapterIntro.season);
+// 시즌 표기는 API 응답 대신 항상 이 mock 고정값을 사용한다.
+const seasonName = storyChapterIntro.season;
 
 useEffect(() => {
     getStoryChapters().then((page) => {
     setStories(page.stories ?? []);
-    if (page.season) {
-        setSeasonName(page.season);
-    }
     });
 }, []);
 
@@ -213,7 +222,7 @@ const handleChapterClick = (chapter) => {
             const prev = stories[index - 1];
             const prevLabel = prev?.unlockOrder != null ? `Chapter ${prev.unlockOrder}` : `Chapter ${index}`;
             return (
-                <LockedBar key={chapter.id}>
+                <LockedBar key={chapter.id} $imageUrl={getChapterImageUrl(chapter)}>
                 <PadlockIcon src={padlockIcon} alt="" aria-hidden />
                 <LockedText>{prevLabel} 완료 시 해금</LockedText>
                 </LockedBar>
@@ -221,7 +230,11 @@ const handleChapterClick = (chapter) => {
             }
 
             return chapter.teaser ? (
-            <LargeCard key={chapter.id} onClick={() => handleChapterClick(chapter)}>
+            <LargeCard
+                key={chapter.id}
+                $imageUrl={getChapterImageUrl(chapter)}
+                onClick={() => handleChapterClick(chapter)}
+            >
                 <LargeLabelRow>
                     <LargeLabelGroup>
                         <LargeLabel>{chapter.unlockOrder != null ? `Chapter ${chapter.unlockOrder}.` : ''}</LargeLabel>
@@ -245,7 +258,11 @@ const handleChapterClick = (chapter) => {
                 ) : null}
             </LargeCard>
             ) : (
-            <ChapterCard key={chapter.id} onClick={() => handleChapterClick(chapter)}>
+            <ChapterCard
+                key={chapter.id}
+                $imageUrl={getChapterImageUrl(chapter)}
+                onClick={() => handleChapterClick(chapter)}
+            >
                 <ChapterLabelRow>
                     <ChapterLabel>{chapter.unlockOrder != null ? `Chapter ${chapter.unlockOrder}.` : ''}</ChapterLabel>
                     <ChapterName>{chapter.title}</ChapterName>
