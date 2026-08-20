@@ -33,7 +33,7 @@ const WelcomeText = styled.p`
   text-align: center;
 `;
 
-// 섹션 (내 정보 / 시즌 한정 참 / 설정 / 계정 관리) — 좌우 1.25rem
+// 섹션 (내 정보 / 설정 / 계정 관리) — 좌우 1.25rem
 const Section = styled.section`
   padding: 0 1.25rem;
   margin-top: 3rem;
@@ -218,7 +218,7 @@ function Account() {
       </WelcomeBox>
       {error && <WelcomeText>내 정보를 불러오지 못했습니다. ({error.response?.status ?? error.message})</WelcomeText>}
 
-      {/* 섹션들 (내 정보 / 시즌 한정 참 / 설정 / 계정 관리) */}
+      {/* 섹션들 (내 정보 / 설정 / 계정 관리) */}
       {accountSections.map((section) => (
         <Section key={section.id}>
           <SectionTitle>{section.title}</SectionTitle>

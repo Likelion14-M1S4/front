@@ -1,7 +1,10 @@
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { HiOutlineArrowRight } from 'react-icons/hi';
 import { useRecommendPage } from '../../hooks/useRecommendPage';
 import { APP_MAX_WIDTH_REM } from '../../styles/theme';
+import { getContrastTextColor } from '../../utils/getContrastTextColor';
 
 const CONTENT_X = 1;
 
@@ -14,6 +17,7 @@ const Page = styled.div`
 `;
 
 const Hero = styled(Link)`
+  position: relative;
   display: block;
   width: 100%;
   height: 27.25rem;
@@ -27,11 +31,26 @@ const HeroImage = styled.img`
   object-fit: cover;
 `;
 
-const HeroStatic = styled.div`
-  width: 100%;
-  height: 27.25rem;
-  background: #f2f2f2;
-  overflow: hidden;
+const HeroOverlay = styled.div`
+  position: absolute;
+  inset: auto 0 0 0;
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0 ${CONTENT_X}rem 1rem;
+`;
+
+const HeroOverlayTitle = styled.h3`
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.3;
+  color: ${({ $color }) => $color};
+`;
+
+const HeroArrow = styled(HiOutlineArrowRight)`
+  flex-shrink: 0;
+  color: ${({ $color }) => $color};
 `;
 
 const HeroCaption = styled.div`
@@ -41,16 +60,8 @@ const HeroCaption = styled.div`
   text-align: left;
 `;
 
-const HeroTitle = styled.h2`
-  margin: 0;
-  font-size: 1.5rem;
-  font-weight: 700;
-  line-height: 1.3;
-  color: #000000;
-`;
-
 const HeroSubtitle = styled.p`
-  margin: 0.5rem 0 0;
+  margin: 0;
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
@@ -162,6 +173,23 @@ const Status = styled.p`
 // 추천 페이지 — GET /api/recommend
 function Recommend() {
   const { page, isLoading, error } = useRecommendPage();
+  const [heroTextColor, setHeroTextColor] = useState('#000000');
+
+  useEffect(() => {
+    if (!page?.heroImageUrl) return undefined;
+
+    let cancelled = false;
+    getContrastTextColor(page.heroImageUrl, {
+      displayWidth: 430,
+      displayHeight: 436,
+    }).then((color) => {
+      if (!cancelled) setHeroTextColor(color);
+    });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [page?.heroImageUrl]);
 
   if (isLoading) {
     return (
@@ -180,24 +208,26 @@ function Recommend() {
   }
 
   const { heroImageUrl, heroLinkTo, journey, curation, bestsellers } = page;
+  const heroTo = heroLinkTo || '/recommend/charms';
 
   return (
     <Page>
-      {heroLinkTo ? (
-        <Hero to={heroLinkTo} aria-label="참 추천 페이지로 이동">
-          {heroImageUrl ? <HeroImage src={heroImageUrl} alt="" /> : null}
-        </Hero>
-      ) : (
-        <HeroStatic>
-          {heroImageUrl ? <HeroImage src={heroImageUrl} alt="" /> : null}
-        </HeroStatic>
-      )}
-      <HeroCaption>
-        <HeroTitle>{journey.title}</HeroTitle>
-        {journey.subtitle ? (
-          <HeroSubtitle>{journey.subtitle}</HeroSubtitle>
+      <Hero to={heroTo} aria-label={journey.title || '참 추천 페이지로 이동'}>
+        {heroImageUrl ? <HeroImage src={heroImageUrl} alt="" /> : null}
+        {journey.title ? (
+          <HeroOverlay>
+            <HeroOverlayTitle $color={heroTextColor}>
+              {journey.title}
+            </HeroOverlayTitle>
+            <HeroArrow size={24} $color={heroTextColor} />
+          </HeroOverlay>
         ) : null}
-      </HeroCaption>
+      </Hero>
+      {journey.subtitle ? (
+        <HeroCaption>
+          <HeroSubtitle>{journey.subtitle}</HeroSubtitle>
+        </HeroCaption>
+      ) : null}
 
       <Section $spaced>
         <SectionHeader>

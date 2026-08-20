@@ -225,17 +225,9 @@ function CharmRecommend() {
         </SeasonBanner>
         <CharmGrid>
           {charms.map((charm) => {
-            const to = charm.productId
-              ? `/product/${charm.productId}`
-              : '#';
+            const to = `/season/${charm.id}`;
             return (
-              <CharmCard
-                key={charm.id}
-                to={to}
-                onClick={(event) => {
-                  if (!charm.productId) event.preventDefault();
-                }}
-              >
+              <CharmCard key={charm.id} to={to}>
                 <CharmThumb>
                   {charm.imageUrl ? (
                     <CharmImage src={charm.imageUrl} alt={charm.name} />
