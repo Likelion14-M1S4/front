@@ -46,24 +46,24 @@ const Description = styled.p`
 
 const Grid = styled.div`
   display: grid;
-  grid-template-columns: 189px 189px;
-  justify-content: center;
-  column-gap: 12px;
-  row-gap: 28px;
-  margin-top: 32px;
+  grid-template-columns: 10.25rem 10.25rem;
+  justify-content: space-between;
+  gap: 1.75rem 0;
+  margin-top: 2rem;
+  padding: 0 1.25rem;
 `;
 
 const Card = styled(Link)`
   display: flex;
-  width: 189px;
+  width: 10.25rem;
   flex-direction: column;
   color: inherit;
   text-decoration: none;
 `;
 
 const Thumb = styled.div`
-  width: 189px;
-  height: 200px;
+  width: 10.25rem;
+  height: 12.5rem;
   background: #f2f2f2;
   overflow: hidden;
 `;
@@ -75,9 +75,9 @@ const ThumbImage = styled.img`
 `;
 
 const ProductName = styled.p`
-  margin: 12px 0 0;
+  margin: 0.75rem 0 0;
   overflow: hidden;
-  font-size: 14px;
+  font-size: 1rem;
   font-weight: 400;
   line-height: 1.4;
   color: #000000;
