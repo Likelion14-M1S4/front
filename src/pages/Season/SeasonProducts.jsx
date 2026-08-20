@@ -128,7 +128,7 @@ function SeasonProducts() {
 
       <Grid>
         {page.products.map((product) => (
-          <Card key={product.id} to={`/season/${product.id}`}>
+          <Card key={product.id} to={`/product/${product.id}`}>
             <Thumb>
               {product.imageUrl ? (
                 <ThumbImage src={product.imageUrl} alt={product.name} />

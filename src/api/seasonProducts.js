@@ -66,6 +66,12 @@ function normalizeSeasonProductDetail(data) {
     requiresStory: !isPurchasable,
     storeCheckLabel: data.storeCheckLabel ?? '구매 가능 매장 확인하기',
     storeUrl: data.storeUrl ?? '/story/stores',
+    purchaseUrl:
+      data.purchaseUrl ??
+      data.detailUrl ??
+      data.productUrl ??
+      data.url ??
+      'https://www.mcmworldwide.com/en-kr/accessories/',
     detail: {
       headline: data.detail?.headline ?? data.collectionName ?? data.collection_name ?? '',
       description: data.detail?.description ?? data.description ?? '',

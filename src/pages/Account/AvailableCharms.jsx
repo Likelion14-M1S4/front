@@ -215,7 +215,7 @@ function AvailableCharms() {
       {charms.length > 0 ? (
         <Grid>
           {charms.map((charm) => (
-            <Card key={charm.id} to="/story/stores">
+            <Card key={charm.id} to={`/season/${charm.id}`}>
               <Thumbnail src={charm.imageUrl} alt={charm.name} />
               <CharmName>{charm.name}</CharmName>
               <CharmCollection>{charm.collectionName}</CharmCollection>

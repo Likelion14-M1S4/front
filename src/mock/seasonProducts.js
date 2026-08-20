@@ -54,6 +54,7 @@ export const seasonProductsPage = {
 const sharedStore = {
   storeCheckLabel: '구매 가능 매장 확인하기',
   storeUrl: '/story/stores',
+  purchaseUrl: 'https://www.mcmworldwide.com/en-kr/accessories/',
 };
 
 const seasonProductDetailsById = {
