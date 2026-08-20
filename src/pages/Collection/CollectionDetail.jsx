@@ -179,7 +179,7 @@ function CollectionDetail() {
         {character.description ? (
           <Description>{character.description}</Description>
         ) : null}
-        <ChatLinkButton to={`/collection/${character.id}/chat`}>
+        <ChatLinkButton to={`/collection/${character.characterId}/chat`}>
           <img src={chatIcon} alt="" />
           캐릭터와 대화하기
         </ChatLinkButton>
