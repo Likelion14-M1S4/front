@@ -53,21 +53,6 @@ const HeroArrow = styled(HiOutlineArrowRight)`
   color: ${({ $color }) => $color};
 `;
 
-const HeroCaption = styled.div`
-  box-sizing: border-box;
-  width: 100%;
-  padding: 1.75rem ${CONTENT_X}rem 0;
-  text-align: left;
-`;
-
-const HeroSubtitle = styled.p`
-  margin: 0;
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.5;
-  color: #000000;
-`;
-
 const SectionTitle = styled.h2`
   margin: 0;
   font-size: 1.5rem;
@@ -77,7 +62,7 @@ const SectionTitle = styled.h2`
 `;
 
 const Section = styled.section`
-  padding-top: ${({ $spaced }) => ($spaced ? '11.25rem' : '2.25rem')};
+  padding-top: 6rem;
 `;
 
 const SectionHeader = styled.div`
@@ -170,6 +155,8 @@ const Status = styled.p`
   color: #8a7a6c;
 `;
 
+const HERO_TITLE = '마이스터라이언과 함께하는 여정';
+
 // 추천 페이지 — GET /api/recommend
 function Recommend() {
   const { page, isLoading, error } = useRecommendPage();
@@ -207,29 +194,20 @@ function Recommend() {
     );
   }
 
-  const { heroImageUrl, heroLinkTo, journey, curation, bestsellers } = page;
+  const { heroImageUrl, heroLinkTo, curation, bestsellers } = page;
   const heroTo = heroLinkTo || '/recommend/charms';
 
   return (
     <Page>
-      <Hero to={heroTo} aria-label={journey.title || '참 추천 페이지로 이동'}>
+      <Hero to={heroTo} aria-label={HERO_TITLE}>
         {heroImageUrl ? <HeroImage src={heroImageUrl} alt="" /> : null}
-        {journey.title ? (
-          <HeroOverlay>
-            <HeroOverlayTitle $color={heroTextColor}>
-              {journey.title}
-            </HeroOverlayTitle>
-            <HeroArrow size={24} $color={heroTextColor} />
-          </HeroOverlay>
-        ) : null}
+        <HeroOverlay>
+          <HeroOverlayTitle $color={heroTextColor}>{HERO_TITLE}</HeroOverlayTitle>
+          <HeroArrow size={24} $color={heroTextColor} />
+        </HeroOverlay>
       </Hero>
-      {journey.subtitle ? (
-        <HeroCaption>
-          <HeroSubtitle>{journey.subtitle}</HeroSubtitle>
-        </HeroCaption>
-      ) : null}
 
-      <Section $spaced>
+      <Section>
         <SectionHeader>
           <SectionTitle>{curation.title}</SectionTitle>
         </SectionHeader>

@@ -3,19 +3,27 @@ import { pastSeasonStories } from '../../mock/story';
 
 const Section = styled.section`
   width: 100%;
-  margin-top: 17.25rem;
+  margin-top: 14.25rem;
 `;
 
 // 섹션 제목 (예: 지난 시즌 스토리)
 const Title = styled.h2`
-  margin: 0 0 2rem;
-  text-align: center;
+  margin: 0;
+  text-align: left;
   color: black;
   font-size: 1.5rem;
   font-family: 'Pretendard';
   font-weight: 500;
   line-height: 1.421875rem;
   word-wrap: break-word;
+`;
+
+const Divider = styled.span`
+  display: block;
+  width: 8.75rem;
+  height: 1px;
+  margin: 0.8125rem 0 1rem;
+  background-color: #000000;
 `;
 
 // 가로 스크롤 카드 목록 — 좌우 패딩(1.25rem)을 상쇄해 카드가 화면 끝까지 이어지도록 함
@@ -69,6 +77,7 @@ function PastSeasonStorySection() {
   return (
     <Section>
       <Title>지난 시즌 스토리</Title>
+      <Divider aria-hidden />
       <List>
         {pastSeasonStories.map((item) => (
           <Card key={item.id}>
