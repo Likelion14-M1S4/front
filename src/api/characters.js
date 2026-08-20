@@ -18,6 +18,7 @@ function normalizeCharmList(payload) {
 
   return charms.map((charm) => ({
     id: charm.id,
+    characterId: charm.characterId,
     name: charm.name ?? '',
     collectionName: charm.collectionName ?? charm.collection_name ?? '',
     collectionSubtitle: charm.collectionSubtitle ?? '',
@@ -56,6 +57,7 @@ export function normalizeCollectedCharacterDetail(data) {
 
   return {
     id: data.id,
+    characterId: data.characterId,
     name: data.name ?? '',
     collectionName: data.collectionName ?? data.collection_name ?? '',
     collectionSubtitle: data.collectionSubtitle ?? '',
