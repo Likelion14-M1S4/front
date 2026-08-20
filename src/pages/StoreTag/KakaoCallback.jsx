@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { useAuth } from '../../context/AuthContext';
 import { addCharacterToCollection } from '../../api/tagCharacterAdd';
-import { readStoreTagNfc } from '../../api/storeTagNfc';
 import { NFC_READ_KEY, NFC_UID_KEY, NFC_CHARACTER_KEY } from '../../constants/storeTagSession';
 
 const Page = styled.div`
@@ -46,12 +45,7 @@ function KakaoCallback() {
       ? addCharacterToCollection(JSON.parse(pendingCharacter).id).catch(() => {})
       : Promise.resolve();
 
-    // 매장 태그 방문 이력도 같은 이유(로그인 전 verify 호출)로 계정에 안 붙어있을 수 있어,
-    // 로그인된 상태로 같은 uid를 한 번 더 검증해 이력이 계정에 연결되도록 시도한다.
-    const pendingUid = sessionStorage.getItem(NFC_UID_KEY);
-    const relinkVisit = pendingUid ? readStoreTagNfc(pendingUid).catch(() => {}) : Promise.resolve();
-
-    Promise.allSettled([collect, relinkVisit]).finally(() => {
+    collect.finally(() => {
       // 매장 태그 온보딩(NFC 읽음 → 인증서 → 캐릭터 추가)이 로그인으로 끝났으니,
       // 다음에 "/"로 오면 새로 읽은 것처럼 동작하도록 세션 플래그를 전부 정리한다.
       sessionStorage.removeItem(NFC_READ_KEY);
