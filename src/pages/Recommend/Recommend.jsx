@@ -55,20 +55,35 @@ const HeroArrow = styled(HiOutlineArrowRight)`
 
 const SectionTitle = styled.h2`
   margin: 0;
+  text-align: left;
+  color: black;
   font-size: 1.5rem;
-  font-weight: 700;
-  line-height: 1.3;
-  color: #000000;
+  font-family: 'Pretendard';
+  font-weight: 500;
+  line-height: 1.421875rem;
+  word-wrap: break-word;
+`;
+
+const SectionDivider = styled.span`
+  display: block;
+  width: 8.75rem;
+  height: 1px;
+  margin: 0.8125rem 0 1rem;
+  background-color: #000000;
 `;
 
 const Section = styled.section`
   padding-top: 6rem;
+  text-align: left;
 `;
 
 const SectionHeader = styled.div`
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   width: 100%;
-  padding: 0 ${CONTENT_X}rem;
+  padding: 0 1.25rem;
   text-align: left;
 `;
 
@@ -76,7 +91,6 @@ const Banner = styled.div`
   position: relative;
   width: 100%;
   height: 16.8125rem;
-  margin-top: 0.5rem;
   background: #f2f2f2;
   overflow: hidden;
 `;
@@ -156,6 +170,7 @@ const Status = styled.p`
 `;
 
 const HERO_TITLE = '마이스터라이언과 함께하는 여정';
+const CURATION_TITLE = '이달의 큐레이션';
 
 // 추천 페이지 — GET /api/recommend
 function Recommend() {
@@ -209,7 +224,8 @@ function Recommend() {
 
       <Section>
         <SectionHeader>
-          <SectionTitle>{curation.title}</SectionTitle>
+          <SectionTitle>{CURATION_TITLE}</SectionTitle>
+          <SectionDivider aria-hidden />
         </SectionHeader>
         <Banner>
           {curation.imageUrl ? (
