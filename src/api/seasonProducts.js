@@ -61,7 +61,7 @@ function normalizeSeasonProductDetail(data) {
     name: data.name ?? '',
     price: data.price ?? null,
     imageUrl: data.imgUrl ?? data.imageUrl ?? '',
-    colorLabel: data.colorLabel ?? data.collectionName ?? data.collection_name ?? '',
+    colorLabel: data.color ?? data.colorLabel ?? '',
     isPurchased: isPurchasable,
     requiresStory: !isPurchasable,
     storeCheckLabel: data.storeCheckLabel ?? '구매 가능 매장 확인하기',
