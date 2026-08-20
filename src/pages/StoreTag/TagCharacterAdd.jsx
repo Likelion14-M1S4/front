@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { addCharacterToCollection } from '../../api/tagCharacterAdd';
 import { NFC_CHARACTER_KEY } from '../../constants/storeTagSession';
 
 // 헤더/네비게이션 없이 흰 배경으로 꽉 채우는 페이지
@@ -90,10 +89,10 @@ function TagCharacterAdd() {
 
   if (!character) return null;
 
+  // 실제 수집(POST /api/characters/:id/collect)은 인증이 필요해 지금은 호출하지 않고,
+  // sessionStorage에 남겨둔 캐릭터 정보를 로그인 완료 시점(KakaoCallback)에 대신 수집한다.
   const handleAdd = () => {
-    addCharacterToCollection(character.id).then(() => {
-      navigate('/login');
-    });
+    navigate('/login');
   };
 
   return (
