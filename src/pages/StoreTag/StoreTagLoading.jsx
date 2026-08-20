@@ -108,11 +108,11 @@ function StoreTagLoading() {
   const [requestKey, setRequestKey] = useState(0);
 
   // 실물 NFC 태그는 태그를 찍으면 uid를 URL 쿼리스트링(?uid=...)에 담아 이 화면을 엽니다.
-  const uid = new URLSearchParams(window.location.search).get('uid');
+  // const uid = new URLSearchParams(window.location.search).get('uid');
 
   // 실물 NFC 태그가 아직 없어 테스트용 uid를 고정으로 사용합니다.
   // 실물 NFC 연동 시 위 줄의 주석을 풀고 아래 줄은 지우세요.
-  // const uid = 'NFC-0000-0002';
+  const uid = 'NFC-0000-0002';
 
   // 이번 세션에 이미 한 번 읽었으면 다시 읽지 않고, 로그인 여부에 따라 바로 이동
   const alreadyRead = sessionStorage.getItem(NFC_READ_KEY) === 'true';

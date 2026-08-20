@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { completeChapter, getStoryById } from '../../api/storyProgress';
 import xIcon from '../../assets/icons/nav/Xicon.svg';
 
-// 전체 화면 — 회색 배경(추후 이미지로 교체)
+// 전체 화면 — 슬라이드 이미지 없으면 회색 배경으로 대체
 const Page = styled.div`
   position: relative;
   display: flex;
@@ -12,6 +12,16 @@ const Page = styled.div`
   min-height: 100vh;
   background: #b0aca8;
   overflow: hidden;
+`;
+
+// 슬라이드 배경 이미지 — Page를 꽉 채우고 탭 존/오버레이 뒤에 깔림
+const SlideImage = styled.img`
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 `;
 
 // 화면 왼쪽 절반 — 누르면 이전 스토리
@@ -84,12 +94,20 @@ const CloseIcon = styled.img`
   height: 1.5rem;
 `;
 
-// 하단 설명 박스 위에 살짝 걸치는 썸네일 — 추후 캐릭터 사진이 들어갈 자리
+// 하단 설명 박스 위에 살짝 걸치는 썸네일 — 캐릭터 사진
 const Thumbnail = styled.div`
+  position: relative;
+  z-index: 1;
   width: 4rem;
   height: 5rem;
   margin: auto 0 -1.125rem 2.125rem;
-  background: #ffffff;
+  overflow: hidden;
+`;
+
+const ThumbnailImage = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 `;
 
 const InfoBox = styled.div`
@@ -197,6 +215,8 @@ function StoryView() {
 
   return (
     <Page>
+      {currentSlide.imageUrl ? <SlideImage src={currentSlide.imageUrl} alt="" /> : null}
+
       <TapZoneLeft type="button" onClick={goToPrevSlide} aria-label="이전 스토리" />
       <TapZoneRight type="button" onClick={goToNextSlide} aria-label="다음 스토리" />
 
@@ -212,7 +232,11 @@ function StoryView() {
           <CloseIcon src={xIcon} alt="" aria-hidden />
         </CloseButton>
 
-        <Thumbnail />
+        <Thumbnail>
+          {chapter.characterImgUrl ? (
+            <ThumbnailImage src={chapter.characterImgUrl} alt={chapter.characterName} />
+          ) : null}
+        </Thumbnail>
 
         <InfoBox>
           <InfoText>{currentSlide.text}</InfoText>
