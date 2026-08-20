@@ -33,27 +33,6 @@ const WelcomeText = styled.p`
   text-align: center;
 `;
 
-// 위시리스트 (단독 항목) — 좌우 1.25rem 여백
-const WishlistRow = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: calc(100% - 2.5rem);
-  margin: 0 1.25rem;
-  padding: 1.5rem 0 1.6875rem;
-  border: none;
-  border-bottom: 1px solid #000000;
-  background: none;
-  cursor: pointer;
-`;
-
-const WishlistLabel = styled.span`
-  color: black;
-  font-size: 1.25rem;
-  font-family: 'Pretendard';
-  font-weight: 500;
-`;
-
 // 섹션 (내 정보 / 시즌 한정 참 / 설정 / 계정 관리) — 좌우 1.25rem
 const Section = styled.section`
   padding: 0 1.25rem;
@@ -192,17 +171,11 @@ function Account() {
       case 'wishlist':
         navigate('/wishlist');
         break;
-      case 'registered-product':
-        navigate('/account/products');
-        break;
       case 'store-tag-history':
         navigate('/account/tag-history');
         break;
       case 'available-charm':
         navigate('/account/available-charms');
-        break;
-      case 'owned-charm':
-        navigate('/account/owned-charms');
         break;
       case 'privacy':
         navigate('/account/privacy');
@@ -244,12 +217,6 @@ function Account() {
         </WelcomeText>
       </WelcomeBox>
       {error && <WelcomeText>내 정보를 불러오지 못했습니다. ({error.response?.status ?? error.message})</WelcomeText>}
-
-      {/* 위시리스트 */}
-      <WishlistRow type="button" onClick={() => handleItemClick({ id: 'wishlist' })}>
-        <WishlistLabel>위시리스트</WishlistLabel>
-        <Arrow src={forwardArrow} alt="" aria-hidden />
-      </WishlistRow>
 
       {/* 섹션들 (내 정보 / 시즌 한정 참 / 설정 / 계정 관리) */}
       {accountSections.map((section) => (

@@ -14,6 +14,16 @@ const Page = styled.div`
   background: #ffffff;
 `;
 
+const Title = styled.h1`
+  margin: 1rem 1.25rem 1rem;
+  padding: 0 0 1rem;
+  color: black;
+  font-size: 1.75rem;
+  font-family: 'Pretendard';
+  font-weight: 500;
+  border-bottom: 1.5px solid #000000;
+`;
+
 const Hero = styled.div`
   width: 100%;
   aspect-ratio: 1 / 1;
@@ -31,7 +41,7 @@ const Info = styled.div`
   padding: 1.5rem 1.25rem 0;
 `;
 
-const ProductName = styled.h1`
+const ProductName = styled.h2`
   margin: 0;
   font-size: 1.25rem;
   font-weight: 600;
@@ -111,6 +121,19 @@ const Status = styled.p`
   color: #8a7a6c;
 `;
 
+function isExternalUrl(url) {
+  return /^https?:\/\//i.test(url);
+}
+
+function openPurchaseUrl(url) {
+  if (!url) return false;
+  if (isExternalUrl(url)) {
+    window.open(url, '_blank', 'noopener,noreferrer');
+    return true;
+  }
+  return false;
+}
+
 // 시즌 한정 참 상세 — 스토리 진행 여부에 따라 CTA 분기
 function SeasonProductDetail() {
   const { productId } = useParams();
@@ -122,6 +145,7 @@ function SeasonProductDetail() {
     return (
       <Page>
         <BackHeader showDivider={false} />
+        <Title>시즌 한정 참</Title>
         <Status>불러오는 중…</Status>
       </Page>
     );
@@ -131,6 +155,7 @@ function SeasonProductDetail() {
     return (
       <Page>
         <BackHeader showDivider={false} />
+        <Title>시즌 한정 참</Title>
         <Status>제품 정보를 불러오지 못했습니다.</Status>
       </Page>
     );
@@ -141,16 +166,20 @@ function SeasonProductDetail() {
     product.isPurchased || !product.requiresStory || storyProgressed;
 
   const handlePurchaseClick = () => {
-    if (canPurchase) {
-      navigate(product.storeUrl || '/story/stores');
+    if (!canPurchase) {
+      navigate('/story/chapter');
       return;
     }
-    navigate('/story/chapter');
+
+    // 홈 추천 백팩과 같이 실제 구매 URL로 이동
+    if (openPurchaseUrl(product.purchaseUrl)) return;
+    navigate(product.purchaseUrl || product.storeUrl || '/story/stores');
   };
 
   return (
     <Page>
       <BackHeader showDivider={false} />
+      <Title>시즌 한정 참</Title>
 
       <Hero>
         {product.imageUrl ? (

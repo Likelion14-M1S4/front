@@ -4,7 +4,7 @@ export const accountSections = [
     id: 'my-info',
     title: '내 정보',
     items: [
-    { id: 'registered-product', label: '등록한 제품' },
+    { id: 'wishlist', label: '위시리스트' },
     { id: 'store-tag-history', label: '매장 태그 이력' },
     ],
 },
@@ -14,7 +14,6 @@ export const accountSections = [
     title: '시즌 한정 참',
     items: [
     { id: 'available-charm', label: '구매 가능한 참' },
-    { id: 'owned-charm', label: '보유한 참' },
     ],
 },
 
