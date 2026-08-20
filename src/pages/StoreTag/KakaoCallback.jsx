@@ -2,6 +2,8 @@ import { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { useAuth } from '../../context/AuthContext';
+import { addCharacterToCollection } from '../../api/tagCharacterAdd';
+import { NFC_READ_KEY, NFC_UID_KEY, NFC_CHARACTER_KEY } from '../../constants/storeTagSession';
 
 const Page = styled.div`
   display: flex;
@@ -36,7 +38,21 @@ function KakaoCallback() {
     localStorage.setItem('accessToken', accessToken);
     localStorage.setItem('refreshToken', refreshToken);
     login();
-    navigate('/home', { replace: true });
+
+    // NFC 태그로 확인했지만 로그인 전이라 컬렉션에 담지 못했던 캐릭터가 있으면 로그인 완료 시점에 수집 처리
+    const pendingCharacter = sessionStorage.getItem(NFC_CHARACTER_KEY);
+    const collect = pendingCharacter
+      ? addCharacterToCollection(JSON.parse(pendingCharacter).id).catch(() => {})
+      : Promise.resolve();
+
+    collect.finally(() => {
+      // 매장 태그 온보딩(NFC 읽음 → 인증서 → 캐릭터 추가)이 로그인으로 끝났으니,
+      // 다음에 "/"로 오면 새로 읽은 것처럼 동작하도록 세션 플래그를 전부 정리한다.
+      sessionStorage.removeItem(NFC_READ_KEY);
+      sessionStorage.removeItem(NFC_UID_KEY);
+      sessionStorage.removeItem(NFC_CHARACTER_KEY);
+      navigate('/home', { replace: true });
+    });
   }, [navigate, login]);
 
   return <Page>로그인 처리 중...</Page>;
