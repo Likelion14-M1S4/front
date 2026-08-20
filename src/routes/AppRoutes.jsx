@@ -30,6 +30,7 @@ import AvailableCharms from '../pages/Account/AvailableCharms';
 import OwnedCharms from '../pages/Account/OwnedCharms';
 import PrivacyPolicy from '../pages/Account/PrivacyPolicy';
 import TermsOfService from '../pages/Account/TermsOfService';
+import CookiePolicy from '../pages/Account/CookiePolicy';
 
 // 페이지 경로와 컴포넌트 매핑
 function AppRoutes() {
@@ -66,6 +67,7 @@ function AppRoutes() {
       <Route path="/account/owned-charms" element={<OwnedCharms />} />
       <Route path="/account/privacy" element={<PrivacyPolicy />} />
       <Route path="/account/terms" element={<TermsOfService />} />
+      <Route path="/account/cookie" element={<CookiePolicy />} />
     </Routes>
   );
 }

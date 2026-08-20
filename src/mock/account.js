@@ -16,7 +16,7 @@ export const accountSections = [
     items: [
         { id: 'terms', label: '온라인 서비스 이용약관' },
         { id: 'privacy', label: '개인정보 처리방침' },
-        { id: 'cookie', label: 'COOKIE POLICY', url: 'https://쿠키정책URL' },
+        { id: 'cookie', label: 'COOKIE POLICY' },
     ],
     },
 
