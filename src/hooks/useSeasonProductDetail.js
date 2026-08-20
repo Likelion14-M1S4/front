@@ -1,9 +1,18 @@
 import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { getSeasonProductById } from '../api/seasonProducts';
-import { getCompletedChapterIds } from '../api/storyProgress';
+import { getStoryChapters } from '../api/storyProgress';
 
-// 시즌 한정 참 상세 + 스토리 진행 여부 — GET /api/charms/:id, GET /api/story/progress
+function hasCompletedSeasonStory(page) {
+  if (page?.isSeasonCompleted === true) return true;
+
+  const stories = Array.isArray(page?.stories) ? page.stories : [];
+  return stories.length > 0 && stories.every((story) => story.isDone);
+}
+
+// 시즌 한정 참 상세 + 스토리 진행 여부 — GET /api/charms/:id, GET /api/stories
 export function useSeasonProductDetail(productId) {
+  const location = useLocation();
   const [product, setProduct] = useState(null);
   const [storyProgressed, setStoryProgressed] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -21,11 +30,11 @@ export function useSeasonProductDetail(productId) {
     setIsLoading(true);
     setError(null);
 
-    Promise.all([getSeasonProductById(productId), getCompletedChapterIds()])
-      .then(([productData, completedIds]) => {
+    Promise.all([getSeasonProductById(productId), getStoryChapters()])
+      .then(([productData, storyPage]) => {
         if (!isMounted) return;
         setProduct(productData);
-        setStoryProgressed(Array.isArray(completedIds) && completedIds.length > 0);
+        setStoryProgressed(hasCompletedSeasonStory(storyPage));
       })
       .catch((err) => {
         if (isMounted) setError(err);
@@ -37,7 +46,7 @@ export function useSeasonProductDetail(productId) {
     return () => {
       isMounted = false;
     };
-  }, [productId]);
+  }, [productId, location.key]);
 
   return { product, storyProgressed, isLoading, error };
 }
