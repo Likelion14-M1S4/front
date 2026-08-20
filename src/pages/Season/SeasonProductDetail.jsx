@@ -138,9 +138,8 @@ function SeasonProductDetail() {
     );
   }
 
-  // 구매하지 않았고 스토리 미진행이면 잠금 CTA
-  const canPurchase =
-    product.isPurchased || !product.requiresStory || storyProgressed;
+  // isSeasonCompleted 기준으로 구매 버튼 분기 (isPurchase 미사용)
+  const canPurchase = storyProgressed;
 
   const handlePurchaseClick = () => {
     if (!canPurchase) {
